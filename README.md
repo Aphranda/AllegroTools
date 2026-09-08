@@ -45,6 +45,12 @@ python _altium2allegro_kit\sch_xshift.py <原理图目录> --dx 5               
 powershell -File _altium2allegro_kit\watch_capture_imports.ps1 -OneShot            # 查看导入进度
 ```
 
+## 已知问题 / 待办 (TODO)
+- [ ] **元件本体方框未随 X 偏移**：`sch_xshift.py --dx 5` 平移后引脚/连线已对齐，但部分元件符号外框(方框)未跟着动 → 需定位方框在 SchDoc 中使用的坐标字段（可能非 `LOCATION.X/X1/X2/CORNER.X`），扩展脚本键集后重导验证。
+- [ ] **跨页连接符(Off-page/Port/Sheet Symbol)仍偏移**：同类原因，坐标字段或记录类型未被覆盖；并入上一条一起修。
+- [ ] 修完用 `--dry-run` 对比 + OrCAD X 重导抽查，确认全部对象(引脚/外框/文字/跨页符)一致。
+- [ ] 若外框来自转换生成的 `ORCAD_LIBRARY.OLB` 符号库(而非页面坐标)，需改为修符号库或确认重导会重建 OLB。
+
 ## 环境与注意事项
 - 需要合法 Cadence 许可；转换会打开 Allegro/Capture GUI 自动操作，脚本带看门狗自动收尾。
 - 受管/沙箱环境运行 GUI 需放行完整权限。
