@@ -1,4 +1,4 @@
-# Altium→Allegro 转换工具包（自动探测环境 + 自动修复测试点 + 自动校验）
+﻿# Altium→Allegro 转换工具包（自动探测环境 + 自动修复测试点 + 自动校验）
 
 本目录是把本次排查成果固化的可复用工具：一次运行即可完成
 「体检 → 自动修复 → 自动导入 → 自动抓错/校验 → 产出 .brd」，
@@ -36,7 +36,7 @@ python altium_ascii_tool.py check CTL-SYNCTRIG4F4-HASL-ASCII.pcbdoc
 powershell -NoProfile -ExecutionPolicy Bypass -File run_conversion.ps1 `
     -Input CTL-SYNCTRIG4F4-HASL-ASCII.pcbdoc `
     -OutBrd out\CTL-SYNCTRIG4F4-HASL.brd `
-    -FixMode pad -TpPadDia 40mil -AutoFallback
+    -FixMode remove -TpPadDia 40mil -AutoFallback
 ```
 流程内部自动：探测 Allegro → check → fix（给空封装测试点分配 `TP1PAD` +
 40mil 圆焊盘）→ 生成 .scr → 看门狗导入 → 若 pad 方案失败自动降级 remove 重试
@@ -66,9 +66,9 @@ powershell -File find_allegro.ps1 -OutJson env.json # 写结果给流程脚本�
 
 ## 4) fix 策略（对空封装元件 / 测试点）
 
-- `pad`（默认）：分配 `PATTERN=TP1PAD` + 按 Component ID 补一条 **40mil ROUND**
-  焊盘（模板取自文件内现成 SMD 圆焊盘），元件完整保留、可正常导入；
-- `remove`：删除这些元件（简单稳妥，适合不需要测试点对象的情况）；
+- `remove`（**默认**）：直接删除空封装元件，控制台与 `--report` 列出删除清单（位号/位置/原因）
+  - `pad`（可选）：分配 `PATTERN=TP1PAD` + 按 Component ID 补一条 40mil ROUND 焊盘（模板取自文件内现成 SMD 圆焊盘），元件完整保留、可正常导入；
+
 - `fill`：只填封装名、不加焊盘；
 - `none`：不改（对照复现崩溃用）。
 
@@ -89,3 +89,4 @@ skill (alt2a-compare 265)
 - 导入后记得核对：差分对类别（缺 `DifferentialPair_Classes.txt` 的旧告警）、
   Dielectric 0 厚度告警、以及测试点补的 40mil 圆焊盘是否符合生产要求。
 - 建议把“空封装元件导致崩溃”的最小复现反馈 Cadence（附一个空封装元件即可复现）。
+

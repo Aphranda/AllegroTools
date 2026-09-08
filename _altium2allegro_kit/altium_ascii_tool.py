@@ -6,19 +6,18 @@ altium_ascii_tool.py - Altium ASCII(.pcbdoc) 检查/修复/变体生成 一体�
 背景(实测根因):
   Allegro 24.1 S008 的 altium2pcb 转换器在 "text blocks" 阶段会对 nil 调用
   upperCase 崩溃, 触发条件是 ASCII 中存在 PATTERN(封装名)为空的 Component
-  (本工程为测试点 T1/T2/T3/T4)。默认策略: 自动识别这些元件, 分配 PATTERN 并
-  按元件 ID 补一条 ROUND 单焊盘(测试点), 使其作为正常元件导入; 也可改删/填名。
+  (本工程为测试点 T1/T2/T3/T4)。
+默认策略(后续统一): 识别问题元件 -> 直接删除 -> 打印并在 --report 文件中
+报告"哪些元件被删、位置、原因"。pad/fill 仅为需要保留时的可选项。
 
 子命令:
   check   <输入.pcbdoc>
       报告记录统计 + 非 ASCII + 空封装元件清单(核心体检)
   fix     <输入.pcbdoc> -o 输出.pcbdoc [选项]
-      生成可直接导入 Allegro 的文件:
-        --empty-pattern-action pad|remove|fill|none   (默认 pad)
-             pad    : 填 PATTERN + 补圆形焊盘(测试点, 推荐, 保留元件)
-             remove : 删除空封装元件
-             fill   : 只填 PATTERN 名(无焊盘)
-             none   : 不动(仅用于对照复现)
+      默认: 识别 PATTERN 为空的元件并删除, 同时打印/写出问题元件报告:
+        --empty-pattern-action remove|pad|fill|none   (默认 remove = 删除)
+        --report FILE   把删除报告写入文本文件
+        (pad = 填封装名+补圆形焊盘 / fill = 只填封装名, 为保留元件的可选项)
         --tp-pattern NAME   测试点封装名(默认 TP1PAD)
         --tp-pad-dia MIL    圆形焊盘直径 mil(默认 40, 约1.0mm)
         --remove-designators T1,T2  额外按位号删除元件
@@ -123,10 +122,10 @@ def _build_pad(template, comp_id, x, y, dia_mil, net):
 def cmd_fix(args):
     chunks = read_records(args.input)
     kept = [chunks[0]]
-    removed = []
+    removed = []      # (designator, id, X, Y, reason)
     filled = []
     extra_pads = []
-    # 找一个 ROUND + 0mil 孔 + TOP 的现成焊盘作模板
+    # template pad: an existing ROUND SMD pad to clone (only needed for action=pad)
     template = None
     for c in chunks[1:]:
         if kind_of(c) == 'Pad':
@@ -139,13 +138,19 @@ def cmd_fix(args):
             kept.append(c)
             continue
         d = prop(c, 'SOURCEDESIGNATOR') or ''
+        cid = prop(c, 'ID')
+        x = prop(c, 'X') or ''
+        y = prop(c, 'Y') or ''
         pat = prop(c, 'PATTERN')
         empty = (pat is None or pat.strip() == '')
+        drop_reason = None
         if d in args.remove_designators:
-            removed.append(d)
-            continue
-        if empty and args.action == 'remove':
-            removed.append(d)
+            drop_reason = 'explicitly listed via -remove-designators'
+        elif empty and args.action == 'remove':
+            drop_reason = ('PATTERN empty -> crashes Allegro altium2pcb '
+                           '(upperCase nil at text-block stage)')
+        if drop_reason:
+            removed.append((d, cid, x, y, drop_reason))
             continue
         if empty:
             if args.action == 'fill':
@@ -153,24 +158,38 @@ def cmd_fix(args):
                 filled.append(d)
             elif args.action == 'pad':
                 c = set_prop(c, 'PATTERN', args.tp_pattern)
-                filled.append(d + '@' + (prop(c, 'X') or '') + ',' + (prop(c, 'Y') or ''))
+                filled.append(d)
                 if template:
-                    extra_pads.append(_build_pad(template, prop(c, 'ID'),
-                                                 prop(c, 'X'), prop(c, 'Y'),
+                    extra_pads.append(_build_pad(template, cid, x, y,
                                                  args.tp_pad_dia, 0))
         kept.append(c)
-    # 追加测试点焊盘(放在全部记录之后亦可, 转换器按 COMPONENT=ID 关联)
     kept.extend(extra_pads)
     write_records(kept, args.output)
-    print('写出:', args.output, os.path.getsize(args.output), 'bytes')
+    print('wrote:', args.output, os.path.getsize(args.output), 'bytes')
+    lines = []
     if removed:
-        print('已删除元件:', ', '.join(removed))
+        for (d, cid, x, y, rs) in removed:
+            line = 'DELETE  %-6s id=%-5s X=%s Y=%s  reason: %s' % (d, cid, x, y, rs)
+            lines.append(line)
+            print(line)
+        print('deleted components:', len(removed))
     if filled:
-        print('已分配封装 %s 的元件: %s' % (args.tp_pattern, ', '.join(filled)))
+        print('assigned pattern %s to: %s' % (args.tp_pattern, ', '.join(filled)))
     if extra_pads:
-        print('已补圆形焊盘(直径 %s) %d 个' % (args.tp_pad_dia, len(extra_pads)))
+        print('added round pads (%s): %d' % (args.tp_pad_dia, len(extra_pads)))
     if not removed and not filled and not extra_pads:
-        print('未做任何修改(文件本身没有空封装元件)')
+        print('no modification needed (no empty-pattern components)')
+    if args.report:
+        with open(args.report, 'w', encoding='utf-8') as fh:
+            fh.write('Altium ASCII fix report\n')
+            fh.write('input : %s\noutput: %s\naction: %s\n' %
+                     (args.input, args.output, args.action))
+            if removed:
+                fh.write('deleted components: %d\n' % len(removed))
+                fh.writelines('  ' + l + '\n' for l in lines)
+            else:
+                fh.write('deleted components: 0 (no problem components)\n')
+        print('report written:', args.report)
 
 # ---------- variant ----------
 
@@ -195,17 +214,21 @@ def main(argv=None):
     p.add_argument('input')
     p.set_defaults(fn=cmd_check)
 
-    p = sub.add_parser('fix', help='生成可导入文件(默认给测试点补焊盘)')
+    p = sub.add_parser('fix', help='fix problem components (default: delete + report)')
     p.add_argument('input')
     p.add_argument('-o', '--output', required=True)
     p.add_argument('--empty-pattern-action', dest='action',
-                   choices=['pad', 'remove', 'fill', 'none'], default='pad',
-                   help='pad=补封装+圆焊盘(默认) remove=删除 fill=只填名 none=不动')
-    p.add_argument('--tp-pattern', default='TP1PAD', help='测试点封装名')
-    p.add_argument('--tp-pad-dia', default='40mil', help='测试点圆焊盘直径, 如 40mil/1.0mm')
+                   choices=['pad', 'remove', 'fill', 'none'], default='remove',
+                   help='default=remove(delete empty-pattern components); '
+                        'pad=assign pattern+round pad; fill=assign pattern only; '
+                        'none=leave untouched')
+    p.add_argument('--tp-pattern', default='TP1PAD', help='pattern name for pad/fill')
+    p.add_argument('--tp-pad-dia', default='40mil', help='round pad diameter, e.g. 40mil')
     p.add_argument('--remove-designators', default='', metavar='T1,T2')
+    p.add_argument('--report', default='', metavar='FILE',
+                   help='write a deletion report text file')
     p.add_argument('--omega-replace', metavar='CH', default='',
-                   help='顺带把非 ASCII 文本字符替换为该字符(如 R)')
+                   help='optionally replace non-ASCII text chars with CH (e.g. R)')
     p.set_defaults(fn=cmd_fix)
 
     p = sub.add_parser('variant', help='按记录类别生成二分变体')

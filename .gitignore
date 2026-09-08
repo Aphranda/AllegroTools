@@ -1,0 +1,19 @@
+# generated / local state files
+__pycache__/
+*.pyc
+*_env.json
+_watchdog_env.json
+_allegro_env.json
+
+# backups & scratch from fix scripts
+*.bak
+*.schdoc.bak
+capture_import_state.json
+
+# large binaries not meant for git
+*.DSN
+*.OLB
+*.brd
+*.pcbdoc
+*.PrjPcbStructure
+translator.run/

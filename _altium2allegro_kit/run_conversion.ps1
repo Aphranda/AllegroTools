@@ -6,20 +6,20 @@
 #   3. python altium_ascii_tool.py fix    -- 默认给空封装元件补 PATTERN + 40mil 圆焊盘
 #   4. 由 run_import.scr.template 生成 <WorkDir>\run_import.scr
 #   5. 调 allegro_watchdog.ps1 跑导入并自动抓错误
-#   6. 成功后把产物 .brd 拷贝为 -OutBrd; 失败可 -AutoFallback 自动降级"删除"重试
+#   6. 成功后把产物 .brd 拷贝为 -OutBrd; 失败可 -AutoFallback 用另一策略重试
 # 用法示例:
 #   powershell -File run_conversion.ps1 -Input CTL-...-HASL-ASCII.pcbdoc `
-#       -OutBrd out\CTL-...-HASL.brd -FixMode pad -TpPadDia 40mil
+#       -OutBrd out\CTL-...-HASL.brd -FixMode remove -TpPadDia 40mil
 # =========================================================================
 param(
     [Parameter(Mandatory = $true)][string]$Input,     # Altium ASCII pcbdoc
-    [string]$OutBrd = '',                             # 输出 .brd 路径
-    [string]$WorkDir = '',                            # 工作目录(默认 _auto_run\convert)
-    [string]$AllegroRoot = '',                        # 显式指定安装根(可选)
-    [string]$FixMode = 'pad',                         # pad|remove|fill|none
+    [string]$OutBrd = '',                             # output .brd path
+    [string]$WorkDir = '',                            # work dir (default ..\_auto_run\convert)
+    [string]$AllegroRoot = '',                        # explicit Allegro root (optional)
+    [string]$FixMode = 'remove',                      # remove|pad|fill|none (default remove=delete+report)
     [string]$TpPattern = 'TP1PAD',
     [string]$TpPadDia = '40mil',
-    [switch]$AutoFallback,                            # pad 失败时自动降级 remove
+    [switch]$AutoFallback,                            # retry with the other fix action if import fails
     [int]$Minutes = 6
 )
 $ErrorActionPreference = 'Stop'
@@ -50,8 +50,10 @@ $base = [System.IO.Path]::GetFileNameWithoutExtension($Input)
 if (-not $WorkDir) { $WorkDir = Join-Path (Split-Path -Parent $MyInvocation.MyCommand.Path) ('..\_auto_run\convert') }
 New-Item -ItemType Directory -Force -Path $WorkDir | Out-Null
 $fixed = Join-Path $WorkDir ($base + '.fixed.pcbdoc')
-python $toolPy fix $Input -o $fixed --empty-pattern-action $FixMode --tp-pattern $TpPattern --tp-pad-dia $TpPadDia
+$report = Join-Path $WorkDir ($base + '.fix-report.txt')
+python $toolPy fix $Input -o $fixed --empty-pattern-action $FixMode --tp-pattern $TpPattern --tp-pad-dia $TpPadDia --report $report
 if ($LASTEXITCODE -ne 0) { Write-Error 'python fix failed'; exit 5 }
+Write-Output ("[REPORT] " + $report)
 
 # ---- 4. 生成导入脚本 ----
 $tplText = Get-Content $tpl -Raw
@@ -73,17 +75,18 @@ $lines = Invoke-Watchdog $fixed 'import'
 $verdict = ($lines | Where-Object { $_ -like '[VERDICT]*' } | Select-Object -Last 1)
 Write-Output ("[FINAL-VERDICT] " + $verdict)
 
-# ---- 6. 成功则拷贝产物; pad 失败可自动降级 ----
+# ---- 6. success -> copy .brd; optional retry with the alternate fix action ----
 $ok = $verdict -like '*SUCCESS*'
-if (-not $ok -and $AutoFallback -and $FixMode -eq 'pad') {
-    Write-Output '[AUTO-FALLBACK] pad failed -> retry with remove'
-    $fixed2 = Join-Path $WorkDir ($base + '.nopad.pcbdoc')
-    python $toolPy fix $Input -o $fixed2 --empty-pattern-action remove
-    $lines2 = Invoke-Watchdog $fixed2 'import_remove'
+if (-not $ok -and $AutoFallback) {
+    $alt = if ($FixMode -eq 'remove') { 'pad' } else { 'remove' }
+    Write-Output ("[AUTO-FALLBACK] " + $FixMode + " failed -> retry with " + $alt)
+    $fixed2 = Join-Path $WorkDir ($base + '.altfix.pcbdoc')
+    python $toolPy fix $Input -o $fixed2 --empty-pattern-action $alt --tp-pattern $TpPattern --tp-pad-dia $TpPadDia
+    $lines2 = Invoke-Watchdog $fixed2 'import_altfix'
     $lines2 | Where-Object { $_ -like '[VERDICT]*' } | ForEach-Object { Write-Output ("[FINAL-VERDICT] " + $_) }
     $verdict = ($lines2 | Where-Object { $_ -like '[VERDICT]*' } | Select-Object -Last 1)
     $ok = $verdict -like '*SUCCESS*'
-    if ($ok) { $fixed = $fixed2 }
+    if ($ok) { $fixed = $fixed2; $lines = $lines2 }
 }
 if ($ok) {
     if ($OutBrd) {
