@@ -1,0 +1,16 @@
+; ================================================================
+; run_import.scr.template - Allegro 脚本模板(Altium ASCII 导入)
+; 用法: 由 run_conversion.ps1 用实际路径替换 __PCB__ 后生成正式 .scr
+;       再以: allegro.exe -s <生成的.scr> 执行(见 allegro_watchdog.ps1)
+; 流程: 打开 Altium 导入表单 -> 填 ASCII 文件 -> Translate -> 保存 -> 退出
+; ================================================================
+setwindow pcb
+trl altium2pcb
+setwindow form.trl_altium2pcb
+FORM trl_altium2pcb cleanup_dangling_clines YES
+FORM trl_altium2pcb pcb_ascii_browse
+fillin "__PCB__"
+FORM trl_altium2pcb run_translator
+setwindow pcb
+save
+exit

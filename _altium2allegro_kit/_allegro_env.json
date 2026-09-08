@@ -1,0 +1,11 @@
+{
+    "ini":  "D:\\Cadence\\SPB_25.1\\share\\pcb\\translators\\config\\altium2pcb.ini",
+    "found":  true,
+    "all":  [
+                "D:\\Cadence\\SPB_25.1",
+                "D:\\Cadence\\SPB_24.1"
+            ],
+    "exe":  "D:\\Cadence\\SPB_25.1\\tools\\bin\\allegro.exe",
+    "root":  "D:\\Cadence\\SPB_25.1",
+    "cxt":  "D:\\Cadence\\SPB_25.1\\share\\pcb\\etc\\context\\64bit\\translators.cxt"
+}
