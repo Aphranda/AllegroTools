@@ -1,0 +1,3 @@
+skill (let (p) (setq p (outfile "D:/Aphranda/APTools/Temp/probe2.txt" "w")) (when p (fprintf p "apt_home=%L\n" (errset apt_home t)) (fprintf p "apt_menuList=%L\n" (errset (if apt_menuList t nil) t)) (fprintf p "cmd_apt_scan=%L\n" (errset (axlUIMenuFind nil "apt_scan") t)) (fprintf p "loadAll=%L\n" (errset (apt_loadAll) t)) (close p)))
+skill (axlUIMenuDump "D:/Aphranda/APTools/Temp/menudump2.txt")
+exit

@@ -1,0 +1,2 @@
+skill (let (p) (setq p (outfile "D:/Aphranda/APTools/Temp/wd.txt" "w")) (when p (fprintf p "workDir=%L\n" (errset (getWorkingDir) t)) (fprintf p "design=%L\n" (errset (axlCurrentDesign) t)) (fprintf p "apt_defaultLibDir=%L\n" (errset (apt_defaultLibDir) t)) (close p)))
+exit

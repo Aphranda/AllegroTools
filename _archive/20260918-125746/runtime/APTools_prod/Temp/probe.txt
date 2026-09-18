@@ -1,0 +1,4 @@
+envAPTools=[nil]
+apt_home=("D:/Aphranda/APTools_prod")
+apt_menuList=(((popup "APTools") ("定位孔: 扫描当前图" "apt_scan") ("定位孔: 修复当前图" "apt_fix") (separator) ("定位孔: 扫描整个库..." "apt_scanlib") ("定位孔: 修复整个库..." "apt_fixlib") (separator) ("设置库目录..." "apt_setlib") ("重新加载工具集" "skill (apt_loadAll)")))
+find_cmd_apt_scan=(0)

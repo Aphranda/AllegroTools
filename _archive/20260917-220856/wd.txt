@@ -1,0 +1,3 @@
+workDir=("F:/1.Hardware/GTS_PPA1/08.CTL-SYNCTRIG4F4-HASL/Allegro/lib")
+design=("rj45-th_r-rj45r08p-c000")
+apt_defaultLibDir=("F:/1.Hardware/GTS_PPA1/08.CTL-SYNCTRIG4F4-HASL/Allegro/lib")

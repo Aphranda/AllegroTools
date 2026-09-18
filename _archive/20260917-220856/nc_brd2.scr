@@ -1,0 +1,7 @@
+skill (errset (axlOpenDesign ?design "F:/1.Hardware/GTS_PPA1/08.CTL-SYNCTRIG4F4-HASL/Allegro/ctl-synctrig4f4-hasl-ascii.brd" ?noMru t) t)
+skill (printf "DESIGN=%L\n" (errset (axlCurrentDesign) nil))
+skill (printf "---- ?? + ???? ----\n")
+skill (printf "COLORRESULT=%L\n" (errset (apt_netPowRun t) t))
+skill (let (n c) (setq n 0) (foreach x (axlDBGetDesign)->nets (when (axlIsCustomColored x) (setq n (n + 1)))) (printf "CUSTOMCOLORED_NETS=%d\n" n))
+skill (printf "PAL161=%L PAL165=%L\n" (errset (nth 160 (axlColorGet (quote all))) nil) (errset (nth 164 (axlColorGet (quote all))) nil))
+exit

@@ -1,0 +1,34 @@
+
+;;; ---------------------------------------------------------------------------
+;;; 本工具的配置默认值 (用 apt_cfgdef, 只在未设置过时生效)
+;;; ---------------------------------------------------------------------------
+
+(apt_cfgdef 'targets        (list "DOCUMENT"))
+(apt_cfgdef 'keepoutPat     "KEEPOUT")
+(apt_cfgdef 'outLayer       "BOARD GEOMETRY/CUTOUT")
+(apt_cfgdef 'requireKeepout t)
+(apt_cfgdef 'circleTol      0.05)
+(apt_cfgdef 'minDiaMM       0.3)
+(apt_cfgdef 'maxDiaMM       8.0)
+(apt_cfgdef 'padTol         0.10)
+(apt_cfgdef 'deleteOriginal nil)
+(apt_cfgdef 'dryRun         nil)
+(apt_cfgdef 'segments       72)
+(apt_cfgdef 'only           nil)
+(apt_cfgdef 'report         "")
+(apt_cfgdef 'csv            "")
+(apt_cfgdef 'modified       "")
+
+;;; ---------------------------------------------------------------------------
+;;; 菜单自声明 (阶段 = tools/10_library)
+;;; ---------------------------------------------------------------------------
+
+(apt_menuAdd "10_library" "定位孔: 扫描当前图"    "apt_scan")
+(apt_menuAdd "10_library" "定位孔: 修复当前图"    "apt_fix")
+(apt_menuSep "10_library")
+(apt_menuAdd "10_library" "定位孔: 扫描整个库..." "apt_scanlib")
+(apt_menuAdd "10_library" "定位孔: 修复整个库..." "apt_fixlib")
+(apt_menuSep "10_library")
+(apt_menuAdd "10_library" "设置库目录..."         "apt_setlib")
+
+(printf "[APTools] APT_LocatorHole 已加载 (apt_scan / apt_fix / apt_scanlib / apt_fixlib)\n")

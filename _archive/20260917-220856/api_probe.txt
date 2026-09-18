@@ -1,0 +1,43 @@
+port:"D:/Aphranda/APTools/Temp/api_probe.txt"LOAD=(t)
+t=== 1. defvar semantics ===
+defvar X nil  then read : ((A nil))
+defvar X 32   then read : ((B 32))   <- nil 表示未绑定
+defvar X nil + setq 7   : ((C 7))
+
+=== 2. integer division / modulo ===
+(7 / 2)                 : (3)
+(8 / 2)                 : (4)
+(1 / 3)                 : (0)
+((0 - 7) / 2)           : (-3)
+evalstring (7 mod 2)    : nil
+evalstring (> 3 2)      : nil
+(mod 7 2) prefix        : (1)
+(remainder 7 2)         : (1)
+(fix 3.7)               : (3)
+(abs -5)                : (5)
+(atoi "42")              : (42)
+
+=== 3. random ===
+(random 10)             : (3)
+(random)                : (143302914)
+(srandom 1)             : (t)
+(getCurrentTime)        : ("Sep 17 21:54:02 2026")
+
+=== 4. 32-bit overflow ===
+2147483647 literal      : (2147483647)
+1000000000000000 literal: (2147483647)   <- 若 =2147483647 则是解析期截断
+2147483647 + 2147483647 : (-2)
+1000003 * 1021          : (1021003063)
+1000003 * 4740          : (445046924)
+1000003 * 1000000       : (-724379968)   <- 看是否溢出/变 bignum
+
+=== 5. string / misc ===
+(substring "ABCDEF" 2 3) : ("BCD")
+(upperCase "aB3")        : ("AB3")
+rexMatchp [0-9] 7       : (t)
+sprintf %-18s padding   : [("GND               |")]
+(axlColorGet 'count)    : (192)
+(axlColorGet 'all) len  : (192)
+
+PROBE DONE
+t

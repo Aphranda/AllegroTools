@@ -1,0 +1,13 @@
+port:"D:/Aphranda/APTools/Temp/nc_diag.txt"ilinit ran? apt_home=("D:/Aphranda/APTools")
+tfn bound? apt_netPowClass=nil apt_nosep=nil apt_patAny=nil apt_voltFind=nil
+tapt_nosep GND      = nil
+ttables GndKw       = (("GND" "VSS" "EARTH" "CHASSIS" "GROUND" "RTN" "^0V$"))
+tapt_patAny GND/GND = nil
+tapt_netPowClass GND= nil
+tapt_netPowClass 3V3= nil
+tapt_voltFind 3V3   = nil
+tapt_netSeed        = nil
+tapt_rnd 100        = nil
+tapt_netPowPick pwr = nil
+tapt_netPowPick gnd = nil
+t

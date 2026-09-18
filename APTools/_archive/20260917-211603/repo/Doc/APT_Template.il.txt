@@ -1,0 +1,51 @@
+;;; ============================================================================
+;;; APT_Template.il.txt  --  APTools 新工具模板
+;;; ----------------------------------------------------------------------------
+;;; 用法:
+;;;   1. 复制本文件到  ..\SkillCode\APT_你的工具名.il   (必须 .il 结尾才会被自动加载)
+;;;   2. 全文替换 APT_MyTool -> 你的工具名
+;;;   3. 在 skill\APTools_Menu.il 的 apt_menuList 里加菜单项
+;;;   4. 重启 Allegro, 或在 Allegro 命令行执行   skill (apt_loadAll)
+;;;
+;;; SKILL 方言铁律(不遵守会直接 load 失败):
+;;;   * 函数名/变量名不能含 '-'   ->  用 '_'    (apt_my_tool  ✔   apt-my-tool  ✘)
+;;;   * setq 一次只能赋一个变量:  (setq a 1) (setq b 2)   不能 (setq a 1 b 2)
+;;;   * 比较/算术是中缀:  (a > b)  (w - h)  (x + 1)   —— 不是 (> a b)
+;;;   * abs/min/max 不保险, 自己写包装
+;;;   * 零参过程写 (procedure (name) body)
+;;;   * 点用 (list x y) 构造, 不要用 cons 拼点
+;;;   * (outfile path "a") 的模式参是字符串, 不是 'a
+;;; ============================================================================
+
+;;; ---- 局部工具: 只在本文件用, 用 apt_ 前缀避免和别的工具撞名 ----
+
+(procedure (apt_mytool_abs x)
+    (if (x < 0.0) (0.0 - x) x))
+
+;;; ---- 主逻辑 ----
+;;; 建议拆成两层:
+;;;   apt_mytool_core  <- 干活, 返回结果表, 不弹任何 UI(方便被批处理/脚本调用)
+;;;   apt_cmd_mytool   <- 薄薄一层 UI(提示输入 / 汇报结果), 调 core
+(procedure (apt_mytool_core t_arg)
+    (let (design res n)
+        (setq design (axlDBGetDesign))
+        (unless design
+            (printf "[APTools] 没有打开的图\n")
+            (return nil))
+        (setq n (length design->components))
+        (printf "[APTools] 当前图元件数 = %d, 参数 = %L\n" n t_arg)
+        (setq res (list n t_arg))
+        res))
+
+;;; ---- UI 包装 ----
+(procedure (apt_cmd_mytool)
+    (let (r msg)
+        (setq r (axlUIPrompt "输入一个参数:" "默认值"))
+        (when r
+            (setq msg (sprintf nil "APTools MyTool 结果:\n%L" (apt_mytool_core r)))
+            (axlUIConfirm msg))))
+
+;;; ---- 注册命令(命令名建议 apt_xxx, 会和菜单项里的字符串对应) ----
+(axlCmdRegister "apt_mytool" 'apt_cmd_mytool ?cmdType "general")
+
+(printf "[APTools] APT_MyTool 已加载\n")

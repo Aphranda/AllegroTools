@@ -1,0 +1,108 @@
+
+;;; ---------------------------------------------------------------------------
+;;; 工具集根目录
+;;;   ilinit 里会先设好 apt_home; 这里只是兜底(直接 load 本文件时也能用)
+;;; ---------------------------------------------------------------------------
+
+(unless apt_home
+    (setq apt_home (getShellEnvVar "APTools")))
+(when (or (null apt_home) (equal apt_home ""))
+    (setq apt_home "D:/Aphranda/APTools"))
+(setq apt_home (axlOSSlash apt_home))
+
+;;; 只在未设置过时才写默认值(工具用自己的默认值调用它)
+(procedure (apt_cfgdef key val)
+    (unless (assoc key aptCfg)
+        (apt_cfgset key val)))
+
+;;; ---------------------------------------------------------------------------
+;;; 菜单自声明
+;;;   工具的 .il 里调用 (apt_menuAdd "10_library" "显示文字" "命令")
+;;;   分隔线用 (apt_menuSep "10_library")
+;;; ---------------------------------------------------------------------------
+
+(defvar apt_menuTree nil)      ; ((阶段 (项...) ...) ...) 保持插入顺序
+
+;; 阶段目录名 -> 中文菜单名; 列表顺序就是菜单顺序
+(defvar apt_stageOrder nil)
+(defvar apt_stageNames nil)
+
+(setq apt_stageOrder (list "10_library" "20_placement" "30_routing"
+                           "40_marking" "50_process" "90_misc"))
+
+(setq apt_stageNames (list
+    (list "10_library"   "封装")
+    (list "20_placement" "布局")
+    (list "30_routing"   "布线")
+    (list "40_marking"   "字符")
+    (list "50_process"   "工艺")
+    (list "90_misc"      "辅助功能")))
+
+(procedure (apt_stageLabel stg)
+    (let (kv)
+        (setq kv (assoc stg apt_stageNames))
+        (if kv (cadr kv) stg)))
+
+(procedure (apt_menuAddRaw stage item)
+    (let (kv)
+        (setq kv (assoc stage apt_menuTree))
+        (unless kv
+            (setq kv (cons stage nil))
+            (setq apt_menuTree (append apt_menuTree (list kv))))
+        (rplacd kv (append (cdr kv) (list item)))))
+
+(procedure (apt_menuAdd stage label cmd)
+    (apt_menuAddRaw stage (list label cmd)))
+
+(procedure (apt_menuSep stage)
+    (apt_menuAddRaw stage (list 'separator)))
+
+;;; 把 apt_menuTree 汇总成 axlUIMenuRegister 需要的菜单列表
+(procedure (apt_buildMenu)
+    (let (out items)
+        (setq out (list (list 'popup "APTools")))
+        (foreach stg apt_stageOrder
+            (setq items (assoc stg apt_menuTree))
+            (when items
+                (setq out (append out (list (list 'popup (apt_stageLabel stg)))))
+                (foreach it (cdr items)
+                    (setq out (append out (list it))))
+                (setq out (append out (list 'end)))))
+        out))
+
+(procedure (apt_menuRegister)
+    (let (lst res)
+        (setq lst (apt_buildMenu))
+        (setq res (errset (axlUIMenuRegister -1 lst) t))
+        (if res
+            (printf "[APTools] 菜单已注册 (menubar 右端 \"APTools\", %d 个阶段)\n"
+                    (length apt_stageOrder))
+            (printf "[APTools] !! 菜单注册失败; 命令仍可直接用 (apt_scan 等)\n"))))
+
+;;; ---------------------------------------------------------------------------
+;;; 加载器: 按 apt_stageOrder 顺序加载 tools/<阶段>/*.il
+;;;   单个工具报错不影响其它工具(errset 兜住), 但会在控制台明确报出来
+;;; ---------------------------------------------------------------------------
+
+(procedure (apt_loadAll)
+    (let (root stg dir files f full n bad ok)
+        (setq root (strcat apt_home "/tools"))
+        (setq n 0)
+        (setq bad 0)
+        (foreach stg apt_stageOrder
+            (setq dir (strcat root "/" stg))
+            (setq files (getDirFiles dir))
+            (foreach f files
+                (when (rexMatchp "\\.il$" (lowerCase f))
+                    (setq full (strcat dir "/" f))
+                    (setq n (n + 1))
+                    (setq ok (errset (load full) t))
+                    (if ok
+                        (printf "[APTools]   ok   %s/%s\n" stg f)
+                        (progn
+                            (setq bad (bad + 1))
+                            (printf "[APTools]   FAIL %s/%s\n" stg f))))))
+        (printf "[APTools] 工具加载完成: 成功 %d, 失败 %d\n" (n - bad) bad)
+        (list n bad)))
+
+(printf "[APTools] 框架已加载 (root=%s)\n" apt_home)

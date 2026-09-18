@@ -1,0 +1,10 @@
+skill (errset (axlOpenDesign ?design "F:/1.Hardware/GTS_PPA1/08.CTL-SYNCTRIG4F4-HASL/Allegro/ctl-synctrig4f4-hasl-ascii.brd" ?noMru t) t)
+skill (errset (apt_netPowRun t) t)
+skill (let (n) (setq n 0) (foreach x (axlDBGetDesign)->nets (when (axlIsCustomColored x) (setq n (n + 1)))) (printf "R1_???=%d\n" n))
+skill (printf "R2_????=%L\n" (errset (apt_netColorClear) t))
+skill (let (n) (setq n 0) (foreach x (axlDBGetDesign)->nets (when (axlIsCustomColored x) (setq n (n + 1)))) (printf "R3_?????=%d\n" n))
+skill (printf "R4_????160=%L\n" (errset (nth 159 (axlColorGet (quote all))) nil))
+skill (printf "R5_?????=%L\n" (errset (apt_netColorFreePal) t))
+skill (printf "R6_????160=%L (?? (255 0 255))\n" (errset (nth 159 (axlColorGet (quote all))) nil))
+skill (printf "R7_????=%L\n" (errset (apt_netPowRun t) t))
+exit

@@ -1,0 +1,148 @@
+(defvar aptCfg      nil)
+
+(defvar aptReport   nil)
+
+(defvar aptCSV      nil)
+
+(defvar aptChanged  nil)
+
+(defvar aptModList  nil)
+
+
+;;; ---------------------------------------------------------------------------
+;;; 配置 / 输出
+;;; ---------------------------------------------------------------------------
+
+(procedure (apt_cfg key)
+    (let (kv)
+        (setq kv (assoc key aptCfg))
+        (if kv (cadr kv) nil)))
+
+
+(procedure (apt_cfgset key val)
+    (let (kv)
+        (setq kv (assoc key aptCfg))
+        (if kv
+            (progn (rplaca (cdr kv) val) val)
+            (progn (setq aptCfg (cons (list key val) aptCfg)) val))))
+
+
+(procedure (apt_log msg)
+    (printf "%s\n" msg)
+    (when aptReport (fprintf aptReport "%s\n" msg))
+    t)
+
+
+(procedure (apt_csvline msg)
+    (when aptCSV (fprintf aptCSV "%s\n" msg))
+    t)
+
+
+;;; ---------------------------------------------------------------------------
+;;; 基础工具 (SKILL 方言注意: 函数名不能含 '-'；setq 一次一个变量；
+;;;             比较/算术是中缀 (a > b)；零参过程写 (procedure (name) ...))
+;;; ---------------------------------------------------------------------------
+
+(procedure (apt_abs x)
+    (if (x < 0.0) (0.0 - x) x))
+
+
+(procedure (apt_min2 a b)
+    (if (a < b) a b))
+
+
+(procedure (apt_max2 a b)
+    (if (a > b) a b))
+
+
+(procedure (apt_ge a b)
+    (if (a >= b) t nil))
+
+
+(procedure (apt_le a b)
+    (if (a <= b) t nil))
+
+
+;;; bBox -> (minX minY maxX maxY) 或 nil
+(procedure (apt_bb bb)
+    (let (a b)
+        (cond
+            ((null bb) nil)
+            ((not (listp bb)) nil)
+            ((and (apt_ge (length bb) 2)
+                  (listp (car bb)) (listp (cadr bb))
+                  (apt_ge (length (car bb)) 2) (apt_ge (length (cadr bb)) 2))
+                (setq a (car bb))
+                (setq b (cadr bb))
+                (list (apt_min2 (car a) (car b)) (apt_min2 (cadr a) (cadr b))
+                      (apt_max2 (car a) (car b)) (apt_max2 (cadr a) (cadr b))))
+            ((and (apt_ge (length bb) 4) (numberp (nth 0 bb)))
+                (list (apt_min2 (nth 0 bb) (nth 2 bb)) (apt_min2 (nth 1 bb) (nth 3 bb))
+                      (apt_max2 (nth 0 bb) (nth 2 bb)) (apt_max2 (nth 1 bb) (nth 3 bb))))
+            (t nil))))
+
+
+(procedure (apt_mm2uu mm)
+    (let (k) (setq k (axlMKS2UU "1mm")) (if k (mm * k) nil)))
+
+
+(procedure (apt_uu2mm uu)
+    (let (k) (setq k (axlMKS2UU "1mm")) (if (and k (k != 0.0)) (uu / k) nil)))
+
+
+;;; 取某种图形: "lines" / "shapes"
+(procedure (apt_selAll kind)
+    (let (res)
+        (axlClearSelSet)
+        (axlSetFindFilter ?enabled (list "noall" kind) ?onButtons (list "noall" kind))
+        (axlAddSelectAll)
+        (setq res (axlGetSelSet))
+        (axlClearSelSet)
+        res))
+
+
+(procedure (apt_layerHas lay pats)
+    (let (up hit)
+        (when lay
+            (setq up (upperCase lay))
+            (foreach p pats
+                (when (rexMatchp (upperCase p) up) (setq hit t))))
+        hit))
+
+
+;;; ---------------------------------------------------------------------------
+;;; 输出文件初始化/收尾 (由 .scr 先 cfgset 路径, 再由 PowerShell 收尾写 modified)
+;;; ---------------------------------------------------------------------------
+
+(procedure (apt_begin)
+    (setq aptChanged nil)
+    (setq aptModList nil)
+    (when (and (apt_cfg 'report) (neq (apt_cfg 'report) ""))
+        (setq aptReport (outfile (apt_cfg 'report) "a")))
+    (when (and (apt_cfg 'csv) (neq (apt_cfg 'csv) ""))
+        (setq aptCSV (outfile (apt_cfg 'csv) "a"))))
+
+
+(procedure (apt_end)
+    (when (and aptModList (apt_cfg 'modified) (neq (apt_cfg 'modified) ""))
+        (let (mport nm)
+            (setq mport (outfile (apt_cfg 'modified) "a"))
+            (when mport
+                (foreach nm (reverse aptModList)
+                    (fprintf mport "%s\n" nm))
+                (close mport))))
+    (when aptReport (close aptReport) (setq aptReport nil))
+    (when aptCSV (close aptCSV) (setq aptCSV nil)))
+   ; 库目录, 第一次用会提示输入, 之后记住
+(defvar apt_home    nil)
+
+
+;;; UI 模式下给输出文件填默认值(写在 APTools/Temp 下)
+(procedure (apt_uiDefaults)
+    (unless apt_home (setq apt_home "D:/Aphranda/APTools"))
+    (when (or (null (apt_cfg 'report)) (equal (apt_cfg 'report) ""))
+        (apt_cfgset 'report (strcat (axlOSSlash apt_home) "/Temp/apt_locator_report.txt")))
+    (when (or (null (apt_cfg 'csv)) (equal (apt_cfg 'csv) ""))
+        (apt_cfgset 'csv (strcat (axlOSSlash apt_home) "/Temp/apt_locator_report.csv")))
+    (when (or (null (apt_cfg 'modified)) (equal (apt_cfg 'modified) ""))
+        (apt_cfgset 'modified (strcat (axlOSSlash apt_home) "/Temp/apt_locator_modified.txt"))))

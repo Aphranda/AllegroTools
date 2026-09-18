@@ -1,0 +1,58 @@
+Loading axlcore.cxt 
+function xFormBegin redefined
+function xFormEnd redefined
+function xCheckList redefined
+function xGroup redefined
+function xText redefined
+function xButton redefined
+function xEdit redefined
+function xInfoText redefined
+[APTools] APT_LocatorHole ÒÑ¼ÓÔØ (apt_scan / apt_fix / apt_scanlib / apt_fixlib)
+[APTools] APT_LocatorHole ÒÑ¼ÓÔØ (apt_scan / apt_fix / apt_scanlib / apt_fixlib)
+[APTools]   ok   D:/Aphranda/APTools/tools/10_library/locatorhole/APT_LocatorHole.il
+[APTools] APT_SymbolCheck ÒÑ¼ÓÔØ (Õ¼Î», ´ýÊµÏÖ)
+[APTools]   ok   D:/Aphranda/APTools/tools/10_library/symcheck/APT_SymbolCheck.il
+[APTools] APT_ColorScheme ÒÑ¼ÓÔØ (3 Ì×·½°¸; ¸ÄÊýÖµ¼û apt_colorSchemes)
+[APTools]   ok   D:/Aphranda/APTools/tools/90_misc/color/APT_ColorScheme.il
+[APTools]   FAIL D:/Aphranda/APTools/tools/90_misc/netcolor/APT_NetColor.il
+[APTools] ¹¤¾ß¼ÓÔØÍê³É: ³É¹¦ 4, Ê§°Ü 1
+[APTools] ²Ëµ¥ÒÑ×¢²á (menubar ÓÒ¶Ë "APTools", 6 ¸ö½×¶Î)
+[APTools] ¹¤¾ß¼¯¾ÍÐ÷ (root=D:/Aphranda/APTools)
+W- 
+W- (setq apt_modPow (list 1000000000000000 100000000000000 10000000000000
+W-                        ^^^^^^^^^^^^^^^^
+W- PARSER WARNING at line 45 column 24 of file D:/Aphranda/APTools/tools/90_misc/netcolor/APT_NetColor.il
+W- *WARNING* (Parser): Integer overflow (INT_MAX assumed) - 1000000000000000
+W- 
+W- (setq apt_modPow (list 1000000000000000 100000000000000 10000000000000
+W-                                         ^^^^^^^^^^^^^^^
+W- PARSER WARNING at line 45 column 41 of file D:/Aphranda/APTools/tools/90_misc/netcolor/APT_NetColor.il
+W- *WARNING* (Parser): Integer overflow (INT_MAX assumed) - 100000000000000
+W- 
+W- (setq apt_modPow (list 1000000000000000 100000000000000 10000000000000
+W-                                                         ^^^^^^^^^^^^^^
+W- PARSER WARNING at line 45 column 57 of file D:/Aphranda/APTools/tools/90_misc/netcolor/APT_NetColor.il
+W- *WARNING* (Parser): Integer overflow (INT_MAX assumed) - 10000000000000
+W- 
+W-                        1000000000000 100000000000 10000000000 1000000000
+W-                        ^^^^^^^^^^^^^
+W- PARSER WARNING at line 46 column 24 of file D:/Aphranda/APTools/tools/90_misc/netcolor/APT_NetColor.il
+W- *WARNING* (Parser): Integer overflow (INT_MAX assumed) - 1000000000000
+W- 
+W-                        1000000000000 100000000000 10000000000 1000000000
+W-                                      ^^^^^^^^^^^^
+W- PARSER WARNING at line 46 column 38 of file D:/Aphranda/APTools/tools/90_misc/netcolor/APT_NetColor.il
+W- *WARNING* (Parser): Integer overflow (INT_MAX assumed) - 100000000000
+W- 
+W-                        1000000000000 100000000000 10000000000 1000000000
+W-                                                   ^^^^^^^^^^^
+W- PARSER WARNING at line 46 column 51 of file D:/Aphranda/APTools/tools/90_misc/netcolor/APT_NetColor.il
+W- *WARNING* (Parser): Integer overflow (INT_MAX assumed) - 10000000000
+E- *Error* eval: unbound variable - apt_netColorReserveN
+E- *Error* load: error while loading file - "D:/Aphranda/APTools/tools/90_misc/netcolor/APT_NetColor.il" at line 668
+Starting new design...
+W- 
+W-     (printf "1000000000000000 literal: %L   <- è‹¥ =2147483647 åˆ™æ˜¯è§£æžæœŸæˆªæ–­\n" (errset 1000000000000000 nil))
+W-                                                                                                 ^^^^^^^^^^^^^^^^
+W- PARSER WARNING at line 39 column 97 of file F:/1.Hardware/GTS_PPA1/08.CTL-SYNCTRIG4F4-HASL/AllegroTools/APTools/devkit/tests/api_probe.il
+W- *WARNING* (Parser): Integer overflow (INT_MAX assumed) - 1000000000000000

@@ -1,0 +1,5 @@
+skill (setq poport (outfile "D:/Aphranda/APTools/Temp/api_probe.txt" "w"))
+skill (printf "LOAD=%L\n" (errset (load "F:/1.Hardware/GTS_PPA1/08.CTL-SYNCTRIG4F4-HASL/AllegroTools/APTools/devkit/tests/api_probe.il") nil))
+skill (aptProbe)
+skill (close poport)
+exit

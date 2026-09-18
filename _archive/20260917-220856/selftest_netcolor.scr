@@ -1,0 +1,5 @@
+skill (setq poport (outfile "D:/Aphranda/APTools/Temp/netcolor_selftest.txt" "w"))
+skill (printf "LOAD=%L\n" (errset (load "F:/1.Hardware/GTS_PPA1/08.CTL-SYNCTRIG4F4-HASL/AllegroTools/APTools/devkit/tests/selftest_netcolor.il") nil))
+skill (aptTestAll)
+skill (close poport)
+exit

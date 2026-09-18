@@ -1,0 +1,11 @@
+skill (printf "Q1 voltAt(3V3,0)=%L\n" (errset (apt_voltAt "3V3" 0) t))
+skill (printf "Q2 voltFind(3V3)=%L\n" (errset (apt_voltFind "3V3") t))
+skill (printf "Q3 patAny(GND,RailKw)=%L\n" (errset (apt_patAny "GND" apt_netPowRailKw) t))
+skill (printf "Q4 class(GND)=%L\n" (errset (apt_netPowClass "GND") t))
+skill (printf "Q5 cfgGreyMin=%L\n" (errset (apt_cfg (quote netColorGreyMin)) t))
+skill (printf "Q6 rnd121=%L\n" (errset (apt_rnd 121) t))
+skill (printf "Q7 distinct=%L\n" (errset (apt_netPowDistinct (list 10 10 10) 130) t))
+skill (printf "Q8 pick gnd=%L\n" (errset (apt_netPowPick (quote gnd)) t))
+skill (printf "Q9 abs=%L\n" (errset (apt_abs -5) t))
+skill (printf "Q10 caddr=%L\n" (errset (caddr (list 1 2 3)) t))
+exit

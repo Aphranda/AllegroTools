@@ -1,0 +1,210 @@
+Loading axlcore.cxt 
+function xFormBegin redefined
+function xFormEnd redefined
+function xCheckList redefined
+function xGroup redefined
+function xText redefined
+function xButton redefined
+function xEdit redefined
+function xInfoText redefined
+[APTools] APT_LocatorHole 已加载 (apt_scan / apt_fix / apt_scanlib / apt_fixlib)
+[APTools] APT_LocatorHole 已加载 (apt_scan / apt_fix / apt_scanlib / apt_fixlib)
+[APTools]   ok   D:/Aphranda/APTools/tools/10_library/locatorhole/APT_LocatorHole.il
+[APTools] APT_SymbolCheck 已加载 (占位, 待实现)
+[APTools]   ok   D:/Aphranda/APTools/tools/10_library/symcheck/APT_SymbolCheck.il
+[APTools] APT_ColorScheme 已加载 (3 套方案; 改数值见 apt_colorSchemes)
+[APTools]   ok   D:/Aphranda/APTools/tools/90_misc/color/APT_ColorScheme.il
+[APTools] APT_NetColor 已加载 (GND规则 7 / 电源规则 52 / 排除 52; 保留槽 32)
+[APTools]   ok   D:/Aphranda/APTools/tools/90_misc/netcolor/APT_NetColor.il
+[APTools] 工具加载完成: 成功 4, 失败 0
+[APTools] 菜单已注册 (menubar 右端 "APTools", 6 个阶段)
+[APTools] 工具集就绪 (root=D:/Aphranda/APTools)
+Starting new design...
+P0 apt_home=("D:/Aphranda/APTools")
+t
+P1 apt_nosep(GND_1)=("GND1")
+t
+P2 apt_ch(ABCDEF,0)=("A")
+t
+P3 apt_sub(ABCDEF,2,3)=("CDE")
+t
+P4 patAny(GND,GndKw)=("GND")
+t
+P5 patHit(GNDEN,EN$)=(t)
+t
+P6 voltFind(3V3)=nil
+t
+P7 voltFind(3.3V)=nil
+t
+P8 class(GND)=nil
+t
+P9 class(3V3)=nil
+t
+P10 seed=(202026)
+t
+P11 rnd100=(57)
+t
+P12 pick pwr=nil
+t
+P13 pick gnd=nil
+t
+P14 load self=(t)
+t
+
+=== A. GND family (expect gnd) ===
+CLS  GND                <ERROR: fn not defined>
+CLS  AGND               <ERROR: fn not defined>
+CLS  DGND               <ERROR: fn not defined>
+CLS  PGND               <ERROR: fn not defined>
+CLS  FGND               <ERROR: fn not defined>
+CLS  SGND               <ERROR: fn not defined>
+CLS  CGND               <ERROR: fn not defined>
+CLS  MGND               <ERROR: fn not defined>
+CLS  GNDA               <ERROR: fn not defined>
+CLS  GND0               <ERROR: fn not defined>
+CLS  GND_1              <ERROR: fn not defined>
+CLS  GND12              <ERROR: fn not defined>
+CLS  VSS                <ERROR: fn not defined>
+CLS  VSSA               <ERROR: fn not defined>
+CLS  VSSD               <ERROR: fn not defined>
+CLS  VSSIO              <ERROR: fn not defined>
+CLS  AVSS               <ERROR: fn not defined>
+CLS  EARTH              <ERROR: fn not defined>
+CLS  CHASSIS            <ERROR: fn not defined>
+CLS  GROUND             <ERROR: fn not defined>
+CLS  0V                 <ERROR: fn not defined>
+
+=== B. Power rails (expect pwr) ===
+CLS  VCC                <ERROR: fn not defined>
+CLS  VDD                <ERROR: fn not defined>
+CLS  VEE                <ERROR: fn not defined>
+CLS  VPP                <ERROR: fn not defined>
+CLS  VTT                <ERROR: fn not defined>
+CLS  VREF               <ERROR: fn not defined>
+CLS  VBUS               <ERROR: fn not defined>
+CLS  VUSB               <ERROR: fn not defined>
+CLS  VBAT               <ERROR: fn not defined>
+CLS  VSYS               <ERROR: fn not defined>
+CLS  VMAIN              <ERROR: fn not defined>
+CLS  VIN                <ERROR: fn not defined>
+CLS  VOUT               <ERROR: fn not defined>
+CLS  VIO                <ERROR: fn not defined>
+CLS  AVDD               <ERROR: fn not defined>
+CLS  DVDD               <ERROR: fn not defined>
+CLS  PVDD               <ERROR: fn not defined>
+CLS  AVCC               <ERROR: fn not defined>
+CLS  DVCC               <ERROR: fn not defined>
+CLS  VCCIO              <ERROR: fn not defined>
+CLS  VCCINT             <ERROR: fn not defined>
+CLS  VCCAUX             <ERROR: fn not defined>
+CLS  VDDCORE            <ERROR: fn not defined>
+CLS  VDDA               <ERROR: fn not defined>
+CLS  VDDO               <ERROR: fn not defined>
+CLS  V33                <ERROR: fn not defined>
+CLS  V18                <ERROR: fn not defined>
+CLS  PWR                <ERROR: fn not defined>
+CLS  POWER              <ERROR: fn not defined>
+CLS  VBUCK              <ERROR: fn not defined>
+CLS  VPHASE             <ERROR: fn not defined>
+CLS  VPWR               <ERROR: fn not defined>
+CLS  3V3                <ERROR: fn not defined>
+CLS  3.3V               <ERROR: fn not defined>
+CLS  1V8                <ERROR: fn not defined>
+CLS  1.2V               <ERROR: fn not defined>
+CLS  5V                 <ERROR: fn not defined>
+CLS  12V                <ERROR: fn not defined>
+CLS  +5V                <ERROR: fn not defined>
+CLS  -12V               <ERROR: fn not defined>
+CLS  N12V               <ERROR: fn not defined>
+CLS  24V                <ERROR: fn not defined>
+CLS  48V                <ERROR: fn not defined>
+CLS  0V9                <ERROR: fn not defined>
+CLS  1V25               <ERROR: fn not defined>
+CLS  2V5                <ERROR: fn not defined>
+CLS  5V0                <ERROR: fn not defined>
+CLS  12V0               <ERROR: fn not defined>
+CLS  VCC3V3             <ERROR: fn not defined>
+CLS  VDD_1V8            <ERROR: fn not defined>
+CLS  VCC5V0             <ERROR: fn not defined>
+CLS  P12V               <ERROR: fn not defined>
+CLS  1P8V               <ERROR: fn not defined>
+CLS  3P3V               <ERROR: fn not defined>
+CLS  3V3_A              <ERROR: fn not defined>
+CLS  5V_STBY            <ERROR: fn not defined>
+
+=== C. Excluded control/feedback (expect skip) ===
+CLS  PWR_EN             <ERROR: fn not defined>
+CLS  VCC_EN             <ERROR: fn not defined>
+CLS  3V3_EN             <ERROR: fn not defined>
+CLS  VBUS_PG            <ERROR: fn not defined>
+CLS  PWRGD              <ERROR: fn not defined>
+CLS  PWROK              <ERROR: fn not defined>
+CLS  VCC_FB             <ERROR: fn not defined>
+CLS  VCC_SENSE          <ERROR: fn not defined>
+CLS  3V3_OV             <ERROR: fn not defined>
+CLS  VDD_DET            <ERROR: fn not defined>
+CLS  GND_PG             <ERROR: fn not defined>
+CLS  VCC_CLK            <ERROR: fn not defined>
+CLS  VCC_MON            <ERROR: fn not defined>
+CLS  VDDO_TEMP          <ERROR: fn not defined>
+CLS  5V_SEL             <ERROR: fn not defined>
+
+=== D. Ordinary signals (expect -, must NOT be listed as excluded) ===
+CLS  TX_P               <ERROR: fn not defined>
+CLS  RX_N               <ERROR: fn not defined>
+CLS  SPI_CLK            <ERROR: fn not defined>
+CLS  SPI_CS             <ERROR: fn not defined>
+CLS  SDA                <ERROR: fn not defined>
+CLS  SCL                <ERROR: fn not defined>
+CLS  GPIO5              <ERROR: fn not defined>
+CLS  ADC_IN0            <ERROR: fn not defined>
+CLS  N00001             <ERROR: fn not defined>
+CLS  RESET_N            <ERROR: fn not defined>
+CLS  LED1               <ERROR: fn not defined>
+CLS  USB_DM             <ERROR: fn not defined>
+CLS  D0                 <ERROR: fn not defined>
+CLS  DATA3              <ERROR: fn not defined>
+CLS  TEMP               <ERROR: fn not defined>
+CLS  SEL0               <ERROR: fn not defined>
+CLS  MODE1              <ERROR: fn not defined>
+CLS  NMI                <ERROR: fn not defined>
+CLS  TDO                <ERROR: fn not defined>
+CLS  CTRL1              <ERROR: fn not defined>
+CLS  STAT               <ERROR: fn not defined>
+CLS  MON1               <ERROR: fn not defined>
+CLS  VCC_CURRENT        <ERROR: fn not defined>
+
+=== E. Voltage token edge cases ===
+CLS  3V3                <ERROR: fn not defined>
+CLS  3.3V               <ERROR: fn not defined>
+CLS  12V                <ERROR: fn not defined>
+CLS  +5V                <ERROR: fn not defined>
+CLS  5V0                <ERROR: fn not defined>
+CLS  0V9                <ERROR: fn not defined>
+CLS  1V25               <ERROR: fn not defined>
+CLS  1P8V               <ERROR: fn not defined>
+CLS  3P3V               <ERROR: fn not defined>
+CLS  13V3               <ERROR: fn not defined>
+CLS  DDR13V3            <ERROR: fn not defined>
+CLS  100V               <ERROR: fn not defined>
+CLS  0V                 <ERROR: fn not defined>
+CLS  DATA0V             <ERROR: fn not defined>
+CLS  TXD3               <ERROR: fn not defined>
+CLS  VCC                <ERROR: fn not defined>
+CLS  5                  <ERROR: fn not defined>
+
+=== F. RNG / random color picks ===
+seed(timestamp string) : (202026)
+RND  (rnd 100) x16 : (57) (94) (24) (35) (2) (59) (47) (60) (45) (12) (19) (24) (54) (34) (82) (33) 
+GREY (6 nets)      : nil nil nil nil nil nil 
+PWR  (8 nets)      : nil nil nil nil nil nil nil nil 
+GREY cfg range     : min=(90) max=(210)
+
+=== G. dialect diagnostics ===
+(defvar X 32) readable at own load's top level : (t)
+rule tables bound (GndKw/RailKw/SkipSuf)       : (t) (t) (t)
+ReserveN / GreyIdx                             : nil (0)
+palette count                                  : (192)
+
+SELFTEST DONE
+t

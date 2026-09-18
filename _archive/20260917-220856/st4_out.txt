@@ -1,0 +1,182 @@
+Loading axlcore.cxt 
+function xFormBegin redefined
+function xFormEnd redefined
+function xCheckList redefined
+function xGroup redefined
+function xText redefined
+function xButton redefined
+function xEdit redefined
+function xInfoText redefined
+[APTools] APT_LocatorHole 已加载 (apt_scan / apt_fix / apt_scanlib / apt_fixlib)
+[APTools] APT_LocatorHole 已加载 (apt_scan / apt_fix / apt_scanlib / apt_fixlib)
+[APTools]   ok   D:/Aphranda/APTools/tools/10_library/locatorhole/APT_LocatorHole.il
+[APTools] APT_SymbolCheck 已加载 (占位, 待实现)
+[APTools]   ok   D:/Aphranda/APTools/tools/10_library/symcheck/APT_SymbolCheck.il
+[APTools] APT_ColorScheme 已加载 (3 套方案; 改数值见 apt_colorSchemes)
+[APTools]   ok   D:/Aphranda/APTools/tools/90_misc/color/APT_ColorScheme.il
+[APTools] APT_NetColor 已加载 (GND规则 7 / 电源规则 52 / 排除 52; 保留槽 32)
+[APTools]   ok   D:/Aphranda/APTools/tools/90_misc/netcolor/APT_NetColor.il
+[APTools] 工具加载完成: 成功 4, 失败 0
+[APTools] 菜单已注册 (menubar 右端 "APTools", 6 个阶段)
+[APTools] 工具集就绪 (root=D:/Aphranda/APTools)
+Starting new design...
+LOAD=(t)
+t
+
+=== A. GND family (expect gnd) ===
+CLS  GND                gnd   关键词 GND
+CLS  AGND               gnd   关键词 GND
+CLS  DGND               gnd   关键词 GND
+CLS  PGND               gnd   关键词 GND
+CLS  FGND               gnd   关键词 GND
+CLS  SGND               gnd   关键词 GND
+CLS  CGND               gnd   关键词 GND
+CLS  MGND               gnd   关键词 GND
+CLS  GNDA               gnd   关键词 GND
+CLS  GND0               gnd   关键词 GND
+CLS  GND_1              gnd   关键词 GND
+CLS  GND12              gnd   关键词 GND
+CLS  VSS                gnd   关键词 VSS
+CLS  VSSA               gnd   关键词 VSS
+CLS  VSSD               gnd   关键词 VSS
+CLS  VSSIO              gnd   关键词 VSS
+CLS  AVSS               gnd   关键词 VSS
+CLS  EARTH              gnd   关键词 EARTH
+CLS  CHASSIS            gnd   关键词 CHASSIS
+CLS  GROUND             gnd   关键词 GROUND
+CLS  0V                 gnd   关键词 ^0V$
+
+=== B. Power rails (expect pwr) ===
+CLS  VCC                pwr   关键词 VCC
+CLS  VDD                pwr   关键词 VDD
+CLS  VEE                pwr   关键词 VEE
+CLS  VPP                pwr   关键词 VPP
+CLS  VTT                pwr   关键词 VTT
+CLS  VREF               pwr   关键词 VREF
+CLS  VBUS               pwr   关键词 VBUS
+CLS  VUSB               pwr   关键词 VUSB
+CLS  VBAT               pwr   关键词 VBAT
+CLS  VSYS               pwr   关键词 VSYS
+CLS  VMAIN              pwr   关键词 VMAIN
+CLS  VIN                pwr   关键词 ^VIN
+CLS  VOUT               pwr   关键词 ^VOUT
+CLS  VIO                pwr   关键词 ^VIO
+CLS  AVDD               pwr   关键词 VDD
+CLS  DVDD               pwr   关键词 VDD
+CLS  PVDD               pwr   关键词 VDD
+CLS  AVCC               pwr   关键词 VCC
+CLS  DVCC               pwr   关键词 VCC
+CLS  VCCIO              pwr   关键词 VCC
+CLS  VCCINT             pwr   关键词 VCC
+CLS  VCCAUX             pwr   关键词 VCC
+CLS  VDDCORE            pwr   关键词 VDD
+CLS  VDDA               pwr   关键词 VDD
+CLS  VDDO               pwr   关键词 VDD
+CLS  V33                pwr   关键词 V33
+CLS  V18                pwr   关键词 V18
+CLS  PWR                pwr   关键词 ^PWR
+CLS  POWER              pwr   关键词 ^POWER
+CLS  VBUCK              pwr   关键词 VBUCK
+CLS  VPHASE             pwr   关键词 VPHASE
+CLS  VPWR               pwr   关键词 VPWR
+CLS  3V3                pwr   电压 3300mV
+CLS  3.3V               pwr   电压 3300mV
+CLS  1V8                pwr   电压 1800mV
+CLS  1.2V               pwr   电压 1200mV
+CLS  5V                 pwr   电压 5000mV
+CLS  12V                pwr   电压 12000mV
+CLS  +5V                pwr   电压 5000mV
+CLS  -12V               pwr   电压 12000mV
+CLS  N12V               pwr   电压 12000mV
+CLS  24V                pwr   电压 24000mV
+CLS  48V                pwr   电压 48000mV
+CLS  0V9                pwr   电压 900mV
+CLS  1V25               pwr   关键词 V25
+CLS  2V5                pwr   电压 2500mV
+CLS  5V0                pwr   电压 5000mV
+CLS  12V0               pwr   电压 12000mV
+CLS  VCC3V3             pwr   关键词 VCC
+CLS  VDD_1V8            pwr   关键词 VDD
+CLS  VCC5V0             pwr   关键词 VCC
+CLS  P12V               pwr   电压 12000mV
+CLS  1P8V               pwr   电压 1800mV
+CLS  3P3V               pwr   电压 3300mV
+CLS  3V3_A              pwr   电压 3300mV
+CLS  5V_STBY            pwr   电压 5000mV
+
+=== C. Excluded control/feedback (expect skip) ===
+CLS  PWR_EN             skip  后缀 EN$ (本可算电源)
+CLS  VCC_EN             skip  后缀 EN$ (本可算电源)
+CLS  3V3_EN             skip  后缀 EN$ (本可算电源)
+CLS  VBUS_PG            skip  后缀 PG$ (本可算电源)
+CLS  PWRGD              skip  后缀 PWRGD$ (本可算电源)
+CLS  PWROK              skip  后缀 PWROK$ (本可算电源)
+CLS  VCC_FB             skip  后缀 FB$ (本可算电源)
+CLS  VCC_SENSE          skip  后缀 SENSE$ (本可算电源)
+CLS  3V3_OV             skip  后缀 OV$ (本可算电源)
+CLS  VDD_DET            skip  后缀 DET$ (本可算电源)
+CLS  GND_PG             skip  后缀 PG$ (本可算电源)
+CLS  VCC_CLK            skip  后缀 CLK$ (本可算电源)
+CLS  VCC_MON            skip  后缀 MON$ (本可算电源)
+CLS  VDDO_TEMP          skip  后缀 TEMP$ (本可算电源)
+CLS  5V_SEL             skip  后缀 SEL$ (本可算电源)
+
+=== D. Ordinary signals (expect -, must NOT be listed as excluded) ===
+CLS  TX_P               -
+CLS  RX_N               -
+CLS  SPI_CLK            -
+CLS  SPI_CS             -
+CLS  SDA                -
+CLS  SCL                -
+CLS  GPIO5              -
+CLS  ADC_IN0            -
+CLS  N00001             -
+CLS  RESET_N            -
+CLS  LED1               -
+CLS  USB_DM             -
+CLS  D0                 -
+CLS  DATA3              -
+CLS  TEMP               -
+CLS  SEL0               -
+CLS  MODE1              -
+CLS  NMI                -
+CLS  TDO                -
+CLS  CTRL1              -
+CLS  STAT               -
+CLS  MON1               -
+CLS  VCC_CURRENT        pwr   关键词 VCC
+
+=== E. Voltage token edge cases ===
+CLS  3V3                pwr   电压 3300mV
+CLS  3.3V               pwr   电压 3300mV
+CLS  12V                pwr   电压 12000mV
+CLS  +5V                pwr   电压 5000mV
+CLS  5V0                pwr   电压 5000mV
+CLS  0V9                pwr   电压 900mV
+CLS  1V25               pwr   关键词 V25
+CLS  1P8V               pwr   电压 1800mV
+CLS  3P3V               pwr   电压 3300mV
+CLS  13V3               pwr   电压 13300mV
+CLS  DDR13V3            pwr   电压 13300mV
+CLS  100V               -
+CLS  0V                 gnd   关键词 ^0V$
+CLS  DATA0V             -
+CLS  TXD3               -
+CLS  VCC                pwr   关键词 VCC
+CLS  5                  -
+
+=== F. RNG / random color picks ===
+seed(timestamp string) : (582026)
+RND  (rnd 100) x16 : (89) (50) (60) (23) (34) (95) (99) (72) (29) (0) (39) (40) (34) (2) (74) (41) 
+GREY (6 nets)      : ((105 105 105)) ((205 205 205)) ((182 182 182)) ((137 137 137)) ((160 160 160)) ((178 178 178)) 
+PWR  (8 nets)      : ((0 186 255)) ((255 144 0)) ((9 0 255)) ((158 255 0)) ((255 0 132)) ((255 0 0)) ((0 255 18)) ((145 0 255)) 
+GREY cfg range     : min=(90) max=(210)
+
+=== G. dialect diagnostics ===
+(defvar X 32) readable at own load's top level : (t)
+rule tables bound (GndKw/RailKw/SkipSuf)       : (t) (t) (t)
+ReserveN / GreyIdx                             : nil (8)
+palette count                                  : (192)
+
+SELFTEST DONE
+t

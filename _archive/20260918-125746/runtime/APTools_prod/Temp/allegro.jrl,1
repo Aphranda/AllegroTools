@@ -1,0 +1,37 @@
+\t (00:00:04) allegro 25.1 S040 (4446200) [6/13/2026] Windows SPB 64-bit Edition
+\t (00:00:04)     Journal start - Thu Sep 17 21:02:39 2026
+\t (00:00:04)         Host=APHRANDA User=Aphranda Pid=7444 CPUs=12
+\t (00:00:04) CmdLine= D:\Cadence\SPB_25.1\tools\bin\allegro.exe -readonly -s D:\Aphranda\APTools_prod\Temp\probe.scr
+\t (00:00:04) 
+\t (00:00:04) Loading axlcore.cxt 
+\t (00:00:04) function xFormBegin redefined
+\t (00:00:04) function xFormEnd redefined
+\t (00:00:04) function xCheckList redefined
+\t (00:00:04) function xGroup redefined
+\t (00:00:04) function xText redefined
+\t (00:00:04) function xButton redefined
+\t (00:00:04) function xEdit redefined
+\t (00:00:04) function xInfoText redefined
+\e (00:00:04) *Error* strcat: argument #1 should be either a string or a symbol (type template = "S") - nil
+\t (00:00:04) Starting new design...
+\i (00:00:05) trapsize 116667
+\i (00:00:05) replay 'D:`\Aphranda`\APTools_prod`\Temp`\probe.scr' 
+\i (00:00:05) skill '(let (p) (setq p (outfile "D:/Aphranda/APTools_prod/Temp/probe.txt" "w")) (when p (fprintf p "envAPTools=[%L]`\n" (getShellEnvVar "APTools")) (fprintf p "apt_home=%L`\n" (errset apt_home t)) (fprintf p "apt_menuList=%L`\n" (errset apt_menuList t)) (fprintf p "find_cmd_apt_scan=%L`\n" (errset (axlUIMenuFind nil "apt_scan") t)) (close p)))' 
+\e (00:00:05) *Error* eval: unbound variable - apt_home
+\e (00:00:05) *Error* eval: unbound variable - apt_menuList
+\t (00:00:05) t
+\i (00:00:05) skill '(axlUIMenuDump "D:/Aphranda/APTools_prod/Temp/menudump.txt")' 
+\t (00:00:05) "D:/Aphranda/APTools_prod/Temp/menudump.txt"
+\i (00:00:05) exit 
+\t (00:00:07) Lic Summary:
+[21:02:43.513754] Cdslmd servers:D:\Hardware\ModelSim2022\LICENSE.TXT
+[21:02:43.513836] Feature usage summary:
+[21:02:43.513838] Allegro_X_Designer_Layout_plus  
+[21:02:43.513844] Allegro_PCB_Productivity_TB  
+[21:02:43.513844] Allegro_PCB_RF  
+[21:02:43.513845] Allegro_PCB_Harmony_Option  
+[21:02:43.513845] Allegro_PCB_HighSpeed_Option  
+[21:02:43.513846] PCB_design_studio  
+[21:02:43.513847] Allegro_X_Designer_plus  
+[21:02:43.513847] Allegro_performance  
+\t (00:00:07)     Journal end - Thu Sep 17 21:02:43 2026

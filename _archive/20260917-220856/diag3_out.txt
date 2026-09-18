@@ -1,0 +1,47 @@
+Loading axlcore.cxt 
+function xFormBegin redefined
+function xFormEnd redefined
+function xCheckList redefined
+function xGroup redefined
+function xText redefined
+function xButton redefined
+function xEdit redefined
+function xInfoText redefined
+[APTools] APT_LocatorHole 已加载 (apt_scan / apt_fix / apt_scanlib / apt_fixlib)
+[APTools] APT_LocatorHole 已加载 (apt_scan / apt_fix / apt_scanlib / apt_fixlib)
+[APTools]   ok   D:/Aphranda/APTools/tools/10_library/locatorhole/APT_LocatorHole.il
+[APTools] APT_SymbolCheck 已加载 (占位, 待实现)
+[APTools]   ok   D:/Aphranda/APTools/tools/10_library/symcheck/APT_SymbolCheck.il
+[APTools] APT_ColorScheme 已加载 (3 套方案; 改数值见 apt_colorSchemes)
+[APTools]   ok   D:/Aphranda/APTools/tools/90_misc/color/APT_ColorScheme.il
+[APTools] APT_NetColor 已加载 (GND规则 7 / 电源规则 52 / 排除 52; 保留槽 32)
+[APTools]   ok   D:/Aphranda/APTools/tools/90_misc/netcolor/APT_NetColor.il
+[APTools] 工具加载完成: 成功 4, 失败 0
+[APTools] 菜单已注册 (menubar 右端 "APTools", 6 个阶段)
+[APTools] 工具集就绪 (root=D:/Aphranda/APTools)
+Starting new design...
+Q1 voltAt(3V3,0)=nil
+E- *Error* if: too many arguments (missing then?) - ((apt_digAt(t_s j) < 0) nil progn(while((& >= 0) (d1 = &) (j = &)) (ch = apt_ch(t_s j)) if((& || &) progn(& & & &) if(& & nil))) when(ok (pre = t) when((t_i > 0) when(& &)) when((& >= 0) (pre = nil)) when(pre (mult = &) (mv = &) if(& mv nil))))
+t
+Q2 voltFind(3V3)=nil
+E- *Error* eval: undefined function - apt_voltFind
+t
+Q3 patAny(GND,RailKw)=(nil)
+t
+Q4 class(GND)=nil
+E- *Error* eval: undefined function - apt_netPowClass
+t
+Q5 cfgGreyMin=(90)
+t
+Q6 rnd121=(112)
+t
+Q7 distinct=nil
+E- *Error* eval: undefined function - apt_netPowDistinct
+t
+Q8 pick gnd=nil
+E- *Error* eval: undefined function - apt_netPowPick
+t
+Q9 abs=(5.0)
+t
+Q10 caddr=(3)
+t

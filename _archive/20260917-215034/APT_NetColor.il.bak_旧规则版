@@ -1,0 +1,206 @@
+;;; ============================================================================
+;;; APT_NetColor.il  --  电源网络刷色
+;;; 阶段: 90_misc (辅助功能)      子菜单: 电源网络刷色
+;;; ----------------------------------------------------------------------------
+;;; 为什么重写而不是移植
+;;;   对应 FanySkill 的 colorp, 但 V1.8 源码包里没有它(V2.x 才加, 且加密),
+;;;   所以用 Allegro 公开 API 自己实现。
+;;;
+;;; 做的事
+;;;   1. 打开"自定义配色"开关 (axlDBDisplayControl 'customColorEnabled), 否则刷了看不见
+;;;   2. 按规则匹配网络名, 给命中的 net 设自定义颜色 (axlCustomColorObject)
+;;;   3. 另给命令清除全部自定义配色
+;;;
+;;; 颜色怎么落地(关键)
+;;;   axlCustomColorObject 收的是"调色板索引", 不是 RGB。所以规则表里用 RGB 描述,
+;;;   运行时 apt_netColorAlloc 按三步解决:
+;;;     ① 调色板里已有同色 -> 直接用那个索引(不破坏你的配色)
+;;;     ② 之前已为该 RGB 分配过保留槽 -> 复用
+;;;     ③ 都没有 -> 写到调色板末尾的保留槽(apt_netColorReserveN 个), 并使用它
+;;;   这样规则表写什么色就一定生效, 不会再"找不到就跳过"。
+;;;
+;;; 改规则: 改 apt_netColorRules, 格式 (正则 RGB); RGB 为 nil 表示不刷
+;;;   也可 (apt_cfgset 'netColorRules (list (list "^GND" (list 0 221 0))))
+;;;
+;;; 编码: 必须 GBK(cp936)。
+;;; ============================================================================
+
+(defvar apt_netcolor_submenu "电源网络刷色")
+
+;;; 调色板缓存(只取一次, 避免每条规则都全表扫描)
+(defvar apt_netColorPalette nil)
+
+;;; 已占用的保留槽: 形如 (("RGB" 索引) ...) —— 用 list, 不要用 dotted pair
+(defvar apt_netColorReserved nil)
+(defvar apt_netColorReserveN 8)
+
+;;; 规则表: (网络名正则  RGB) —— 按顺序匹配, 先命中先用
+(defvar apt_netColorRules nil)
+(setq apt_netColorRules (list
+    (list "^(GND|AGND|DGND|PGND|GNDA|VSS|0V|EARTH)"                    (list   0 221   0))
+    (list "^(\\+?3V3|3\\.3V|1V8|1\\.8V|1V2|1\\.2V|VDD|VCC|AVDD|DVDD)" (list 255   0   0))
+    (list "^(\\+?5V|5V0|VBUS|VUSB|VSYS|VIN5)"                          (list 255 160   0))
+    (list "^(\\+?12V|12V0|VIN|VBAT|VMAIN|PWR|POWER)"                   (list 255   0 255))
+    (list "^(NC|DUMMY)"                                                nil)))
+
+;;; ---------------------------------------------------------------------------
+;;; 调色板(带缓存)
+;;; ---------------------------------------------------------------------------
+(procedure (apt_netColorLoadPalette)
+    (unless apt_netColorPalette
+        (setq apt_netColorPalette (axlColorGet 'all)))
+    apt_netColorPalette)
+
+;;; 在调色板里找与 RGB 相同的索引; 找不到返回 nil
+(procedure (apt_netColorIndexOf t_rgb)
+    (let (all i hit)
+        (setq all (apt_netColorLoadPalette))
+        (setq i 1)
+        (foreach rgb all
+            (when (and (null hit) (equal rgb t_rgb))
+                (setq hit i))
+            (setq i (i + 1)))
+        hit))
+
+;;; 取一个还没被我们占用的保留槽索引; 没有则 nil
+(procedure (apt_netColorFreeSlot)
+    (let (n k used hit)
+        (setq n (axlColorGet 'count))
+        (setq k (n - apt_netColorReserveN))
+        (when (k < 1) (setq k 1))
+        (while (and (null hit) (k <= n))
+            (setq used nil)
+            (foreach kv apt_netColorReserved
+                (when (equal (cadr kv) k) (setq used t)))
+            (unless used (setq hit k))
+            (setq k (k + 1)))
+        hit))
+
+;;; RGB -> 可用索引(三步: 已有同色 / 已分配 / 新占保留槽)
+(procedure (apt_netColorAlloc t_rgb)
+    (let (idx slot)
+        (setq idx (apt_netColorIndexOf t_rgb))
+        (unless idx
+            (foreach kv apt_netColorReserved
+                (when (and (null idx) (equal (car kv) t_rgb))
+                    (setq idx (cadr kv)))))
+        (unless idx
+            (setq slot (apt_netColorFreeSlot))
+            (when slot
+                (axlColorSet slot t_rgb)
+                (setq apt_netColorReserved (append apt_netColorReserved (list (list t_rgb slot))))
+                (setq idx slot)
+                (printf "[APTools]   保留调色板槽 %d 已写入 RGB %L\n" slot t_rgb)))
+        idx))
+
+;;; ---------------------------------------------------------------------------
+;;; 按规则给电源网络刷色。返回 (命中数 上色数 未上色数)
+;;; ---------------------------------------------------------------------------
+(procedure (apt_netColorApply)
+    (let (nets rules nm up rule idx nHit nSet nFail)
+        (axlDBDisplayControl 'customColorEnabled t)
+
+        (setq rules (apt_cfg 'netColorRules))
+        (unless rules (setq rules apt_netColorRules))
+
+        ;; 先把规则里的 RGB 解析成索引(每条规则只解析一次)
+        (setq rules (mapcar (lambda (r)
+                              (list (car r)
+                                    (if (cadr r) (apt_netColorAlloc (cadr r)) nil)
+                                    (cadr r)))
+                            rules))
+
+        (setq nets (axlDBGetDesign)->nets)
+        (setq nHit 0)
+        (setq nSet 0)
+        (setq nFail 0)
+        (foreach nm nets
+            (setq up (upperCase nm->name))
+            (setq rule nil)
+            (foreach r rules
+                (when (and (null rule) (cadr r) (rexMatchp (car r) up))
+                    (setq rule r)))
+            (when rule
+                (setq nHit (nHit + 1))
+                (setq idx (cadr rule))
+                (if idx
+                    (progn
+                        (axlCustomColorObject nm idx)
+                        (setq nSet (nSet + 1)))
+                    (setq nFail (nFail + 1)))))
+
+        (axlVisibleUpdate t)
+        (printf "[APTools] 电源网络刷色: 命中 %d, 上色 %d, 未上色 %d (共 %d 个网络)\n"
+                nHit nSet nFail (length nets))
+        (list nHit nSet nFail)))
+
+;;; ---------------------------------------------------------------------------
+;;; 清除所有自定义配色
+;;; ---------------------------------------------------------------------------
+(procedure (apt_netColorClear)
+    (let (nets dbids n)
+        (setq nets (axlDBGetDesign)->nets)
+        (setq dbids nil)
+        (foreach nm nets
+            (when (axlIsCustomColored nm)
+                (setq dbids (cons nm dbids))))
+        (setq n (length dbids))
+        (when dbids
+            (axlClearObjectCustomColor dbids))
+        (axlVisibleUpdate t)
+        (printf "[APTools] 已清除 %d 个网络的自定义配色\n" n)
+        n))
+
+;;; ---------------------------------------------------------------------------
+;;; 辅助: 打印调色板 / 打印当前规则
+;;; ---------------------------------------------------------------------------
+(procedure (apt_netColorShowPalette)
+    (let (all i)
+        (setq all (apt_netColorLoadPalette))
+        (setq i 1)
+        (foreach rgb all
+            (printf "  %3d : %L\n" i rgb)
+            (setq i (i + 1)))
+        (printf "[APTools] 调色板共 %d 色\n" (length all))))
+
+(procedure (apt_netColorShowRules)
+    (let (rules i)
+        (setq rules (apt_cfg 'netColorRules))
+        (unless rules (setq rules apt_netColorRules))
+        (setq i 1)
+        (foreach r rules
+            (printf "  %d : 正则 %-52s  RGB %L\n" i (car r) (cadr r))
+            (setq i (i + 1)))
+        (when apt_netColorReserved
+            (printf "  已占用的保留槽:\n")
+            (foreach kv apt_netColorReserved
+                (printf "     槽 %d = %L\n" (cadr kv) (car kv))))
+        (length rules)))
+
+;;; ---------------------------------------------------------------------------
+;;; 命令 + 菜单
+;;; ---------------------------------------------------------------------------
+(procedure (apt_cmd_netcolor)
+    (let (r)
+        (setq r (apt_netColorApply))
+        (axlUIConfirm (sprintf nil "电源网络刷色完成\n\n命中网络 %d 个, 上色 %d 个\n\n规则见 apt_netColorRules; 菜单\"查看规则\"可打印当前规则与保留槽占用。"
+                               (nth 0 r) (nth 1 r)))))
+
+(procedure (apt_cmd_netcolorClear)
+    (axlUIConfirm (sprintf nil "已清除 %d 个网络的自定义配色。" (apt_netColorClear))))
+
+(axlCmdRegister "apt_netcolor"      'apt_cmd_netcolor          ?cmdType "general")
+(axlCmdRegister "apt_netcolorclear" 'apt_cmd_netcolorClear     ?cmdType "general")
+(axlCmdRegister "apt_netcolorpal"   'apt_netColorShowPalette   ?cmdType "general")
+(axlCmdRegister "apt_netcolorrule"  'apt_netColorShowRules     ?cmdType "general")
+
+(apt_cfgdef 'netColorRules apt_netColorRules)
+
+(apt_menuSub "90_misc" apt_netcolor_submenu "按规则刷色"   "apt_netcolor")
+(apt_menuSub "90_misc" apt_netcolor_submenu "清除刷色"     "apt_netcolorclear")
+(apt_menuSubSep "90_misc" apt_netcolor_submenu)
+(apt_menuSub "90_misc" apt_netcolor_submenu "查看规则"     "apt_netcolorrule")
+(apt_menuSub "90_misc" apt_netcolor_submenu "查看调色板"   "apt_netcolorpal")
+
+(printf "[APTools] APT_NetColor 已加载 (%d 条规则; 保留槽 %d 个)\n"
+        (length apt_netColorRules) apt_netColorReserveN)

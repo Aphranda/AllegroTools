@@ -1,0 +1,608 @@
+[2026-09-17 22:04:19.188429] [0x00005114] [debug]    ------------------ OS Env ------------------
+[2026-09-17 22:04:19.190946] [0x00005114] [debug]   Env: ACT_INC_LICENSE_FILE=D:\Hardware\CAM350\license2021.dat
+[2026-09-17 22:04:19.190946] [0x00005114] [debug]   Env: ALLEGRO_BRD2ODB=D:\Cadence\ODB++\brd2odb_2409
+[2026-09-17 22:04:19.191948] [0x00005114] [debug]   Env: ALLUSERSPROFILE=C:\ProgramData
+[2026-09-17 22:04:19.191948] [0x00005114] [debug]   Env: ANSYS261_DIR=D:\Hardware\ANAYS\ANSYS Inc\v261\ANSYS
+[2026-09-17 22:04:19.192947] [0x00005114] [debug]   Env: ANSYSEM_ROOT242=D:\Hardware\AnsysEM\v242\Win64
+[2026-09-17 22:04:19.193947] [0x00005114] [debug]   Env: ANSYSEM_ROOT261=D:\Hardware\ANAYS\ANSYS Inc\v261\AnsysEM
+[2026-09-17 22:04:19.193947] [0x00005114] [debug]   Env: ANSYSLIC_DIR=D:\Hardware\ANSYS Inc\Shared Files\Licensing
+[2026-09-17 22:04:19.193947] [0x00005114] [debug]   Env: ANSYSLMD_LICENSE_FILE=1055@localhost
+[2026-09-17 22:04:19.193947] [0x00005114] [debug]   Env: APPDATA=C:\Users\Aphranda\AppData\Roaming
+[2026-09-17 22:04:19.194949] [0x00005114] [debug]   Env: AutInstLog=C:\ProgramData\Siemens\Automation\Logfiles\Setup\
+[2026-09-17 22:04:19.194949] [0x00005114] [debug]   Env: AWP_ROOT261=D:\Hardware\ANAYS\ANSYS Inc\v261
+[2026-09-17 22:04:19.194949] [0x00005114] [debug]   Env: CDSROOT=D:\Cadence\SPB_25.1
+[2026-09-17 22:04:19.194949] [0x00005114] [debug]   Env: CDS_HOME=C:\cds_spb_home
+[2026-09-17 22:04:19.194949] [0x00005114] [debug]   Env: CDS_LIC_FILE=5280@localhost
+[2026-09-17 22:04:19.194949] [0x00005114] [debug]   Env: CDS_LIC_ONLY=1
+[2026-09-17 22:04:19.195951] [0x00005114] [debug]   Env: ChocolateyInstall=C:\ProgramData\chocolatey
+[2026-09-17 22:04:19.195951] [0x00005114] [debug]   Env: ChocolateyLastPathUpdate=133604410072896946
+[2026-09-17 22:04:19.195951] [0x00005114] [debug]   Env: CHROME_CRASHPAD_PIPE_NAME=\\.\pipe\crashpad_11156_ZWDPBHZAWADSBMMU
+[2026-09-17 22:04:19.195951] [0x00005114] [debug]   Env: CMWrunTestsDir=C:\Program Files (x86)\Rohde-Schwarz\CMWrun\1.7.8\Tests\
+[2026-09-17 22:04:19.195951] [0x00005114] [debug]   Env: CommonProgramFiles=C:\Program Files\Common Files
+[2026-09-17 22:04:19.195951] [0x00005114] [debug]   Env: CommonProgramFiles(x86)=C:\Program Files (x86)\Common Files
+[2026-09-17 22:04:19.195951] [0x00005114] [debug]   Env: CommonProgramW6432=C:\Program Files\Common Files
+[2026-09-17 22:04:19.196948] [0x00005114] [debug]   Env: COMPUTERNAME=APHRANDA
+[2026-09-17 22:04:19.196948] [0x00005114] [debug]   Env: ComSpec=C:\WINDOWS\system32\cmd.exe
+[2026-09-17 22:04:19.196948] [0x00005114] [debug]   Env: DriverData=C:\Windows\System32\Drivers\DriverData
+[2026-09-17 22:04:19.196948] [0x00005114] [debug]   Env: DSH_HOME=C:\Users\Aphranda\.dsh
+[2026-09-17 22:04:19.196948] [0x00005114] [debug]   Env: DSH_SESSION_ID=session-7856035d-e28e-4bb2-8194-623212f9bef3
+[2026-09-17 22:04:19.196948] [0x00005114] [debug]   Env: DSH_SESSION_JSONL=C:\Users\Aphranda\.dsh\sessions\--F-1.Hardware-GTS_PPA1-08.CTL-SYNCTRIG4F4-HASL--\session-7856035d-e28e-4bb2-8194-623212f9bef3\session.jsonl.zstd
+[2026-09-17 22:04:19.196948] [0x00005114] [debug]   Env: DSH_SHELL=1
+[2026-09-17 22:04:19.197949] [0x00005114] [debug]   Env: DSH_WEB_URL=http://127.0.0.1:43120
+[2026-09-17 22:04:19.197949] [0x00005114] [debug]   Env: DST_HOME=D:\Hardware\CAM350\
+[2026-09-17 22:04:19.197949] [0x00005114] [debug]   Env: FyEnhanceTool=D:\Aphranda\FanySkill
+[2026-09-17 22:04:19.197949] [0x00005114] [debug]   Env: GIT_PAGER=cat
+[2026-09-17 22:04:19.197949] [0x00005114] [debug]   Env: HOME=D:\Cadence\SPB_Data
+[2026-09-17 22:04:19.197949] [0x00005114] [debug]   Env: HOMEDRIVE=C:
+[2026-09-17 22:04:19.197949] [0x00005114] [debug]   Env: HOMEPATH=\Users\Aphranda
+[2026-09-17 22:04:19.198949] [0x00005114] [debug]   Env: IFX_TOOLBOX_UUID=bea04ac1-0658-310f-9512-52989fffc585
+[2026-09-17 22:04:19.198949] [0x00005114] [debug]   Env: IGNORE_PRO=DEVICE
+[2026-09-17 22:04:19.198949] [0x00005114] [debug]   Env: INTELFPGAOCLSDKROOT=D:\intelFPGA\18.1\hld
+[2026-09-17 22:04:19.198949] [0x00005114] [debug]   Env: KMP_DUPLICATE_LIB_OK=TRUE
+[2026-09-17 22:04:19.198949] [0x00005114] [debug]   Env: LM_LICENSE_FILE=D:\Hardware\ModelSim2022\LICENSE.TXT
+[2026-09-17 22:04:19.198949] [0x00005114] [debug]   Env: LOCALAPPDATA=C:\Users\Aphranda\AppData\Local
+[2026-09-17 22:04:19.199948] [0x00005114] [debug]   Env: LOGONSERVER=\\APHRANDA
+[2026-09-17 22:04:19.199948] [0x00005114] [debug]   Env: MGLS_LICENSE_FILE=D:\Hardware\ModelSim2022\win64
+[2026-09-17 22:04:19.199948] [0x00005114] [debug]   Env: MKL_SERIAL=YES
+[2026-09-17 22:04:19.199948] [0x00005114] [debug]   Env: MSMPI_BIN=C:\Program Files\Microsoft MPI\Bin\
+[2026-09-17 22:04:19.199948] [0x00005114] [debug]   Env: NIDAQmxSwitchDir=D:\National Instruments\NI-DAQ\Switch\
+[2026-09-17 22:04:19.199948] [0x00005114] [debug]   Env: NIEXTCCOMPILERSUPP=D:\National Instruments\Shared\ExternalCompilerSupport\C\
+[2026-09-17 22:04:19.200951] [0x00005114] [debug]   Env: NO_COLOR=1
+[2026-09-17 22:04:19.200951] [0x00005114] [debug]   Env: NUMBER_OF_PROCESSORS=12
+[2026-09-17 22:04:19.200951] [0x00005114] [debug]   Env: OneDrive=E:\OneDrive
+[2026-09-17 22:04:19.200951] [0x00005114] [debug]   Env: OneDriveConsumer=E:\OneDrive
+[2026-09-17 22:04:19.200951] [0x00005114] [debug]   Env: ORIGINAL_XDG_CURRENT_DESKTOP=undefined
+[2026-09-17 22:04:19.200951] [0x00005114] [debug]   Env: OS=Windows_NT
+[2026-09-17 22:04:19.200951] [0x00005114] [debug]   Env: OV_NI_PLUGIN_DIR=C:\Program Files\National Instruments\Shared\OpenVINO\
+[2026-09-17 22:04:19.201949] [0x00005114] [debug]   Env: PAGER=cat
+[2026-09-17 22:04:19.201949] [0x00005114] [debug]   Env: PATH=d:\cadence\spb_25.1\tools\bin;C:\Users\Aphranda\AppData\Roaming\DSH Desktop\host-commands\desktop\bin;C:\Users\Aphranda\AppData\Roaming\DSH Desktop\runtime-commands\bin;D:\Cadence\SPB_24.1\tools\bin;C:\Program Files\Microsoft MPI\Bin\;C:\Program Files (x86)\Razer\ChromaBroadcast\bin;C:\Program Files\Razer\ChromaBroadcast\bin;C:\Program Files\Common Files\Siemens\Automation\Simatic OAM\bin;C:\Program Files\National Instruments\Shared\OpenVINO\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\110\Tools\Binn\;C:\Program Files (x86)\Microsoft SQL Server\120\Tools\Binn\;C:\Program Files\Microsoft SQL Server\120\Tools\Binn\;C:\Program Files\Microsoft SQL Server\120\DTS\Binn\;C:\Program Files (x86)\Windows Kits\8.1\Windows Performance Toolkit\;C:\Program Files (x86)\IVI Foundation\VISA\WinNT\Bin;D:\National Instruments\Shared\LabVIEW CLI;C:\Program Files (x86)\IVI Foundation\VISA\WinNT\Bin\;C:\Program Files\IVI Foundation\VISA\Win64\Bin\;C:\Windows\system32\config\systemprofile\AppData\Local\Microsoft\WindowsApps;C:\Program Files (x86)\STMicroelectronics\STM32 ST-LINK Utility\ST-LINK Utility;C:\Program Files\dotnet\;D:\Program Files\CMake\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\ProgramData\chocolatey\bin;D:\Cmake\bin;C:\Program Files\Git\bin;C:\Program Files\CMake\bin;D:\Altium\AD23;C:\Program Files (x86)\PxMEWNET;D:\Microsoft\Miniconda;D:\Microsoft\Miniconda\condabin;D:\Microsoft\Miniconda\Scripts;C:\Program Files\NVIDIA Corporation\NVIDIA App\NvDLISR;D:\Aphranda\gs10.06.0\bin;D:\Aphranda\npm;D:\Microsoft\NodeJs\;D:\Cadence\SPB_24.1\tools\bin;C:\Program Files\Microsoft MPI\Bin\;C:\Program Files (x86)\Razer\ChromaBroadcast\bin;C:\Program Files\Razer\ChromaBroadcast\bin;C:\Program Files\Common Files\Siemens\Automation\Simatic OAM\bin;C:\Program Files\National Instruments\Shared\OpenVINO\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\110\Tools\Binn\;C:\Program Files (x86)\Microsoft SQL Server\120\Tools\Binn\;C:\Program Files\Microsoft SQL Server\120\Tools\Binn\;C:\Program Files\Microsoft SQL Server\120\DTS\Binn\;C:\Program Files (x86)\Windows Kits\8.1\Windows Performance Toolkit\;C:\Program Files (x86)\IVI Foundation\VISA\WinNT\Bin;D:\National Instruments\Shared\LabVIEW CLI;C:\Program Files (x86)\IVI Foundation\VISA\WinNT\Bin\;C:\Program Files\IVI Foundation\VISA\Win64\Bin\;C:\Windows\system32\config\systemprofile\AppData\Local\Micr;D:\Aphranda\npm;D:\Microsoft\Microsoft VScode\Microsoft VS Code\bin;D:\Microsoft\MinGW\mingw64\bin;C:\Users\Aphranda\AppData\Roaming\npm
+[2026-09-17 22:04:19.201949] [0x00005114] [debug]   Env: PATHEXT=.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.CPL
+[2026-09-17 22:04:19.202950] [0x00005114] [debug]   Env: PROCESSOR_ARCHITECTURE=AMD64
+[2026-09-17 22:04:19.202950] [0x00005114] [debug]   Env: PROCESSOR_IDENTIFIER=Intel64 Family 6 Model 158 Stepping 10, GenuineIntel
+[2026-09-17 22:04:19.202950] [0x00005114] [debug]   Env: PROCESSOR_LEVEL=6
+[2026-09-17 22:04:19.202950] [0x00005114] [debug]   Env: PROCESSOR_REVISION=9e0a
+[2026-09-17 22:04:19.202950] [0x00005114] [debug]   Env: ProgramData=C:\ProgramData
+[2026-09-17 22:04:19.202950] [0x00005114] [debug]   Env: ProgramFiles=C:\Program Files
+[2026-09-17 22:04:19.203951] [0x00005114] [debug]   Env: ProgramFiles(x86)=C:\Program Files (x86)
+[2026-09-17 22:04:19.203951] [0x00005114] [debug]   Env: ProgramW6432=C:\Program Files
+[2026-09-17 22:04:19.203951] [0x00005114] [debug]   Env: PSModulePath=C:\Users\Aphranda\Documents\WindowsPowerShell\Modules;C:\Program Files\WindowsPowerShell\Modules;C:\WINDOWS\system32\WindowsPowerShell\v1.0\Modules;C:\Program Files (x86)\Microsoft SQL Server\120\Tools\PowerShell\Modules\
+[2026-09-17 22:04:19.203951] [0x00005114] [debug]   Env: PUBLIC=C:\Users\Public
+[2026-09-17 22:04:19.203951] [0x00005114] [debug]   Env: PyCharm=D:\JetBrains\PyCharm 2025.1.3.1\bin;
+[2026-09-17 22:04:19.203951] [0x00005114] [debug]   Env: QSYS_ROOTDIR=D:\intelFPGA\18.1\quartus\sopc_builder\bin
+[2026-09-17 22:04:19.203951] [0x00005114] [debug]   Env: QtMsBuild=C:\Users\Aphranda\AppData\Local\QtMsBuild
+[2026-09-17 22:04:19.203951] [0x00005114] [debug]   Env: QUARTUS_ROOTDIR=D:\intelFPGA\18.1\quartus
+[2026-09-17 22:04:19.205090] [0x00005114] [debug]   Env: SESSIONNAME=Console
+[2026-09-17 22:04:19.205090] [0x00005114] [debug]   Env: SIGRITY_EDA_DIR=D:\Cadence\Sigrity2023.1
+[2026-09-17 22:04:19.205090] [0x00005114] [debug]   Env: Simatic_OAM=C:\Program Files\Common Files\Siemens\Automation\Simatic OAM
+[2026-09-17 22:04:19.205090] [0x00005114] [debug]   Env: Simatic_OAM_DATA=C:\ProgramData\Siemens\Automation\Simatic OAM
+[2026-09-17 22:04:19.205090] [0x00005114] [debug]   Env: SIMPLORER_HOME=D:\Hardware\AnsysEM\v242\Win64
+[2026-09-17 22:04:19.205090] [0x00005114] [debug]   Env: SIWAVE_INSTALL_DIR=D:\Hardware\AnsysEM\v242\Win64
+[2026-09-17 22:04:19.206087] [0x00005114] [debug]   Env: SOPC_KIT_NIOS2=D:\intelFPGA\18.1\nios2eds
+[2026-09-17 22:04:19.206087] [0x00005114] [debug]   Env: SW_SIM_HYDRA=C:\Program Files\Common Files\SolidWorks Shared\Simulation Worker Agent\
+[2026-09-17 22:04:19.206087] [0x00005114] [debug]   Env: SW_SIM_MPIT=INTELMPI
+[2026-09-17 22:04:19.206087] [0x00005114] [debug]   Env: SW_SIM_TEMP=C:\ProgramData\SOLIDWORKS\SW_net_sim_temp\
+[2026-09-17 22:04:19.206087] [0x00005114] [debug]   Env: SystemDrive=C:
+[2026-09-17 22:04:19.206087] [0x00005114] [debug]   Env: SystemRoot=C:\WINDOWS
+[2026-09-17 22:04:19.207156] [0x00005114] [debug]   Env: TEMP=C:\Users\Aphranda\AppData\Local\Temp
+[2026-09-17 22:04:19.207156] [0x00005114] [debug]   Env: TMP=C:\Users\Aphranda\AppData\Local\Temp
+[2026-09-17 22:04:19.207156] [0x00005114] [debug]   Env: USERDOMAIN=APHRANDA
+[2026-09-17 22:04:19.207156] [0x00005114] [debug]   Env: USERDOMAIN_ROAMINGPROFILE=APHRANDA
+[2026-09-17 22:04:19.207156] [0x00005114] [debug]   Env: USERNAME=Aphranda
+[2026-09-17 22:04:19.208166] [0x00005114] [debug]   Env: USERPROFILE=C:\Users\Aphranda
+[2026-09-17 22:04:19.208166] [0x00005114] [debug]   Env: UV_DEFAULT_INDEX=https://mirrors.aliyun.com/pypi/simple
+[2026-09-17 22:04:19.208166] [0x00005114] [debug]   Env: VIPSHOME=\\?\D:\Aphranda\DSH\DSH Desktop\resources\app.asar.unpacked\node_modules\@img\sharp-win32-x64
+[2026-09-17 22:04:19.208166] [0x00005114] [debug]   Env: VXIPNPPATH=C:\Program Files (x86)\IVI Foundation\VISA\
+[2026-09-17 22:04:19.209162] [0x00005114] [debug]   Env: VXIPNPPATH64=C:\Program Files\IVI Foundation\VISA\
+[2026-09-17 22:04:19.209162] [0x00005114] [debug]   Env: windir=C:\WINDOWS
+[2026-09-17 22:04:19.209162] [0x00005114] [debug]   Env: ZES_ENABLE_SYSMAN=1
+[2026-09-17 22:04:19.209162] [0x00005114] [debug]   Env: CHDL_LIB_INST_DIR=d:\cadence\spb_25.1
+[2026-09-17 22:04:19.209162] [0x00005114] [debug]   Env: CONCEPT_INST_DIR=d:\cadence\spb_25.1
+[2026-09-17 22:04:19.209162] [0x00005114] [debug]   Env: QT_D3DCREATE_MULTITHREADED=1
+[2026-09-17 22:04:19.210165] [0x00005114] [debug]   Env: CDS_ARCH=WIN32
+[2026-09-17 22:04:19.210165] [0x00005114] [debug]   Env: CDS_MPS_SESSION=Aphranda
+[2026-09-17 22:04:19.210165] [0x00005114] [debug]   Env: _allegro_x_designer_plus=1
+[2026-09-17 22:04:19.211182] [0x00005114] [debug]   Env: QT_QUICK_BACKEND=software
+[2026-09-17 22:04:19.211182] [0x00005114] [debug]   Env: QTWEBENGINE_CHROMIUM_FLAGS=--no-sandbox --lang=en_US
+[2026-09-17 22:04:19.211182] [0x00005114] [debug]    ------------------ SY Env ------------------
+[2026-09-17 22:04:19.211182] [0x00005114] [debug]   Env: cdsversion=25.1
+[2026-09-17 22:04:19.211182] [0x00005114] [debug]   Env: textpath=. D:/Cadence/SPB_25.1/share/local/pcb/extracta D:/Cadence/SPB_25.1/share/pcb/text/views
+[2026-09-17 22:04:19.212167] [0x00005114] [debug]   Env: vxipnppath64=C:\Program Files\IVI Foundation\VISA\
+[2026-09-17 22:04:19.212167] [0x00005114] [debug]   Env: uv_default_index=https://mirrors.aliyun.com/pypi/simple
+[2026-09-17 22:04:19.212167] [0x00005114] [debug]   Env: ravpath=. D:/Cadence/SPB_25.1/share/pcb/ravel
+[2026-09-17 22:04:19.212167] [0x00005114] [debug]   Env: pathext=.COM .EXE .BAT .CMD .VBS .VBE .JS .JSE .WSF .WSH .MSC .CPL
+[2026-09-17 22:04:19.212167] [0x00005114] [debug]   Env: envpath=D:/Cadence/SPB_Data/pcbenv D:/Cadence/SPB_25.1/share/pcb/text
+[2026-09-17 22:04:19.212167] [0x00005114] [debug]   Env: os=Windows_NT
+[2026-09-17 22:04:19.212167] [0x00005114] [debug]   Env: cds_lic_file=5280@localhost
+[2026-09-17 22:04:19.213164] [0x00005114] [debug]   Env: place_text_version2=
+[2026-09-17 22:04:19.213164] [0x00005114] [debug]   Env: disable_html_datatip_style=
+[2026-09-17 22:04:19.213164] [0x00005114] [debug]   Env: ads_boardrevs=1
+[2026-09-17 22:04:19.213164] [0x00005114] [debug]   Env: tilepath=. D:/Cadence/SPB_25.1/share/local/pcb/modules
+[2026-09-17 22:04:19.213164] [0x00005114] [debug]   Env: sessionname=Console
+[2026-09-17 22:04:19.213164] [0x00005114] [debug]   Env: processor_revision=9e0a
+[2026-09-17 22:04:19.213164] [0x00005114] [debug]   Env: ansysem_root242=D:\Hardware\AnsysEM\v242\Win64
+[2026-09-17 22:04:19.214164] [0x00005114] [debug]   Env: dpm_dbext=dpm
+[2026-09-17 22:04:19.214164] [0x00005114] [debug]   Env: scriptpath=. D:/Cadence/SPB_25.1/share/local/pcb/scripts D:/Cadence/SPB_25.1/share/pcb/text/script
+[2026-09-17 22:04:19.214164] [0x00005114] [debug]   Env: localappdata=C:\Users\Aphranda\AppData\Local
+[2026-09-17 22:04:19.214164] [0x00005114] [debug]   Env: _allegro_cns_regions_ok=1
+[2026-09-17 22:04:19.214164] [0x00005114] [debug]   Env: dfaauditpath=. D:/Cadence/SPB_25.1/share/local/pcb/assembly D:/Cadence/SPB_25.1/share/pcb/assembly
+[2026-09-17 22:04:19.214164] [0x00005114] [debug]   Env: path=d:\cadence\spb_25.1\tools\bin C:\Users\Aphranda\AppData\Roaming\DSH Desktop\host-commands\desktop\bin C:\Users\Aphranda\AppData\Roaming\DSH Desktop\runtime-commands\bin D:\Cadence\SPB_24.1\tools\bin C:\Program Files\Microsoft MPI\Bin\ C:\Program Files (x86)\Razer\ChromaBroadcast\bin C:\Program Files\Razer\ChromaBroadcast\bin C:\Program Files\Common Files\Siemens\Automation\Simatic OAM\bin C:\Program Files\National Instruments\Shared\OpenVINO\ C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common C:\Windows\system32 C:\Windows C:\Windows\System32\Wbem C:\Windows\System32\WindowsPowerShell\v1.0\ C:\Windows\System32\OpenSSH\ C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\110\Tools\Binn\ C:\Program Files (x86)\Microsoft SQL Server\120\Tools\Binn\ C:\Program Files\Microsoft SQL Server\120\Tools\Binn\ C:\Program Files\Microsoft SQL Server\120\DTS\Binn\ C:\Program Files (x86)\Windows Kits\8.1\Windows Performance Toolkit\ C:\Program Files (x86)\IVI Foundation\VISA\WinNT\Bin D:\National Instruments\Shared\LabVIEW CLI C:\Program Files (x86)\IVI Foundation\VISA\WinNT\Bin\ C:\Program Files\IVI Foundation\VISA\Win64\Bin\ C:\Windows\system32\config\systemprofile\AppData\Local\Microsoft\WindowsApps C:\Program Files (x86)\STMicroelectronics\STM32 ST-LINK Utility\ST-LINK Utility C:\Program Files\dotnet\ D:\Program Files\CMake\bin C:\WINDOWS\system32 C:\WINDOWS C:\WINDOWS\System32\Wbem C:\WINDOWS\System32\WindowsPowerShell\v1.0\
+[2026-09-17 22:04:19.215164] [0x00005114] [debug]   Env: dps_dbext=dps
+[2026-09-17 22:04:19.215164] [0x00005114] [debug]   Env: _allegro_adv_pcb_router=
+[2026-09-17 22:04:19.215164] [0x00005114] [debug]   Env: _allegro_x_designer_plus=
+[2026-09-17 22:04:19.215164] [0x00005114] [debug]   Env: ads_autosaverevs=0
+[2026-09-17 22:04:19.215164] [0x00005114] [debug]   Env: miscpath=. D:/Cadence/SPB_25.1/share/local/pcb/misc D:/Cadence/SPB_25.1/share/pcb/text D:/Cadence/SPB_25.1/share/local/cdssetup
+[2026-09-17 22:04:19.215164] [0x00005114] [debug]   Env: signal_install_dir=D:/Cadence/SPB_25.1/share/pcb/signal
+[2026-09-17 22:04:19.215164] [0x00005114] [debug]   Env: kmp_duplicate_lib_ok=TRUE
+[2026-09-17 22:04:19.215164] [0x00005114] [debug]   Env: telenv=D:/Cadence/SPB_25.1/share/pcb/text/env
+[2026-09-17 22:04:19.216164] [0x00005114] [debug]   Env: roaminc=96
+[2026-09-17 22:04:19.216164] [0x00005114] [debug]   Env: interfacepath=D:/Cadence/SPB_25.1/share/library/interface
+[2026-09-17 22:04:19.216164] [0x00005114] [debug]   Env: pcell_lib_path=D:/Cadence/SPB_25.1/share/local/pcb/../../rfsip/sip_pcells . sip_pcells .. ../sip_pcells D:/Cadence/SPB_25.1/share/pcb/../rfsip/sip_pcells
+[2026-09-17 22:04:19.216164] [0x00005114] [debug]   Env: sw_sim_temp=C:\ProgramData\SOLIDWORKS\SW_net_sim_temp\
+[2026-09-17 22:04:19.216164] [0x00005114] [debug]   Env: original_xdg_current_desktop=undefined
+[2026-09-17 22:04:19.216164] [0x00005114] [debug]   Env: _allegro_pcb_router=
+[2026-09-17 22:04:19.217166] [0x00005114] [debug]   Env: appdata=C:\Users\Aphranda\AppData\Roaming
+[2026-09-17 22:04:19.217166] [0x00005114] [debug]   Env: number_of_processors=12
+[2026-09-17 22:04:19.217166] [0x00005114] [debug]   Env: topology_template_path=. templates .. ../templates D:/Cadence/SPB_25.1/share/local/pcb/topology D:/Cadence/SPB_25.1/share/pcb/pcb_lib/templates D:/Cadence/SPB_25.1/share/pcb/allegrolib/templates
+[2026-09-17 22:04:19.217166] [0x00005114] [debug]   Env: brd_mcm_tech=EXT=brd:EXTALT=mcm;tech:MSG=BRD/MCM/TECH:TITLE=Select a BRD/MCM/TECH file:
+[2026-09-17 22:04:19.217166] [0x00005114] [debug]   Env: signal_optlib_dir=D:/Cadence/SPB_25.1/share/pcb/signal/optlib
+[2026-09-17 22:04:19.217166] [0x00005114] [debug]   Env: stacked_via_off=
+[2026-09-17 22:04:19.218165] [0x00005114] [debug]   Env: ads_logrevs=4
+[2026-09-17 22:04:19.218165] [0x00005114] [debug]   Env: _allegro_x_option=
+[2026-09-17 22:04:19.218165] [0x00005114] [debug]   Env: pager=cat
+[2026-09-17 22:04:19.218671] [0x00005114] [debug]   Env: si_model_file_ext=Generic_IBIS(ibs) IBIS_Buffer(buf) IBIS_EBD(ebd) IBIS_ICM(icm) IBIS_Pin_List(pin) IBIS_Package(pkg) Quad(mod) Generic_SPICE(spc) HSpice_Input(sp) HSpice_Output(lis) Spectre(spc) Touchstone(s?p,s??p,ts) DML(ndx,dml) Interconnect(iml) ABIML(abiml)
+[2026-09-17 22:04:19.218671] [0x00005114] [debug]   Env: idx_comp_attrpath=. D:/Cadence/SPB_25.1/share/local/pcb D:/Cadence/SPB_25.1/share/local D:/Cadence/SPB_25.1/share/pcb/text
+[2026-09-17 22:04:19.218671] [0x00005114] [debug]   Env: tmp=C:\Users\Aphranda\AppData\Local\Temp
+[2026-09-17 22:04:19.218671] [0x00005114] [debug]   Env: wbpath=. D:/Cadence/SPB_25.1/share/local/pcb/wbtiers
+[2026-09-17 22:04:19.218671] [0x00005114] [debug]   Env: pdfpath=. D:/Cadence/SPB_25.1/share/pcb/help/pdf
+[2026-09-17 22:04:19.219679] [0x00005114] [debug]   Env: scfpath=. scfs .. ../scfs
+[2026-09-17 22:04:19.219679] [0x00005114] [debug]   Env: cds_lic_only=1
+[2026-09-17 22:04:19.219679] [0x00005114] [debug]   Env: chdl_lib_inst_dir=d:\cadence\spb_25.1
+[2026-09-17 22:04:19.219679] [0x00005114] [debug]   Env: allegro_install_root=D:/Cadence/SPB_25.1
+[2026-09-17 22:04:19.219679] [0x00005114] [debug]   Env: logic_edit_enabled=
+[2026-09-17 22:04:19.220682] [0x00005114] [debug]   Env: dsh_session_jsonl=C:\Users\Aphranda\.dsh\sessions\--F-1.Hardware-GTS_PPA1-08.CTL-SYNCTRIG4F4-HASL--\session-7856035d-e28e-4bb2-8194-623212f9bef3\session.jsonl.zstd
+[2026-09-17 22:04:19.220682] [0x00005114] [debug]   Env: step_mapping_path=. step ../step D:/Cadence/SPB_24.1/share/local/pcb/step F:/1.Hardware/GTS_PPG/0.lib/package F:/1.Hardware/HardwareLibs/package F:/1.HARDWARE/GTS_TDR/0.lib/package
+[2026-09-17 22:04:19.220682] [0x00005114] [debug]   Env: processor_architecture=AMD64
+[2026-09-17 22:04:19.220682] [0x00005114] [debug]   Env: userdomain=APHRANDA
+[2026-09-17 22:04:19.220682] [0x00005114] [debug]   Env: axlpluginpath=. D:/Cadence/SPB_Data/pcbenv/win64 D:/Cadence/SPB_25.1/share/local/pcb/win64 D:/Cadence/SPB_25.1/tools/bin
+[2026-09-17 22:04:19.220682] [0x00005114] [debug]   Env: _allegro_electrical_checks=1
+[2026-09-17 22:04:19.221682] [0x00005114] [debug]   Env: ads_sdart=GERBER
+[2026-09-17 22:04:19.221682] [0x00005114] [debug]   Env: zes_enable_sysman=1
+[2026-09-17 22:04:19.221682] [0x00005114] [debug]   Env: _allegro_mini_ok=1
+[2026-09-17 22:04:19.221682] [0x00005114] [debug]   Env: no_color=1
+[2026-09-17 22:04:19.221682] [0x00005114] [debug]   Env: dfacnspath=. dfa .. ../dfa D:/Cadence/SPB_25.1/share/local/pcb/dfa
+[2026-09-17 22:04:19.221682] [0x00005114] [debug]   Env: ansysem_root261=D:\Hardware\ANAYS\ANSYS Inc\v261\AnsysEM
+[2026-09-17 22:04:19.221682] [0x00005114] [debug]   Env: cdsroot=D:\Cadence\SPB_25.1
+[2026-09-17 22:04:19.221682] [0x00005114] [debug]   Env: commonprogramw6432=C:\Program Files\Common Files
+[2026-09-17 22:04:19.223195] [0x00005114] [debug]   Env: viewpath=. D:/Cadence/SPB_25.1/share/local/pcb/views
+[2026-09-17 22:04:19.223195] [0x00005114] [debug]   Env: allegro_dynam_timing_fixedpos=
+[2026-09-17 22:04:19.223195] [0x00005114] [debug]   Env: amimodelpath=. D:/Cadence/SPB_Data/pcbenv D:/Cadence/SPB_25.1/share/local/pcb/ami/win64 D:/Cadence/SPB_25.1/share/pcb/channelanalysis/ami/toolkit/dll/win64
+[2026-09-17 22:04:19.223195] [0x00005114] [debug]   Env: modulepath=. D:/Cadence/SPB_25.1/share/local/pcb/modules
+[2026-09-17 22:04:19.224204] [0x00005114] [debug]   Env: demo_board=D:/Cadence/SPB_25.1/share/pcb/examples/board_design/Cadence_Demo.brd
+[2026-09-17 22:04:19.224204] [0x00005114] [debug]   Env: comspec=C:\WINDOWS\system32\cmd.exe
+[2026-09-17 22:04:19.224204] [0x00005114] [debug]   Env: dsh_shell=1
+[2026-09-17 22:04:19.224204] [0x00005114] [debug]   Env: act_inc_license_file=D:\Hardware\CAM350\license2021.dat
+[2026-09-17 22:04:19.224204] [0x00005114] [debug]   Env: ifx_toolbox_uuid=bea04ac1-0658-310f-9512-52989fffc585
+[2026-09-17 22:04:19.224204] [0x00005114] [debug]   Env: ov_ni_plugin_dir=C:\Program Files\National Instruments\Shared\OpenVINO\
+[2026-09-17 22:04:19.224204] [0x00005114] [debug]   Env: display_shapefill_analysis=1
+[2026-09-17 22:04:19.224204] [0x00005114] [debug]   Env: global=D:/Cadence/SPB_25.1/share/pcb/text
+[2026-09-17 22:04:19.224204] [0x00005114] [debug]   Env: public=C:\Users\Public
+[2026-09-17 22:04:19.224204] [0x00005114] [debug]   Env: ads_dbext=brd
+[2026-09-17 22:04:19.225724] [0x00005114] [debug]   Env: _allegro_studio_anl=
+[2026-09-17 22:04:19.225724] [0x00005114] [debug]   Env: allegro_install_dll=D:/Cadence/SPB_25.1/tools/bin
+[2026-09-17 22:04:19.225724] [0x00005114] [debug]   Env: quartus_rootdir=D:\intelFPGA\18.1\quartus
+[2026-09-17 22:04:19.225724] [0x00005114] [debug]   Env: _splash_bmp=10100
+[2026-09-17 22:04:19.225724] [0x00005114] [debug]   Env: autosave_time=30
+[2026-09-17 22:04:19.226733] [0x00005114] [debug]   Env: systemdrive=C:
+[2026-09-17 22:04:19.226733] [0x00005114] [debug]   Env: mcm_dbext=mcm
+[2026-09-17 22:04:19.226733] [0x00005114] [debug]   Env: exportpath=. D:/Cadence/SPB_25.1/share/local/pcb/export D:/Cadence/SPB_25.1/share/pcb/text/export
+[2026-09-17 22:04:19.226733] [0x00005114] [debug]   Env: commonprogramfiles=C:\Program Files\Common Files
+[2026-09-17 22:04:19.226733] [0x00005114] [debug]   Env: processor_level=6
+[2026-09-17 22:04:19.226733] [0x00005114] [debug]   Env: ignore_pro=DEVICE
+[2026-09-17 22:04:19.227742] [0x00005114] [debug]   Env: chocolateyinstall=C:\ProgramData\chocolatey
+[2026-09-17 22:04:19.227742] [0x00005114] [debug]   Env: vxipnppath=C:\Program Files (x86)\IVI Foundation\VISA\
+[2026-09-17 22:04:19.227742] [0x00005114] [debug]   Env: aptpath=. .. D:/Cadence/SPB_25.1/share/local/pcb
+[2026-09-17 22:04:19.227742] [0x00005114] [debug]   Env: allegro_html_qt=
+[2026-09-17 22:04:19.227742] [0x00005114] [debug]   Env: dsh_session_id=session-7856035d-e28e-4bb2-8194-623212f9bef3
+[2026-09-17 22:04:19.227742] [0x00005114] [debug]   Env: wirebond_suppress_bondwire_drcs=
+[2026-09-17 22:04:19.227742] [0x00005114] [debug]   Env: steppath=. step ../step D:/Cadence/SPB_24.1/share/local/pcb/step F:/1.hardware/HardwareLibs/3D F:/1.hardware/gts_aix/0.Lib/3D F:/1.Hardware/GTS_PPG/0.lib/package F:/1.Hardware/HardwareLibs/package F:/1.HARDWARE/GTS_TDR/0.lib/package
+[2026-09-17 22:04:19.228735] [0x00005114] [debug]   Env: simatic_oam_data=C:\ProgramData\Siemens\Automation\Simatic OAM
+[2026-09-17 22:04:19.228735] [0x00005114] [debug]   Env: siwave_install_dir=D:\Hardware\AnsysEM\v242\Win64
+[2026-09-17 22:04:19.228735] [0x00005114] [debug]   Env: si_model_path=. D:/Cadence/SPB_25.1/share/local/pcb/signal D:/Cadence/SPB_25.1/share/pcb/signal
+[2026-09-17 22:04:19.228735] [0x00005114] [debug]   Env: batchhelppath=. D:/Cadence/SPB_25.1/share/pcb/batchhelp
+[2026-09-17 22:04:19.228735] [0x00005114] [debug]   Env: workflowpath=D:/Cadence/SPB_25.1/share/local/pcb/workflows D:/Cadence/SPB_25.1/share/pcb/text/workflows
+[2026-09-17 22:04:19.228735] [0x00005114] [debug]   Env: _allegro_group_route=1
+[2026-09-17 22:04:19.229733] [0x00005114] [debug]   Env: programfiles(x86)=C:\Program Files (x86)
+[2026-09-17 22:04:19.229733] [0x00005114] [debug]   Env: slide_arcs=
+[2026-09-17 22:04:19.229733] [0x00005114] [debug]   Env: compalib=D:/Cadence/SPB_25.1/share/pcb/pcb_lib/symbols D:/Cadence/SPB_25.1/share/pcb/allegrolib/symbols
+[2026-09-17 22:04:19.229733] [0x00005114] [debug]   Env: psmpath=. symbols .. ../symbols D:/Cadence/SPB_24.1/share/local/pcb/symbols D:/Cadence/SPB_24.1/share/pcb/pcb_lib/symbols D:/Cadence/SPB_24.1/share/pcb/allegrolib/symbols F:/1.hardware/HardwareLibs/package F:/1.hardware/gts_aix/0.Lib/package F:/1.Hardware/GTS_PPG/0.lib/package F:/1.Hardware/GTS_TDR/0.lib/package F:/1.Hardware/TDR_Product_Design/3_Common/Libraries/Allegro_Footprints/A_IPC7351_LevelA F:/1.Hardware/TDR_Product_Design/3_Common/Libraries/Allegro_Footprints/PXI_Express_Slot
+[2026-09-17 22:04:19.229733] [0x00005114] [debug]   Env: localpath=. D:/Cadence/SPB_Data/pcbenv D:/Cadence/SPB_25.1/share/local/pcb . D:/Cadence/SPB_25.1/share/pcb/text
+[2026-09-17 22:04:19.229733] [0x00005114] [debug]   Env: _allegro_cstm_nclegend_ok=1
+[2026-09-17 22:04:19.229733] [0x00005114] [debug]   Env: padpath=. symbols .. ../symbols D:/Cadence/SPB_24.1/share/local/pcb/padstacks D:/Cadence/SPB_24.1/share/pcb/pcb_lib/symbols D:/Cadence/SPB_24.1/share/pcb/allegrolib/symbols F:/1.hardware/HardwareLibs/package F:/1.hardware/gts_aix/0.Lib/package F:/1.Hardware/GTS_PPG/0.lib/package F:/1.Hardware/GTS_TDR/0.lib/package F:/1.Hardware/TDR_Product_Design/3_Common/Libraries/Allegro_Footprints/A_IPC7351_LevelA F:/1.Hardware/TDR_Product_Design/3_Common/Libraries/Allegro_Footprints/PXI_Express_Slot
+[2026-09-17 22:04:19.230731] [0x00005114] [debug]   Env: qtmsbuild=C:\Users\Aphranda\AppData\Local\QtMsBuild
+[2026-09-17 22:04:19.230731] [0x00005114] [debug]   Env: _allegro_diffpair_ok=1
+[2026-09-17 22:04:19.230731] [0x00005114] [debug]   Env: complibpath=D:/Cadence/SPB_25.1/share/pcb/allegrolib
+[2026-09-17 22:04:19.230731] [0x00005114] [debug]   Env: align_guides_ratsnest=
+[2026-09-17 22:04:19.230731] [0x00005114] [debug]   Env: cds_home=C:\cds_spb_home
+[2026-09-17 22:04:19.230731] [0x00005114] [debug]   Env: ldfpath=.
+[2026-09-17 22:04:19.230731] [0x00005114] [debug]   Env: ext_script=scr
+[2026-09-17 22:04:19.230731] [0x00005114] [debug]   Env: niextccompilersupp=D:\National Instruments\Shared\ExternalCompilerSupport\C\
+[2026-09-17 22:04:19.231732] [0x00005114] [debug]   Env: _allegro_ibd_view=1
+[2026-09-17 22:04:19.231732] [0x00005114] [debug]   Env: alibpath=D:/Cadence/SPB_25.1/share/pcb/pcb_lib
+[2026-09-17 22:04:19.231732] [0x00005114] [debug]   Env: _allegro_option_highspeed=
+[2026-09-17 22:04:19.231732] [0x00005114] [debug]   Env: localenv=D:/Cadence/SPB_Data/pcbenv
+[2026-09-17 22:04:19.231732] [0x00005114] [debug]   Env: devpath=. devices .. ../devices D:/Cadence/SPB_25.1/share/local/pcb/devices D:/Cadence/SPB_25.1/share/pcb/pcb_lib/devices D:/Cadence/SPB_25.1/share/pcb/allegrolib/devices
+[2026-09-17 22:04:19.231732] [0x00005114] [debug]   Env: temp=C:\Users\Aphranda\AppData\Local\Temp
+[2026-09-17 22:04:19.231732] [0x00005114] [debug]   Env: simplorer_home=D:\Hardware\AnsysEM\v242\Win64
+[2026-09-17 22:04:19.231732] [0x00005114] [debug]   Env: sip_dbext=sip
+[2026-09-17 22:04:19.232732] [0x00005114] [debug]   Env: dsh_web_url=http://127.0.0.1:43120
+[2026-09-17 22:04:19.232732] [0x00005114] [debug]   Env: lm_license_file=D:\Hardware\ModelSim2022\LICENSE.TXT
+[2026-09-17 22:04:19.232732] [0x00005114] [debug]   Env: allegro_type=pcb
+[2026-09-17 22:04:19.232732] [0x00005114] [debug]   Env: psmodulepath=C:\Users\Aphranda\Documents\WindowsPowerShell\Modules C:\Program Files\WindowsPowerShell\Modules C:\WINDOWS\system32\WindowsPowerShell\v1.0\Modules C:\Program Files (x86)\Microsoft SQL Server\120\Tools\PowerShell\Modules\
+[2026-09-17 22:04:19.232732] [0x00005114] [debug]   Env: chocolateylastpathupdate=133604410072896946
+[2026-09-17 22:04:19.232732] [0x00005114] [debug]   Env: windir=C:\WINDOWS
+[2026-09-17 22:04:19.232732] [0x00005114] [debug]   Env: autinstlog=C:\ProgramData\Siemens\Automation\Logfiles\Setup\
+[2026-09-17 22:04:19.232732] [0x00005114] [debug]   Env: ansifont=ansifont
+[2026-09-17 22:04:19.232732] [0x00005114] [debug]   Env: cio_dbext=cio
+[2026-09-17 22:04:19.232732] [0x00005114] [debug]   Env: ansyslmd_license_file=1055@localhost
+[2026-09-17 22:04:19.232732] [0x00005114] [debug]   Env: autosave_dbcheck=
+[2026-09-17 22:04:19.232732] [0x00005114] [debug]   Env: ads_textrevs=2
+[2026-09-17 22:04:19.234237] [0x00005114] [debug]   Env: bmppath=. D:/Cadence/SPB_25.1/share/local/pcb/icons D:/Cadence/SPB_25.1/share/pcb/text/icons D:/Cadence/SPB_25.1/share/fsp/legends D:/Cadence/SPB_25.1/tools/fsp/legends
+[2026-09-17 22:04:19.234237] [0x00005114] [debug]   Env: cdsplat=win64
+[2026-09-17 22:04:19.234237] [0x00005114] [debug]   Env: allegro_brd2odb=D:\Cadence\ODB++\brd2odb_2409
+[2026-09-17 22:04:19.234237] [0x00005114] [debug]   Env: concept_inst_dir=d:\cadence\spb_25.1
+[2026-09-17 22:04:19.234237] [0x00005114] [debug]   Env: mgls_license_file=D:\Hardware\ModelSim2022\win64
+[2026-09-17 22:04:19.234237] [0x00005114] [debug]   Env: _allegro_gre_view=
+[2026-09-17 22:04:19.235246] [0x00005114] [debug]   Env: artpath=. .. D:/Cadence/SPB_25.1/share/local/pcb
+[2026-09-17 22:04:19.235246] [0x00005114] [debug]   Env: sproutepath=D:/Cadence/SPB_25.1/share/pcb/configure/sproute
+[2026-09-17 22:04:19.235246] [0x00005114] [debug]   Env: iconpath=D:/Cadence/SPB_Data/pcbenv/toolbar_icons D:/Cadence/SPB_25.1/share/local/pcb/toolbar_icons D:/Cadence/SPB_25.1/share/pcb/text/text/toolbar_icons
+[2026-09-17 22:04:19.235246] [0x00005114] [debug]   Env: vipshome=\\?\D:\Aphranda\DSH\DSH Desktop\resources\app.asar.unpacked\node_modules\@img\sharp-win32-x64
+[2026-09-17 22:04:19.235246] [0x00005114] [debug]   Env: _allegro_option_prodtoolbox=
+[2026-09-17 22:04:19.236248] [0x00005114] [debug]   Env: capath=. D:/Cadence/SPB_Data/pcbenv D:/Cadence/SPB_25.1/share/local/pcb D:/Cadence/SPB_25.1/share/pcb/channelanalysis
+[2026-09-17 22:04:19.236248] [0x00005114] [debug]   Env: onedrive=E:\OneDrive
+[2026-09-17 22:04:19.236248] [0x00005114] [debug]   Env: ext_drill=drl
+[2026-09-17 22:04:19.236248] [0x00005114] [debug]   Env: _allegro_elec_cns_ok=1
+[2026-09-17 22:04:19.236248] [0x00005114] [debug]   Env: cdsdoc=algcmdref
+[2026-09-17 22:04:19.236248] [0x00005114] [debug]   Env: etchedit_ignore_dynamic_shapes=
+[2026-09-17 22:04:19.236248] [0x00005114] [debug]   Env: _program=allegro
+[2026-09-17 22:04:19.237409] [0x00005114] [debug]   Env: via_struct_auto_lock=
+[2026-09-17 22:04:19.237409] [0x00005114] [debug]   Env: ext_artwork=art
+[2026-09-17 22:04:19.237409] [0x00005114] [debug]   Env: _allegro_ecsetflatten=1
+[2026-09-17 22:04:19.237409] [0x00005114] [debug]   Env: dsh_home=C:\Users\Aphranda\.dsh
+[2026-09-17 22:04:19.238416] [0x00005114] [debug]   Env: allegro_site=D:/Cadence/SPB_25.1/share/local/pcb
+[2026-09-17 22:04:19.238416] [0x00005114] [debug]   Env: homedrive=C:
+[2026-09-17 22:04:19.238416] [0x00005114] [debug]   Env: wizard_template_path=D:/Cadence/SPB_25.1/share/local/pcb/new_templates D:/Cadence/SPB_25.1/share/pcb/pcb_lib/symbols/template
+[2026-09-17 22:04:19.239416] [0x00005114] [debug]   Env: formpath=. D:/Cadence/SPB_25.1/share/local/pcb/forms D:/Cadence/SPB_25.1/share/pcb/text/forms
+[2026-09-17 22:04:19.239416] [0x00005114] [debug]   Env: helppath=. D:/Cadence/SPB_25.1/share/pcb/help D:/Cadence/SPB_25.1/share/pcb/text/help
+[2026-09-17 22:04:19.239416] [0x00005114] [debug]   Env: driverdata=C:\Windows\System32\Drivers\DriverData
+[2026-09-17 22:04:19.239416] [0x00005114] [debug]   Env: dfm_rav_path=. D:/Cadence/SPB_25.1/share/pcb/dfm_ravel
+[2026-09-17 22:04:19.240418] [0x00005114] [debug]   Env: use_no_locale=
+[2026-09-17 22:04:19.240418] [0x00005114] [debug]   Env: _allegro_ibd_all=1
+[2026-09-17 22:04:19.240418] [0x00005114] [debug]   Env: cwd=D:/Aphranda/APTools/Temp
+[2026-09-17 22:04:19.240418] [0x00005114] [debug]   Env: fyenhancetool=D:\Aphranda\FanySkill
+[2026-09-17 22:04:19.240418] [0x00005114] [debug]   Env: sopc_kit_nios2=D:\intelFPGA\18.1\nios2eds
+[2026-09-17 22:04:19.241416] [0x00005114] [debug]   Env: homepath=\Users\Aphranda
+[2026-09-17 22:04:19.241416] [0x00005114] [debug]   Env: qsys_rootdir=D:\intelFPGA\18.1\quartus\sopc_builder\bin
+[2026-09-17 22:04:19.241416] [0x00005114] [debug]   Env: techpath=. D:/Cadence/SPB_25.1/share/local/pcb/tech D:/Cadence/SPB_25.1/share/pcb/text/tech
+[2026-09-17 22:04:19.241416] [0x00005114] [debug]   Env: cmwruntestsdir=C:\Program Files (x86)\Rohde-Schwarz\CMWrun\1.7.8\Tests\
+[2026-09-17 22:04:19.241416] [0x00005114] [debug]   Env: _allegro_gre_ifd=
+[2026-09-17 22:04:19.241416] [0x00005114] [debug]   Env: ipc2581spec_path=. D:/Cadence/SPB_25.1/share/local/pcb D:/Cadence/SPB_25.1/share/local D:/Cadence/SPB_25.1/share/pcb/text
+[2026-09-17 22:04:19.241416] [0x00005114] [debug]   Env: globalpath=. D:/Cadence/SPB_25.1/share/pcb/text
+[2026-09-17 22:04:19.242420] [0x00005114] [debug]   Env: systemroot=C:\WINDOWS
+[2026-09-17 22:04:19.242420] [0x00005114] [debug]   Env: materialpath=. D:/Cadence/SPB_Data/pcbenv D:/Cadence/SPB_25.1/share/local/pcb D:/Cadence/SPB_25.1/share/pcb/text D:/Cadence/SPB_25.1/share/pcb/text/materials
+[2026-09-17 22:04:19.242420] [0x00005114] [debug]   Env: _allegro_pgr_router=
+[2026-09-17 22:04:19.242420] [0x00005114] [debug]   Env: base=D:/Aphranda/APTools/Temp
+[2026-09-17 22:04:19.242420] [0x00005114] [debug]   Env: win64=
+[2026-09-17 22:04:19.242420] [0x00005114] [debug]   Env: _allegro_option_multiuser=
+[2026-09-17 22:04:19.243421] [0x00005114] [debug]   Env: qt_d3dcreate_multithreaded=1
+[2026-09-17 22:04:19.243421] [0x00005114] [debug]   Env: parampath=. D:/Cadence/SPB_24.1/share/local/pcb/parameter F:/1.Hardware/GTS_PPG/0.lib/package
+[2026-09-17 22:04:19.243421] [0x00005114] [debug]   Env: msmpi_bin=C:\Program Files\Microsoft MPI\Bin\
+[2026-09-17 22:04:19.243421] [0x00005114] [debug]   Env: allegro_html=
+[2026-09-17 22:04:19.243421] [0x00005114] [debug]   Env: username=Aphranda
+[2026-09-17 22:04:19.243421] [0x00005114] [debug]   Env: home=D:/Cadence/SPB_Data
+[2026-09-17 22:04:19.243421] [0x00005114] [debug]   Env: ansys261_dir=D:\Hardware\ANAYS\ANSYS Inc\v261\ANSYS
+[2026-09-17 22:04:19.244422] [0x00005114] [debug]   Env: _allegro_designer=
+[2026-09-17 22:04:19.244422] [0x00005114] [debug]   Env: logonserver=\\APHRANDA
+[2026-09-17 22:04:19.244422] [0x00005114] [debug]   Env: display_backingstore=on
+[2026-09-17 22:04:19.244422] [0x00005114] [debug]   Env: allusersprofile=C:\ProgramData
+[2026-09-17 22:04:19.244422] [0x00005114] [debug]   Env: sw_sim_mpit=INTELMPI
+[2026-09-17 22:04:19.244422] [0x00005114] [debug]   Env: wirebond_hud_update_frequency=25
+[2026-09-17 22:04:19.245421] [0x00005114] [debug]   Env: signoisepath=. D:/Cadence/SPB_Data/pcbenv D:/Cadence/SPB_25.1/share/local/pcb/signal D:/Cadence/SPB_25.1/share/pcb/signal D:/Cadence/SPB_25.1/share/pcb/signal/optlib D:/Cadence/SPB_25.1/share/pcb/text
+[2026-09-17 22:04:19.245421] [0x00005114] [debug]   Env: menupath=. D:/Cadence/SPB_25.1/share/local/pcb/menus D:/Cadence/SPB_25.1/share/pcb/text/cuimenus
+[2026-09-17 22:04:19.245421] [0x00005114] [debug]   Env: autosave_name=backup
+[2026-09-17 22:04:19.245421] [0x00005114] [debug]   Env: ads_materialname=materials
+[2026-09-17 22:04:19.245421] [0x00005114] [debug]   Env: buttonfactor=1
+[2026-09-17 22:04:19.245421] [0x00005114] [debug]   Env: brd_dbext=brd
+[2026-09-17 22:04:19.245421] [0x00005114] [debug]   Env: programw6432=C:\Program Files
+[2026-09-17 22:04:19.246421] [0x00005114] [debug]   Env: xtalk_table_path=. xtalk_tables .. ../xtalk_tables D:/Cadence/SPB_25.1/share/local/pcb/xtalk D:/Cadence/SPB_25.1/share/pcb/pcb_lib/xtalk_tables
+[2026-09-17 22:04:19.246421] [0x00005114] [debug]   Env: allegro_license_caching=
+[2026-09-17 22:04:19.246421] [0x00005114] [debug]   Env: system_element_path=. step D:/Cadence/SPB_25.1/share/local/pcb/step
+[2026-09-17 22:04:19.246421] [0x00005114] [debug]   Env: ads_norevs=1
+[2026-09-17 22:04:19.246421] [0x00005114] [debug]   Env: ipc2581attrpath=. D:/Cadence/SPB_25.1/share/local/pcb D:/Cadence/SPB_25.1/share/local D:/Cadence/SPB_25.1/share/pcb/text
+[2026-09-17 22:04:19.246421] [0x00005114] [debug]   Env: allegro_install_tools=D:/Cadence/SPB_25.1/tools/bin
+[2026-09-17 22:04:19.246421] [0x00005114] [debug]   Env: dclpath=. .. D:/Cadence/SPB_25.1/share/pcb/pcb_lib D:/Cadence/SPB_25.1/share/pcb/allegrolib
+[2026-09-17 22:04:19.246421] [0x00005114] [debug]   Env: kanjifontpath=. D:/Cadence/SPB_25.1/share/pcb/text/fonts/kanji
+[2026-09-17 22:04:19.247422] [0x00005114] [debug]   Env: topfilelib=D:/Cadence/SPB_25.1/share/pcb/pcb_lib/templates D:/Cadence/SPB_25.1/share/pcb/allegrolib/templates
+[2026-09-17 22:04:19.247422] [0x00005114] [debug]   Env: intelfpgaoclsdkroot=D:\intelFPGA\18.1\hld
+[2026-09-17 22:04:19.247422] [0x00005114] [debug]   Env: cds_site=D:/Cadence/SPB_25.1/share/local
+[2026-09-17 22:04:19.247422] [0x00005114] [debug]   Env: sigrity_legacy_3dem=.
+[2026-09-17 22:04:19.247422] [0x00005114] [debug]   Env: _allegro_diffpair_static_ok=1
+[2026-09-17 22:04:19.247422] [0x00005114] [debug]   Env: programfiles=C:\Program Files
+[2026-09-17 22:04:19.248424] [0x00005114] [debug]   Env: _allegro_rfpcb=
+[2026-09-17 22:04:19.248424] [0x00005114] [debug]   Env: pm_cmdmap=allegro
+[2026-09-17 22:04:19.248424] [0x00005114] [debug]   Env: _allegro_ratt_ok=1
+[2026-09-17 22:04:19.248424] [0x00005114] [debug]   Env: ansyslic_dir=D:\Hardware\ANSYS Inc\Shared Files\Licensing
+[2026-09-17 22:04:19.248424] [0x00005114] [debug]   Env: align_guides_component_origin=
+[2026-09-17 22:04:19.248424] [0x00005114] [debug]   Env: sigrity_eda_dir=D:\Cadence\Sigrity2023.1
+[2026-09-17 22:04:19.248424] [0x00005114] [debug]   Env: awp_root261=D:\Hardware\ANAYS\ANSYS Inc\v261
+[2026-09-17 22:04:19.249420] [0x00005114] [debug]   Env: processor_identifier=Intel64 Family 6 Model 158 Stepping 10, GenuineIntel
+[2026-09-17 22:04:19.249420] [0x00005114] [debug]   Env: accpath=D:/Cadence/SPB_25.1/share/local/consmgr/compiler
+[2026-09-17 22:04:19.249420] [0x00005114] [debug]   Env: _allegro_x_ai=
+[2026-09-17 22:04:19.249420] [0x00005114] [debug]   Env: allegro_no_graphics=
+[2026-09-17 22:04:19.249420] [0x00005114] [debug]   Env: ads_msgname=allegro
+[2026-09-17 22:04:19.249420] [0x00005114] [debug]   Env: dst_home=D:\Hardware\CAM350\
+[2026-09-17 22:04:19.249420] [0x00005114] [debug]   Env: pycharm=D:\JetBrains\PyCharm 2025.1.3.1\bin 
+[2026-09-17 22:04:19.250420] [0x00005114] [debug]   Env: onedriveconsumer=E:\OneDrive
+[2026-09-17 22:04:19.250420] [0x00005114] [debug]   Env: clippath=.
+[2026-09-17 22:04:19.250420] [0x00005114] [debug]   Env: kanjifont2=kanjifont2
+[2026-09-17 22:04:19.250420] [0x00005114] [debug]   Env: userprofile=C:\Users\Aphranda
+[2026-09-17 22:04:19.250420] [0x00005114] [debug]   Env: programdata=C:\ProgramData
+[2026-09-17 22:04:19.250420] [0x00005114] [debug]   Env: kanjifont1=kanjifont1
+[2026-09-17 22:04:19.250420] [0x00005114] [debug]   Env: _allegro_ida_dcr=
+[2026-09-17 22:04:19.251421] [0x00005114] [debug]   Env: _allegro_x_designer_plus_option=
+[2026-09-17 22:04:19.251421] [0x00005114] [debug]   Env: nidaqmxswitchdir=D:\National Instruments\NI-DAQ\Switch\
+[2026-09-17 22:04:19.251421] [0x00005114] [debug]   Env: ncdpath=. .. D:/Cadence/SPB_25.1/share/local/pcb/nclegend D:/Cadence/SPB_25.1/share/pcb/text/nclegend
+[2026-09-17 22:04:19.251421] [0x00005114] [debug]   Env: _allegro_ida_thermal=
+[2026-09-17 22:04:19.251930] [0x00005114] [debug]   Env: create_flow_45_snapping=
+[2026-09-17 22:04:19.251930] [0x00005114] [debug]   Env: commonprogramfiles(x86)=C:\Program Files (x86)\Common Files
+[2026-09-17 22:04:19.251930] [0x00005114] [debug]   Env: allegro_install_dir=D:/Cadence/SPB_25.1/share/pcb
+[2026-09-17 22:04:19.251930] [0x00005114] [debug]   Env: git_pager=cat
+[2026-09-17 22:04:19.251930] [0x00005114] [debug]   Env: mkl_serial=YES
+[2026-09-17 22:04:19.251930] [0x00005114] [debug]   Env: imagepath=. D:/Cadence/SPB_25.1/share/pcb/examples/image
+[2026-09-17 22:04:19.252940] [0x00005114] [debug]   Env: vectorfontpath=. D:/Cadence/SPB_25.1/share/pcb/text
+[2026-09-17 22:04:19.252940] [0x00005114] [debug]   Env: sw_sim_hydra=C:\Program Files\Common Files\SolidWorks Shared\Simulation Worker Agent\
+[2026-09-17 22:04:19.252940] [0x00005114] [debug]   Env: simatic_oam=C:\Program Files\Common Files\Siemens\Automation\Simatic OAM
+[2026-09-17 22:04:19.252940] [0x00005114] [debug]   Env: step_facet_path=. step ../step D:/Cadence/SPB_25.1/share/local/pcb/step
+[2026-09-17 22:04:19.252940] [0x00005114] [debug]   Env: adspath=. D:/Cadence/SPB_25.1/share/pcb/text
+[2026-09-17 22:04:19.252940] [0x00005114] [debug]   Env: chrome_crashpad_pipe_name=\\.\pipe\crashpad_11156_ZWDPBHZAWADSBMMU
+[2026-09-17 22:04:19.252940] [0x00005114] [debug]   Env: autosave=
+[2026-09-17 22:04:19.252940] [0x00005114] [debug]   Env: userdomain_roamingprofile=APHRANDA
+[2026-09-17 22:04:19.253941] [0x00005114] [debug]   Env: prfeditpath=. D:/Cadence/SPB_Data/pcbenv/configure/prfedit D:/Cadence/SPB_25.1/share/local/pcb/configure/prfedit D:/Cadence/SPB_25.1/share/pcb/configure/prfedit
+[2026-09-17 22:04:19.253941] [0x00005114] [debug]   Env: computername=APHRANDA
+[2026-09-17 22:04:20.389669] [0x00005114] [debug]   Using Default X AI URL - https://move37.cadence.com/src/orcadx/OxIndex.html
+[2026-09-17 22:04:21.932847] [0x00005114] [debug]   \t (00:00:03) allegro 25.1 S040 (4446200) [6/13/2026] Windows SPB 64-bit Edition
+[2026-09-17 22:04:21.933778] [0x00005114] [debug]   \t (00:00:03)     Journal start - Thu Sep 17 22:04:21 2026
+[2026-09-17 22:04:21.933778] [0x00005114] [debug]   \t (00:00:03)         Host=APHRANDA User=Aphranda Pid=6668 CPUs=12
+[2026-09-17 22:04:21.933778] [0x00005114] [debug]   \t (00:00:03) CmdLine= D:\Cadence\SPB_25.1\tools\bin\allegro.exe -nograph -readonly -s D:\Aphranda\APTools\Temp\nc_brd3.scr
+[2026-09-17 22:04:21.934777] [0x00005114] [debug]   \t (00:00:03) 
+[2026-09-17 22:04:21.954891] [0x00005114] [debug]   \t (00:00:03) Loading axlcore.cxt 
+Loading axlcore.cxt 
+[2026-09-17 22:04:22.064032] [0x00005114] [debug]   \t (00:00:03) function xFormBegin redefined
+function xFormBegin redefined
+[2026-09-17 22:04:22.064556] [0x00005114] [debug]   \t (00:00:03) function xFormEnd redefined
+function xFormEnd redefined
+[2026-09-17 22:04:22.065630] [0x00005114] [debug]   \t (00:00:03) function xCheckList redefined
+function xCheckList redefined
+[2026-09-17 22:04:22.065630] [0x00005114] [debug]   \t (00:00:03) function xGroup redefined
+function xGroup redefined
+[2026-09-17 22:04:22.067596] [0x00005114] [debug]   \t (00:00:03) function xText redefined
+function xText redefined
+[2026-09-17 22:04:22.067596] [0x00005114] [debug]   \t (00:00:03) function xButton redefined
+function xButton redefined
+[2026-09-17 22:04:22.068586] [0x00005114] [debug]   \t (00:00:03) function xEdit redefined
+function xEdit redefined
+[2026-09-17 22:04:22.068586] [0x00005114] [debug]   \t (00:00:03) function xInfoText redefined
+function xInfoText redefined
+[2026-09-17 22:04:22.068586] [0x00005114] [debug]   \t (00:00:03) [APTools] APT_LocatorHole 已加载 (apt_scan / apt_fix / apt_scanlib / apt_fixlib)
+[APTools] APT_LocatorHole 已加载 (apt_scan / apt_fix / apt_scanlib / apt_fixlib)
+[2026-09-17 22:04:22.068586] [0x00005114] [debug]   \t (00:00:03) [APTools] APT_LocatorHole 已加载 (apt_scan / apt_fix / apt_scanlib / apt_fixlib)
+[APTools] APT_LocatorHole 已加载 (apt_scan / apt_fix / apt_scanlib / apt_fixlib)
+[2026-09-17 22:04:22.070108] [0x00005114] [debug]   \t (00:00:03) [APTools]   ok   D:/Aphranda/APTools/tools/10_library/locatorhole/APT_LocatorHole.il
+[APTools]   ok   D:/Aphranda/APTools/tools/10_library/locatorhole/APT_LocatorHole.il
+[2026-09-17 22:04:22.070727] [0x00005114] [debug]   \t (00:00:03) [APTools] APT_SymbolCheck 已加载 (占位, 待实现)
+[APTools] APT_SymbolCheck 已加载 (占位, 待实现)
+[2026-09-17 22:04:22.070727] [0x00005114] [debug]   \t (00:00:03) [APTools]   ok   D:/Aphranda/APTools/tools/10_library/symcheck/APT_SymbolCheck.il
+[APTools]   ok   D:/Aphranda/APTools/tools/10_library/symcheck/APT_SymbolCheck.il
+[2026-09-17 22:04:22.071737] [0x00005114] [debug]   \t (00:00:03) [APTools] APT_ColorScheme 已加载 (3 套方案; 改数值见 apt_colorSchemes)
+[APTools] APT_ColorScheme 已加载 (3 套方案; 改数值见 apt_colorSchemes)
+[2026-09-17 22:04:22.073246] [0x00005114] [debug]   \t (00:00:03) [APTools]   ok   D:/Aphranda/APTools/tools/90_misc/color/APT_ColorScheme.il
+[APTools]   ok   D:/Aphranda/APTools/tools/90_misc/color/APT_ColorScheme.il
+[2026-09-17 22:04:22.074255] [0x00005114] [debug]   \t (00:00:03) [APTools] APT_NetColor 已加载 (GND规则 7 / 电源规则 52 / 排除 52; 保留槽 32)
+[APTools] APT_NetColor 已加载 (GND规则 7 / 电源规则 52 / 排除 52; 保留槽 32)
+[2026-09-17 22:04:22.076291] [0x00005114] [debug]   \t (00:00:03) [APTools]   ok   D:/Aphranda/APTools/tools/90_misc/netcolor/APT_NetColor.il
+[APTools]   ok   D:/Aphranda/APTools/tools/90_misc/netcolor/APT_NetColor.il
+[2026-09-17 22:04:22.076291] [0x00005114] [debug]   \t (00:00:03) [APTools] 工具加载完成: 成功 4, 失败 0
+[APTools] 工具加载完成: 成功 4, 失败 0
+[2026-09-17 22:04:22.077260] [0x00005114] [debug]   \t (00:00:03) [APTools] 菜单已注册 (menubar 右端 "APTools", 6 个阶段)
+[APTools] 菜单已注册 (menubar 右端 "APTools", 6 个阶段)
+[2026-09-17 22:04:22.078305] [0x00005114] [debug]   \t (00:00:03) [APTools] 工具集就绪 (root=D:/Aphranda/APTools)
+[APTools] 工具集就绪 (root=D:/Aphranda/APTools)
+[2026-09-17 22:04:24.746300] [0x00005114] [debug]   \t (00:00:05) Starting new design...
+Starting new design...
+[2026-09-17 22:04:24.814480] [0x00005114] [debug]   enter: 
+[2026-09-17 22:04:24.817484] [0x00005114] [debug]   exit: 
+[2026-09-17 22:04:24.823518] [0x00005114] [debug]   enter: 
+[2026-09-17 22:04:24.827529] [0x00005114] [debug]   exit: 
+[2026-09-17 22:04:25.816044] [0x00005114] [debug]   \i (00:00:06) trapsize 29310
+[2026-09-17 22:04:26.080716] [0x00005114] [debug]   \i (00:00:07) replay 'D:`\Aphranda`\APTools`\Temp`\nc_brd3.scr' 
+[2026-09-17 22:04:26.086815] [0x00005114] [debug]   \i (00:00:07) skill '(errset (axlOpenDesign ?design "F:/1.Hardware/GTS_PPA1/08.CTL-SYNCTRIG4F4-HASL/Allegro/ctl-synctrig4f4-hasl-ascii.brd" ?noMru t) t)' 
+[2026-09-17 22:04:26.102427] [0x00005114] [debug]   \t (00:00:07) Opening existing design...
+Opening existing design...
+[2026-09-17 22:04:26.186044] [0x00005114] [debug]   enter: 
+[2026-09-17 22:04:26.188044] [0x00005114] [debug]   exit: 
+[2026-09-17 22:04:26.257208] [0x00005114] [debug]   enter: 
+[2026-09-17 22:04:26.262190] [0x00005114] [debug]   exit: 
+[2026-09-17 22:04:26.520525] [0x00005114] [warning] \w (00:00:07) Dielectric layer thickness is 0 !
+[2026-09-17 22:04:26.545549] [0x00005114] [warning] \w (00:00:07) Dielectric layer thickness is 0 !
+[2026-09-17 22:04:26.562554] [0x00005114] [debug]   \t (00:00:07) Loading signal.cxt 
+Loading signal.cxt 
+W- Dielectric layer thickness is 0 !
+[2026-09-17 22:04:26.567195] [0x00005114] [debug]   \i (00:00:07) trapsize 94455
+[2026-09-17 22:04:26.579799] [0x00005114] [debug]   \t (00:00:07) > Sending response DoneOpenBoard
+> Sending response DoneOpenBoard
+Opened connection with Capture.
+[2026-09-17 22:04:26.588328] [0x00005114] [debug]   \t (00:00:07) ("ctl-synctrig4f4-hasl-ascii")
+("ctl-synctrig4f4-hasl-ascii")
+[2026-09-17 22:04:26.827310] [0x00005114] [debug]   \i (00:00:07) skill '(errset (apt_netPowRun t) t)' 
+[2026-09-17 22:04:26.927075] [0x00005114] [debug]   \t (00:00:08) [APTools]   调色板槽 160 写入 RGB (201 201 201) (原值 (255 0 255))
+[APTools]   调色板槽 160 写入 RGB (201 201 201) (原值 (255 0 255))
+[2026-09-17 22:04:26.928108] [0x00005114] [debug]   \t (00:00:08) [APTools]   调色板槽 161 写入 RGB (255 148 0) (原值 (255 0 0))
+[APTools]   调色板槽 161 写入 RGB (255 148 0) (原值 (255 0 0))
+[2026-09-17 22:04:26.930657] [0x00005114] [debug]   \t (00:00:08) [APTools]   调色板槽 162 写入 RGB (145 255 0) (原值 (250 120 120))
+[APTools]   调色板槽 162 写入 RGB (145 255 0) (原值 (250 120 120))
+[2026-09-17 22:04:26.935328] [0x00005114] [debug]   \t (00:00:08) [APTools]   调色板槽 163 写入 RGB (159 159 159) (原值 (255 128 0))
+[APTools]   调色板槽 163 写入 RGB (159 159 159) (原值 (255 128 0))
+[2026-09-17 22:04:26.939896] [0x00005114] [debug]   \t (00:00:08) [APTools]   调色板槽 164 写入 RGB (255 0 16) (原值 (250 200 0))
+[APTools]   调色板槽 164 写入 RGB (255 0 16) (原值 (250 200 0))
+[2026-09-17 22:04:26.941879] [0x00005114] [debug]   \t (00:00:08) [APTools]   调色板槽 165 写入 RGB (0 235 255) (原值 (255 255 0))
+[APTools]   调色板槽 165 写入 RGB (0 235 255) (原值 (255 255 0))
+[2026-09-17 22:04:26.943882] [0x00005114] [debug]   \t (00:00:08) [APTools]   调色板槽 166 写入 RGB (0 255 30) (原值 (207 207 92))
+[APTools]   调色板槽 166 写入 RGB (0 255 30) (原值 (207 207 92))
+[2026-09-17 22:04:26.945920] [0x00005114] [debug]   \t (00:00:08) [APTools]   调色板槽 167 写入 RGB (255 0 148) (原值 (176 254 0))
+[APTools]   调色板槽 167 写入 RGB (255 0 148) (原值 (176 254 0))
+[2026-09-17 22:04:26.950946] [0x00005114] [debug]   \t (00:00:08) [APTools]   调色板槽 168 写入 RGB (120 0 255) (原值 (0 255 0))
+[APTools]   调色板槽 168 写入 RGB (120 0 255) (原值 (0 255 0))
+[2026-09-17 22:04:26.950946] [0x00005114] [debug]   \t (00:00:08) [APTools]   调色板槽 169 写入 RGB (28 0 255) (原值 (0 128 0))
+[APTools]   调色板槽 169 写入 RGB (28 0 255) (原值 (0 128 0))
+[2026-09-17 22:04:26.955971] [0x00005114] [debug]   \t (00:00:08) [APTools]   调色板槽 170 写入 RGB (139 255 0) (原值 (0 255 255))
+[APTools]   调色板槽 170 写入 RGB (139 255 0) (原值 (0 255 255))
+[2026-09-17 22:04:26.960925] [0x00005114] [debug]   \t (00:00:08) [APTools]   调色板槽 171 写入 RGB (6 0 255) (原值 (0 128 192))
+[APTools]   调色板槽 171 写入 RGB (6 0 255) (原值 (0 128 192))
+[2026-09-17 22:04:26.965061] [0x00005114] [debug]   \t (00:00:08) 
+
+[2026-09-17 22:04:26.968676] [0x00005114] [debug]   \t (00:00:08) [APTools] ===== 电源网络识别 =====
+[APTools] ===== 电源网络识别 =====
+[2026-09-17 22:04:26.974283] [0x00005114] [debug]   \t (00:00:08) [APTools] 合计: GND 系 2 个 / 电源 10 个 / 排除 0 个 / 其它 174 个 ; 已上色 12 个
+[APTools] 合计: GND 系 2 个 / 电源 10 个 / 排除 0 个 / 其它 174 个 ; 已上色 12 个
+[2026-09-17 22:04:26.978268] [0x00005114] [debug]   \t (00:00:08) [APTools]   -- GND 系 (灰色系随机) 2 个 --
+[APTools]   -- GND 系 (灰色系随机) 2 个 --
+[2026-09-17 22:04:26.980267] [0x00005114] [debug]   \t (00:00:08) [APTools]     FGND   -> RGB (201 201 201)  槽 160   (关键词 GND)
+[APTools]     FGND   -> RGB (201 201 201)  槽 160   (关键词 GND)
+[2026-09-17 22:04:26.982816] [0x00005114] [debug]   \t (00:00:08) [APTools]     GND   -> RGB (159 159 159)  槽 163   (关键词 GND)
+[APTools]     GND   -> RGB (159 159 159)  槽 163   (关键词 GND)
+[2026-09-17 22:04:26.982816] [0x00005114] [debug]   \t (00:00:08) [APTools]   -- 电源 (随机彩) 10 个 --
+[APTools]   -- 电源 (随机彩) 10 个 --
+[2026-09-17 22:04:26.985838] [0x00005114] [debug]   \t (00:00:08) [APTools]     VCC12V   -> RGB (255 148 0)  槽 161   (关键词 VCC)
+[APTools]     VCC12V   -> RGB (255 148 0)  槽 161   (关键词 VCC)
+[2026-09-17 22:04:26.989822] [0x00005114] [debug]   \t (00:00:08) [APTools]     VCCISO_5V   -> RGB (145 255 0)  槽 162   (关键词 VCC)
+[APTools]     VCCISO_5V   -> RGB (145 255 0)  槽 162   (关键词 VCC)
+[2026-09-17 22:04:26.994371] [0x00005114] [debug]   \t (00:00:08) [APTools]     VCC5V_OUT   -> RGB (255 0 16)  槽 164   (关键词 VCC)
+[APTools]     VCC5V_OUT   -> RGB (255 0 16)  槽 164   (关键词 VCC)
+[2026-09-17 22:04:26.998427] [0x00005114] [debug]   \t (00:00:08) [APTools]     VCC5V   -> RGB (0 235 255)  槽 165   (关键词 VCC)
+[APTools]     VCC5V   -> RGB (0 235 255)  槽 165   (关键词 VCC)
+[2026-09-17 22:04:27.354679] [0x00005114] [debug]   \t (00:00:08) [APTools]     PWR_IN   -> RGB (0 255 30)  槽 166   (关键词 ^PWR)
+[APTools]     PWR_IN   -> RGB (0 255 30)  槽 166   (关键词 ^PWR)
+[2026-09-17 22:04:27.354679] [0x00005114] [debug]   \t (00:00:08) [APTools]     1V1   -> RGB (255 0 148)  槽 167   (电压 1100mV)
+[APTools]     1V1   -> RGB (255 0 148)  槽 167   (电压 1100mV)
+[2026-09-17 22:04:27.359434] [0x00005114] [debug]   \t (00:00:08) [APTools]     VDDISO_3V3   -> RGB (120 0 255)  槽 168   (关键词 VDD)
+[APTools]     VDDISO_3V3   -> RGB (120 0 255)  槽 168   (关键词 VDD)
+[2026-09-17 22:04:27.363992] [0x00005114] [debug]   \t (00:00:08) [APTools]     VBUS2   -> RGB (28 0 255)  槽 169   (关键词 VBUS)
+[APTools]     VBUS2   -> RGB (28 0 255)  槽 169   (关键词 VBUS)
+[2026-09-17 22:04:27.379185] [0x00005114] [debug]   \t (00:00:08) [APTools]     PWR_OUT   -> RGB (139 255 0)  槽 170   (关键词 ^PWR)
+[APTools]     PWR_OUT   -> RGB (139 255 0)  槽 170   (关键词 ^PWR)
+[2026-09-17 22:04:27.381187] [0x00005114] [debug]   \t (00:00:08) [APTools]     VBUS1   -> RGB (6 0 255)  槽 171   (关键词 VBUS)
+[APTools]     VBUS1   -> RGB (6 0 255)  槽 171   (关键词 VBUS)
+[2026-09-17 22:04:27.383184] [0x00005114] [debug]   \t (00:00:08) [APTools] 识别报告已写出: D:/Aphranda/APTools/Temp/netcolor_report.csv
+[APTools] 识别报告已写出: D:/Aphranda/APTools/Temp/netcolor_report.csv
+[2026-09-17 22:04:27.387962] [0x00005114] [debug]   \t (00:00:08) ((2 10 0 174 12))
+((2 10 0 174 12))
+[2026-09-17 22:04:27.412208] [0x00005114] [debug]   \i (00:00:08) skill '(let (n) (setq n 0) (foreach x (axlDBGetDesign)->nets (when (axlIsCustomColored x) (setq n (n + 1)))) (printf "R1_???=%d`\n" n))' 
+[2026-09-17 22:04:27.416717] [0x00005114] [debug]   \t (00:00:08) R1_???=12
+R1_???=12
+[2026-09-17 22:04:27.421241] [0x00005114] [debug]   \t (00:00:08) t
+t
+[2026-09-17 22:04:27.425238] [0x00005114] [debug]   \i (00:00:08) skill '(printf "R2_????=%L`\n" (errset (apt_netColorClear) t))' 
+[2026-09-17 22:04:27.454654] [0x00005114] [debug]   \t (00:00:08) [APTools] 已清除 12 个网络的自定义配色
+[APTools] 已清除 12 个网络的自定义配色
+[2026-09-17 22:04:27.459651] [0x00005114] [debug]   \t (00:00:08) R2_????=(12)
+R2_????=(12)
+[2026-09-17 22:04:27.460690] [0x00005114] [debug]   \t (00:00:08) t
+t
+[2026-09-17 22:04:27.465278] [0x00005114] [debug]   \i (00:00:08) skill '(let (n) (setq n 0) (foreach x (axlDBGetDesign)->nets (when (axlIsCustomColored x) (setq n (n + 1)))) (printf "R3_?????=%d`\n" n))' 
+[2026-09-17 22:04:27.469726] [0x00005114] [debug]   \t (00:00:08) R3_?????=0
+R3_?????=0
+[2026-09-17 22:04:27.476784] [0x00005114] [debug]   \t (00:00:08) t
+t
+[2026-09-17 22:04:27.480790] [0x00005114] [debug]   \i (00:00:08) skill '(printf "R4_????160=%L`\n" (errset (nth 159 (axlColorGet (quote all))) nil))' 
+[2026-09-17 22:04:27.482917] [0x00005114] [debug]   \t (00:00:08) R4_????160=((201 201 201))
+R4_????160=((201 201 201))
+[2026-09-17 22:04:27.487439] [0x00005114] [debug]   \t (00:00:08) t
+t
+[2026-09-17 22:04:27.496473] [0x00005114] [debug]   \i (00:00:08) skill '(printf "R5_?????=%L`\n" (errset (apt_netColorFreePal) t))' 
+[2026-09-17 22:04:27.506142] [0x00005114] [debug]   \t (00:00:08) [APTools] 已还原 12 个保留调色板槽
+[APTools] 已还原 12 个保留调色板槽
+[2026-09-17 22:04:27.525318] [0x00005114] [debug]   \t (00:00:08) R5_?????=(12)
+R5_?????=(12)
+[2026-09-17 22:04:27.529318] [0x00005114] [debug]   \t (00:00:08) t
+t
+[2026-09-17 22:04:27.534473] [0x00005114] [debug]   \i (00:00:08) skill '(printf "R6_????160=%L (?? (255 0 255))`\n" (errset (nth 159 (axlColorGet (quote all))) nil))' 
+[2026-09-17 22:04:27.545148] [0x00005114] [debug]   \t (00:00:08) R6_????160=((255 0 255)) (?? (255 0 255))
+R6_????160=((255 0 255)) (?? (255 0 255))
+[2026-09-17 22:04:27.548109] [0x00005114] [debug]   \t (00:00:08) t
+t
+[2026-09-17 22:04:27.552200] [0x00005114] [debug]   \i (00:00:08) skill '(printf "R7_????=%L`\n" (errset (apt_netPowRun t) t))' 
+[2026-09-17 22:04:27.679448] [0x00005114] [debug]   \t (00:00:08) [APTools]   调色板槽 160 写入 RGB (98 98 98) (原值 (255 0 255))
+[APTools]   调色板槽 160 写入 RGB (98 98 98) (原值 (255 0 255))
+[2026-09-17 22:04:27.693076] [0x00005114] [debug]   \t (00:00:08) [APTools]   调色板槽 161 写入 RGB (0 255 108) (原值 (255 0 0))
+[APTools]   调色板槽 161 写入 RGB (0 255 108) (原值 (255 0 0))
+[2026-09-17 22:04:27.698170] [0x00005114] [debug]   \t (00:00:08) [APTools]   调色板槽 162 写入 RGB (97 255 0) (原值 (250 120 120))
+[APTools]   调色板槽 162 写入 RGB (97 255 0) (原值 (250 120 120))
+[2026-09-17 22:04:27.705745] [0x00005114] [debug]   \t (00:00:08) [APTools]   调色板槽 163 写入 RGB (179 179 179) (原值 (255 128 0))
+[APTools]   调色板槽 163 写入 RGB (179 179 179) (原值 (255 128 0))
+[2026-09-17 22:04:27.711767] [0x00005114] [debug]   \t (00:00:08) [APTools]   调色板槽 164 写入 RGB (255 0 8) (原值 (250 200 0))
+[APTools]   调色板槽 164 写入 RGB (255 0 8) (原值 (250 200 0))
+[2026-09-17 22:04:27.759001] [0x00005114] [debug]   \t (00:00:08) [APTools]   调色板槽 165 写入 RGB (255 130 0) (原值 (255 255 0))
+[APTools]   调色板槽 165 写入 RGB (255 130 0) (原值 (255 255 0))
+[2026-09-17 22:04:27.789430] [0x00005114] [debug]   \t (00:00:08) [APTools]   调色板槽 166 写入 RGB (0 242 255) (原值 (207 207 92))
+[APTools]   调色板槽 166 写入 RGB (0 242 255) (原值 (207 207 92))
+[2026-09-17 22:04:27.801950] [0x00005114] [debug]   \t (00:00:08) [APTools]   调色板槽 167 写入 RGB (255 0 156) (原值 (176 254 0))
+[APTools]   调色板槽 167 写入 RGB (255 0 156) (原值 (176 254 0))
+[2026-09-17 22:04:27.806469] [0x00005114] [debug]   \t (00:00:08) [APTools]   调色板槽 168 写入 RGB (53 0 255) (原值 (0 255 0))
+[APTools]   调色板槽 168 写入 RGB (53 0 255) (原值 (0 255 0))
+[2026-09-17 22:04:27.829329] [0x00005114] [debug]   \t (00:00:08) [APTools]   调色板槽 169 写入 RGB (250 255 0) (原值 (0 128 0))
+[APTools]   调色板槽 169 写入 RGB (250 255 0) (原值 (0 128 0))
+[2026-09-17 22:04:27.836437] [0x00005114] [debug]   \t (00:00:08) [APTools]   调色板槽 170 写入 RGB (0 96 255) (原值 (0 255 255))
+[APTools]   调色板槽 170 写入 RGB (0 96 255) (原值 (0 255 255))
+[2026-09-17 22:04:27.855195] [0x00005114] [debug]   \t (00:00:08) [APTools]   调色板槽 171 写入 RGB (96 0 255) (原值 (0 128 192))
+[APTools]   调色板槽 171 写入 RGB (96 0 255) (原值 (0 128 192))
+[2026-09-17 22:04:27.863236] [0x00005114] [debug]   \t (00:00:08) 
+
+[2026-09-17 22:04:27.868830] [0x00005114] [debug]   \t (00:00:08) [APTools] ===== 电源网络识别 =====
+[APTools] ===== 电源网络识别 =====
+[2026-09-17 22:04:27.901674] [0x00005114] [debug]   \t (00:00:08) [APTools] 合计: GND 系 2 个 / 电源 10 个 / 排除 0 个 / 其它 174 个 ; 已上色 12 个
+[APTools] 合计: GND 系 2 个 / 电源 10 个 / 排除 0 个 / 其它 174 个 ; 已上色 12 个
+[2026-09-17 22:04:27.906347] [0x00005114] [debug]   \t (00:00:08) [APTools]   -- GND 系 (灰色系随机) 2 个 --
+[APTools]   -- GND 系 (灰色系随机) 2 个 --
+[2026-09-17 22:04:27.912319] [0x00005114] [debug]   \t (00:00:09) [APTools]     FGND   -> RGB (98 98 98)  槽 160   (关键词 GND)
+[APTools]     FGND   -> RGB (98 98 98)  槽 160   (关键词 GND)
+[2026-09-17 22:04:27.916326] [0x00005114] [debug]   \t (00:00:09) [APTools]     GND   -> RGB (179 179 179)  槽 163   (关键词 GND)
+[APTools]     GND   -> RGB (179 179 179)  槽 163   (关键词 GND)
+[2026-09-17 22:04:27.950900] [0x00005114] [debug]   \t (00:00:09) [APTools]   -- 电源 (随机彩) 10 个 --
+[APTools]   -- 电源 (随机彩) 10 个 --
+[2026-09-17 22:04:27.955941] [0x00005114] [debug]   \t (00:00:09) [APTools]     VCC12V   -> RGB (0 255 108)  槽 161   (关键词 VCC)
+[APTools]     VCC12V   -> RGB (0 255 108)  槽 161   (关键词 VCC)
+[2026-09-17 22:04:27.964042] [0x00005114] [debug]   \t (00:00:09) [APTools]     VCCISO_5V   -> RGB (97 255 0)  槽 162   (关键词 VCC)
+[APTools]     VCCISO_5V   -> RGB (97 255 0)  槽 162   (关键词 VCC)
+[2026-09-17 22:04:27.970375] [0x00005114] [debug]   \t (00:00:09) [APTools]     VCC5V_OUT   -> RGB (255 0 8)  槽 164   (关键词 VCC)
+[APTools]     VCC5V_OUT   -> RGB (255 0 8)  槽 164   (关键词 VCC)
+[2026-09-17 22:04:28.005826] [0x00005114] [debug]   \t (00:00:09) [APTools]     VCC5V   -> RGB (255 130 0)  槽 165   (关键词 VCC)
+[APTools]     VCC5V   -> RGB (255 130 0)  槽 165   (关键词 VCC)
+[2026-09-17 22:04:28.021831] [0x00005114] [debug]   \t (00:00:09) [APTools]     PWR_IN   -> RGB (0 242 255)  槽 166   (关键词 ^PWR)
+[APTools]     PWR_IN   -> RGB (0 242 255)  槽 166   (关键词 ^PWR)
+[2026-09-17 22:04:28.026369] [0x00005114] [debug]   \t (00:00:09) [APTools]     1V1   -> RGB (255 0 156)  槽 167   (电压 1100mV)
+[APTools]     1V1   -> RGB (255 0 156)  槽 167   (电压 1100mV)
+[2026-09-17 22:04:28.040155] [0x00005114] [debug]   \t (00:00:09) [APTools]     VDDISO_3V3   -> RGB (53 0 255)  槽 168   (关键词 VDD)
+[APTools]     VDDISO_3V3   -> RGB (53 0 255)  槽 168   (关键词 VDD)
+[2026-09-17 22:04:28.046191] [0x00005114] [debug]   \t (00:00:09) [APTools]     VBUS2   -> RGB (250 255 0)  槽 169   (关键词 VBUS)
+[APTools]     VBUS2   -> RGB (250 255 0)  槽 169   (关键词 VBUS)
+[2026-09-17 22:04:28.079345] [0x00005114] [debug]   \t (00:00:09) [APTools]     PWR_OUT   -> RGB (0 96 255)  槽 170   (关键词 ^PWR)
+[APTools]     PWR_OUT   -> RGB (0 96 255)  槽 170   (关键词 ^PWR)
+[2026-09-17 22:04:28.095921] [0x00005114] [debug]   \t (00:00:09) [APTools]     VBUS1   -> RGB (96 0 255)  槽 171   (关键词 VBUS)
+[APTools]     VBUS1   -> RGB (96 0 255)  槽 171   (关键词 VBUS)
+[2026-09-17 22:04:28.099953] [0x00005114] [debug]   \t (00:00:09) [APTools] 识别报告已写出: D:/Aphranda/APTools/Temp/netcolor_report.csv
+[APTools] 识别报告已写出: D:/Aphranda/APTools/Temp/netcolor_report.csv
+[2026-09-17 22:04:28.127679] [0x00005114] [debug]   \t (00:00:09) R7_????=((2 10 0 174 12))
+R7_????=((2 10 0 174 12))
+[2026-09-17 22:04:28.133687] [0x00005114] [debug]   \t (00:00:09) t
+t
+[2026-09-17 22:04:28.148748] [0x00005114] [debug]   \i (00:00:09) exit 
+Closed connection with Capture.

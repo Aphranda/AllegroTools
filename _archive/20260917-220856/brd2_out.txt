@@ -1,0 +1,69 @@
+Loading axlcore.cxt 
+function xFormBegin redefined
+function xFormEnd redefined
+function xCheckList redefined
+function xGroup redefined
+function xText redefined
+function xButton redefined
+function xEdit redefined
+function xInfoText redefined
+[APTools] APT_LocatorHole 已加载 (apt_scan / apt_fix / apt_scanlib / apt_fixlib)
+[APTools] APT_LocatorHole 已加载 (apt_scan / apt_fix / apt_scanlib / apt_fixlib)
+[APTools]   ok   D:/Aphranda/APTools/tools/10_library/locatorhole/APT_LocatorHole.il
+[APTools] APT_SymbolCheck 已加载 (占位, 待实现)
+[APTools]   ok   D:/Aphranda/APTools/tools/10_library/symcheck/APT_SymbolCheck.il
+[APTools] APT_ColorScheme 已加载 (3 套方案; 改数值见 apt_colorSchemes)
+[APTools]   ok   D:/Aphranda/APTools/tools/90_misc/color/APT_ColorScheme.il
+[APTools] APT_NetColor 已加载 (GND规则 7 / 电源规则 52 / 排除 52; 保留槽 32)
+[APTools]   ok   D:/Aphranda/APTools/tools/90_misc/netcolor/APT_NetColor.il
+[APTools] 工具加载完成: 成功 4, 失败 0
+[APTools] 菜单已注册 (menubar 右端 "APTools", 6 个阶段)
+[APTools] 工具集就绪 (root=D:/Aphranda/APTools)
+Starting new design...
+Opening existing design...
+Loading signal.cxt 
+W- Dielectric layer thickness is 0 !
+> Sending response DoneOpenBoard
+Opened connection with Capture.
+("ctl-synctrig4f4-hasl-ascii")
+DESIGN=("ctl-synctrig4f4-hasl-ascii")
+t
+---- ?? + ???? ----
+t
+[APTools]   调色板槽 160 写入 RGB (102 102 102) (原值 (255 0 255))
+[APTools]   调色板槽 161 写入 RGB (60 0 255) (原值 (255 0 0))
+[APTools]   调色板槽 162 写入 RGB (0 225 255) (原值 (250 120 120))
+[APTools]   调色板槽 163 写入 RGB (134 134 134) (原值 (255 128 0))
+[APTools]   调色板槽 164 写入 RGB (255 0 88) (原值 (250 200 0))
+[APTools]   调色板槽 165 写入 RGB (191 255 0) (原值 (255 255 0))
+[APTools]   调色板槽 166 写入 RGB (255 50 0) (原值 (207 207 92))
+[APTools]   调色板槽 167 写入 RGB (0 255 101) (原值 (176 254 0))
+[APTools]   调色板槽 168 写入 RGB (229 255 0) (原值 (0 255 0))
+[APTools]   调色板槽 169 写入 RGB (65 0 255) (原值 (0 128 0))
+[APTools]   调色板槽 170 写入 RGB (240 255 0) (原值 (0 255 255))
+[APTools]   调色板槽 171 写入 RGB (98 0 255) (原值 (0 128 192))
+
+[APTools] ===== 电源网络识别 =====
+[APTools] 合计: GND 系 2 个 / 电源 10 个 / 排除 0 个 / 其它 174 个 ; 已上色 12 个
+[APTools]   -- GND 系 (灰色系随机) 2 个 --
+[APTools]     FGND   -> RGB (102 102 102)  槽 160   (关键词 GND)
+[APTools]     GND   -> RGB (134 134 134)  槽 163   (关键词 GND)
+[APTools]   -- 电源 (随机彩) 10 个 --
+[APTools]     VCC12V   -> RGB (60 0 255)  槽 161   (关键词 VCC)
+[APTools]     VCCISO_5V   -> RGB (0 225 255)  槽 162   (关键词 VCC)
+[APTools]     VCC5V_OUT   -> RGB (255 0 88)  槽 164   (关键词 VCC)
+[APTools]     VCC5V   -> RGB (191 255 0)  槽 165   (关键词 VCC)
+[APTools]     PWR_IN   -> RGB (255 50 0)  槽 166   (关键词 ^PWR)
+[APTools]     1V1   -> RGB (0 255 101)  槽 167   (电压 1100mV)
+[APTools]     VDDISO_3V3   -> RGB (229 255 0)  槽 168   (关键词 VDD)
+[APTools]     VBUS2   -> RGB (65 0 255)  槽 169   (关键词 VBUS)
+[APTools]     PWR_OUT   -> RGB (240 255 0)  槽 170   (关键词 ^PWR)
+[APTools]     VBUS1   -> RGB (98 0 255)  槽 171   (关键词 VBUS)
+[APTools] 识别报告已写出: D:/Aphranda/APTools/Temp/netcolor_report.csv
+COLORRESULT=((2 10 0 174 12))
+t
+CUSTOMCOLORED_NETS=12
+t
+PAL161=((60 0 255)) PAL165=((191 255 0))
+t
+Closed connection with Capture.

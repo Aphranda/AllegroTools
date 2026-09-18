@@ -1,0 +1,6 @@
+apt_home=("D:/Aphranda/APTools")
+workDir=("D:/Aphranda/APTools/Temp")
+design=("unnamed")
+apt_menuTree=(t)
+cmd_apt_scan=(0)
+loadAll=((4 0))

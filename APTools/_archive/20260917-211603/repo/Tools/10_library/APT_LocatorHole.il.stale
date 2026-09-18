@@ -1,0 +1,477 @@
+;;; ============================================================================
+;;; APT_LocatorHole.il  --  工具① 定位孔还原
+;;; 阶段: 10_library (封装)
+;;; ----------------------------------------------------------------------------
+;;; 解决什么问题
+;;;   嘉立创(EasyEDA) 封装里连接器的机械定位孔不是焊盘, 而是画在 DOCUMENT_LAYER
+;;;   上的一圈闭合线。经 AD -> Allegro 之后被原样搬成
+;;;       PACKAGE GEOMETRY/DOCUMENT_LAYER 上的 path 图形
+;;;   于是钻孔/铣槽文件里没有这些孔 —— 表现为"封装没有定位孔"。
+;;;
+;;; 识别规则(两根信号同时满足, 误判率极低)
+;;;   A. PACKAGE GEOMETRY 下 DOCUMENT 类图层上有一圈"闭合且近似圆"的线;
+;;;   B. 同一圆心位置存在 ROUTE KEEPOUT/ALL 的 keepout。
+;;;
+;;; 处理动作
+;;;   闭合线是有宽度的, 取它们的"外轮廓"(中心线外扩半个线宽, 即 Z-Copy 的
+;;;   enlarge 语义)作为 BOARD GEOMETRY/CUTOUT 上的圆形 shape。
+;;;
+;;; 命令
+;;;   apt_scan      扫描当前打开的图        apt_fix      修复当前图
+;;;   apt_scanlib   单会话扫描整个库        apt_fixlib   单会话修复整个库
+;;;   apt_setlib    设置库目录
+;;;
+;;; 编码: 必须 GBK(cp936), 否则菜单/对话框中文乱码。
+;;; ============================================================================
+   ; 本次批处理里改过的符号名
+
+
+
+
+(procedure (apt_diaOK dia)
+    (let (mm)
+        (setq mm (apt_uu2mm dia))
+        (and mm (mm >= (apt_cfg 'minDiaMM)) (mm <= (apt_cfg 'maxDiaMM)))))
+
+
+;;; ---------------------------------------------------------------------------
+;;; 收集: 目标层的 path, 以及 keepout 的方框
+;;; ---------------------------------------------------------------------------
+
+;;; 返回 list of (dbid bBox) ; bBox = (minX minY maxX maxY)
+(procedure (apt_targetPaths)
+    (let (objs res bb)
+        (setq objs (apt_selAll "lines"))
+        (foreach o objs
+            (when (apt_layerHas o->layer (apt_cfg 'targets))
+                (setq bb (apt_bb o->bBox))
+                (when bb
+                    (setq res (cons (list o bb) res)))))
+        (reverse res)))
+
+
+;;; 返回 list of (dbid (minX minY maxX maxY))
+(procedure (apt_keepouts)
+    (let (objs res bb)
+        (setq objs (apt_selAll "shapes"))
+        (foreach o objs
+            (when (apt_layerHas o->layer (list (apt_cfg 'keepoutPat)))
+                (setq bb (apt_bb o->bBox))
+                (when bb
+                    (setq res (cons (list o bb) res)))))
+        (reverse res)))
+
+
+;;; ---------------------------------------------------------------------------
+;;; 方框聚类: 把互相重叠(或很近)的方框并成一块 -> 每块就是一个候选定位孔
+;;; ---------------------------------------------------------------------------
+
+(procedure (apt_bbMerge a b)
+    (list (apt_min2 (nth 0 a) (nth 0 b)) (apt_min2 (nth 1 a) (nth 1 b))
+          (apt_max2 (nth 2 a) (nth 2 b)) (apt_max2 (nth 3 a) (nth 3 b))))
+
+
+(procedure (apt_bbTouch a b tol)
+    (and (apt_le (nth 0 a) ((nth 2 b) + tol))
+         (apt_ge (nth 2 a) ((nth 0 b) - tol))
+         (apt_le (nth 1 a) ((nth 3 b) + tol))
+         (apt_ge (nth 3 a) ((nth 1 b) - tol))))
+
+
+(procedure (apt_cluster bbs tol)
+    (let (pool merged changed cur rest hit out)
+        (setq pool bbs)
+        (setq out nil)
+        (while pool
+            (setq cur (car pool))
+            (setq pool (cdr pool))
+            (setq changed t)
+            (while changed
+                (setq changed nil)
+                (setq rest nil)
+                (foreach b pool
+                    (if (apt_bbTouch cur b tol)
+                        (progn
+                            (setq cur (apt_bbMerge cur b))
+                            (setq changed t))
+                        (setq rest (cons b rest))))
+                (setq pool (reverse rest)))
+            (setq out (cons cur out)))
+        (reverse out)))
+
+
+;;; ---------------------------------------------------------------------------
+;;; 判定: 每个聚类块是不是"圆"
+;;; 返回 list of (cx cy outerDia bb)
+;;; ---------------------------------------------------------------------------
+
+(procedure (apt_clusterCircles clusters)
+    (let (res w h tol)
+        (setq tol (apt_cfg 'circleTol))
+        (foreach c clusters
+            (setq w ((nth 2 c) - (nth 0 c)))
+            (setq h ((nth 3 c) - (nth 1 c)))
+            (when (and (w > 0.0) (h > 0.0)
+                       (apt_le (apt_abs (w - h)) (tol * (apt_max2 w h))))
+                (setq res (cons (list (((nth 0 c) + (nth 2 c)) / 2.0)
+                                       (((nth 1 c) + (nth 3 c)) / 2.0)
+                                       ((w + h) / 2.0) c)
+                                res))))
+        (reverse res)))
+
+
+;;; keepout 是否盖住 (cx cy)
+(procedure (apt_keepoutAt kps cx cy tol)
+    (let (hit b pad)
+        (setq pad (tol * 1.0))
+        (foreach k kps
+            (setq b (cadr k))
+            (when (and (apt_ge cx ((nth 0 b) - pad)) (apt_le cx ((nth 2 b) + pad))
+                       (apt_ge cy ((nth 1 b) - pad)) (apt_le cy ((nth 3 b) + pad)))
+                (setq hit t)))
+        hit))
+
+
+;;; ---------------------------------------------------------------------------
+;;; 生成 CUTOUT 圆形 shape
+;;; ---------------------------------------------------------------------------
+
+(procedure (apt_makeCirclePoly cx cy rad)
+    (let (n i a pts p poly)
+        (setq n (apt_cfg 'segments))
+        (setq pts nil)
+        (for i 0 (n - 1)
+            (setq a ((2.0 * 3.14159265358979 * i) / n))
+            (setq pts (cons (list (cx + (rad * (cos a))) (cy + (rad * (sin a)))) pts)))
+        (setq pts (reverse pts))
+        (setq pts (append pts (list (car pts))))
+        (setq p (axlPathStart pts 0.0))
+        (setq poly (axlPolyFromDB p))
+        (if poly (car poly) nil)))
+
+
+(procedure (apt_makeCutout cx cy dia)
+    (let (poly res)
+        (setq poly (apt_makeCirclePoly cx cy (dia / 2.0)))
+        (if (null poly)
+            nil
+            (progn
+                (setq res (axlDBCreateShape poly nil (apt_cfg 'outLayer)))
+                (if res (car res) nil)))))
+
+
+;;; ---------------------------------------------------------------------------
+;;; 主流程: 处理当前打开的那张图
+;;; 返回 (nCircle nKeepout nHole nMade nErr)
+;;; ---------------------------------------------------------------------------
+
+(procedure (apt_current t_action)
+    (let (paths kps clusters circles c cx cy dia diaMM hit nCircle nKp nHole nMade nErr
+          tol doFix polyRes confirmed)
+        (setq nCircle 0)
+        (setq nKp 0)
+        (setq nHole 0)
+        (setq nMade 0)
+        (setq nErr 0)
+        (setq aptChanged nil)   ; 每张图单独判定, 批处理时不能沿用上一张的
+        (setq doFix (equal (lowerCase t_action) "fix"))
+        (when (apt_cfg 'dryRun) (setq doFix nil))
+
+        (setq paths (apt_targetPaths))
+        (setq kps (apt_keepouts))
+        (setq tol (apt_cfg 'padTol))
+
+        (apt_log "")
+        (apt_log (sprintf nil "=== %s ===  [%s]"
+                            (axlCurrentDesign) (if doFix "FIX" "SCAN")))
+        (apt_log (sprintf nil "  目标层 path: %d 个 (图层关键字 %L)"
+                            (length paths) (apt_cfg 'targets)))
+        (apt_log (sprintf nil "  keepout    : %d 个 (图层关键字 %L)"
+                            (length kps) (apt_cfg 'keepoutPat)))
+
+        (if (null paths)
+            (apt_log "  -> 目标层没有闭合线, 跳过")
+            (progn
+                ;; 聚类容差按实际单位换算(0.01mm), 免得库是 mm 单位时 0.5 个单位太粗
+                (setq clusters (apt_cluster (mapcar (lambda (x) (cadr x)) paths)
+                                              (apt_max2 0.01 (or (axlMKS2UU "0.01mm") 0.5))))
+                (setq circles (apt_clusterCircles clusters))
+                (setq nCircle (length circles))
+                (apt_log (sprintf nil "  聚类出 %d 块, 其中近似圆 %d 个:"
+                                    (length clusters) nCircle))
+
+                (foreach c circles
+                    (setq cx (nth 0 c))
+                    (setq cy (nth 1 c))
+                    (setq dia (nth 2 c))
+                    (setq diaMM (apt_uu2mm dia))
+                    (setq hit (apt_keepoutAt kps cx cy tol))
+                    (when hit (setq nKp (nKp + 1)))
+                    (setq c (append c (list hit)))
+                    (apt_log (sprintf nil "    @ (%9.3f, %9.3f)  外轮廓 D=%8.3f (=%.3f mm)  keepout=%s"
+                                        cx cy dia (if diaMM diaMM 0.0)
+                                        (if hit "YES" "no")))
+                    (apt_csvline (sprintf nil "%s,%s,%.4f,%.4f,%.4f,%s,%s"
+                                            (axlCurrentDesign) "candidate" cx cy
+                                            (if diaMM diaMM 0.0)
+                                            (if hit "KEEPOUT" "-") ""))
+
+                    ;; 判定为"缺定位孔"
+                    (if (and (not (apt_diaOK dia)) hit)
+                        (apt_log (sprintf nil "      -- keepout 命中但孔径 %.3fmm 超出 %.2f~%.2fmm 范围, 已跳过"
+                                            (if diaMM diaMM 0.0) (apt_cfg 'minDiaMM) (apt_cfg 'maxDiaMM)))
+                        nil)
+                    (when (and (or hit (not (apt_cfg 'requireKeepout)))
+                               (apt_diaOK dia))
+                        (setq nHole (nHole + 1))
+                        (setq confirmed (cons (list cx cy dia (nth 3 c)) confirmed))
+                        (apt_log (sprintf nil "      => 认定为缺失定位孔, 生成 %s 上 D=%.3fmm 的 shape"
+                                            (apt_cfg 'outLayer) (if diaMM diaMM 0.0)))
+                        (if doFix
+                            (progn
+                                (setq polyRes (errset (apt_makeCutout cx cy dia) t))
+                                (if (and polyRes (car polyRes))
+                                    (progn
+                                        (setq nMade (nMade + 1))
+                                        (setq aptChanged t)
+                                        (setq aptModList (cons (axlCurrentDesign) aptModList))
+                                        (apt_log "      ++ 已生成 CUTOUT shape")
+                                        (apt_csvline (sprintf nil "%s,%s,%.4f,%.4f,%.4f,%s,%s"
+                                                                (axlCurrentDesign) "cutout" cx cy
+                                                                (if diaMM diaMM 0.0)
+                                                                (apt_cfg 'outLayer) "")))
+                                    (progn
+                                        (setq nErr (nErr + 1))
+                                        (apt_log "      !! 生成 CUTOUT 失败"))))
+                            (apt_log "      (scan 模式, 未生成)"))))
+
+                ;; 按需删掉源闭合线(只删落在已确认孔范围内的)
+                (when (and doFix (apt_cfg 'deleteOriginal) confirmed)
+                    (foreach c confirmed
+                        (foreach tk paths
+                            (when (apt_bbTouch (cadr tk) (nth 3 c) 0.5)
+                                (errset (axlDeleteObject (car tk)) t)))))))
+
+        ;; 保存
+        (when (and doFix aptChanged)
+            (if (axlSaveDesign ?noConfirm t)
+                (apt_log "  .. 已保存 drawing")
+                (progn
+                    (setq nErr (nErr + 1))
+                    (apt_log "  !! 保存失败"))))
+
+        (apt_log (sprintf nil "  小结: 圆 %d, 有 keepout %d, 认定缺失定位孔 %d, 已生成 %d, 错误 %d"
+                            nCircle nKp nHole nMade nErr))
+        (list nCircle nKp nHole nMade nErr)))
+
+
+;;; 一条龙: (apt_run "scan"|"fix")  -- 自动 begin/end
+(procedure (apt_run t_action)
+    (let (r)
+        (apt_begin)
+        (setq r (apt_current t_action))
+        (apt_end)
+        r))
+
+
+;;; ---------------------------------------------------------------------------
+;;; 单会话批处理: 在"同一个" Allegro 里连跑整个库, 不反复开关窗口
+;;; ---------------------------------------------------------------------------
+
+;;; 打开一张图。要点:
+;;;   * 先用 axlKillDesign 无确认地丢掉当前图, 避免"是否保存"模态框
+;;;   * 用 ?mode "wl" (写 + 不加锁) + ?ignoreLock t
+;;;     既不会生成 .dra.lck, 也能忽略别人/上次残留的 .lck ——
+;;;     实测残留 .lck 会让打开动作弹模态框从而"卡住不报错"
+(procedure (apt_openDra dra)
+    (let (r)
+        (errset (axlKillDesign) t)
+        (setq r (errset (axlOpenDesign ?design dra ?mode "wl" ?ignoreLock t ?noMru t) t))
+        (if r (car r) nil)))
+
+
+;;; 'only 命中判断(nil 或空表 = 全部通过)
+(procedure (apt_onlyOK f)
+    (let (pats hit nm)
+        (setq pats (apt_cfg 'only))
+        (if (null pats)
+            t
+            (progn
+                (setq nm (lowerCase f))
+                (foreach p pats
+                    (when (rexMatchp p nm) (setq hit t)))
+                hit))))
+
+
+;;; (apt_librun "<lib目录>" "scan"|"fix") -- 单会话处理整个库
+;;; 返回 (文件数 命中孔数 已生成数 失败数)
+(procedure (apt_librun t_libDir t_action)
+    (let (doFix dir files f full n nOpen ok nCircle nKp nHole nMade nErr r)
+        (setq dir (axlOSSlash t_libDir))
+        (setq doFix (equal (lowerCase t_action) "fix"))
+        (setq n 0)
+        (setq nOpen 0)
+        (setq nCircle 0)
+        (setq nKp 0)
+        (setq nHole 0)
+        (setq nMade 0)
+        (setq nErr 0)
+
+        (apt_begin)
+        (apt_log "================================================================")
+        (apt_log (sprintf nil "单会话批处理  action=%s" (if doFix "FIX" "SCAN")))
+        (apt_log (sprintf nil "lib = %s" dir))
+        (apt_log "================================================================")
+
+        (setq files (getDirFiles dir))
+        (foreach f files
+            (when (and (rexMatchp "\\.dra$" (lowerCase f))
+                       (apt_onlyOK f))
+                (setq full (if (rexMatchp "/" f) f (strcat dir "/" f)))
+                (setq n (n + 1))
+                (setq ok (apt_openDra full))
+                (if ok
+                    (progn
+                        (setq nOpen (nOpen + 1))
+                        (setq r (errset (apt_current (if doFix "fix" "scan")) t))
+                        (if r
+                            (progn
+                                (setq nCircle (nCircle + (nth 0 (car r))))
+                                (setq nKp     (nKp     + (nth 1 (car r))))
+                                (setq nHole   (nHole   + (nth 2 (car r))))
+                                (setq nMade   (nMade   + (nth 3 (car r))))
+                                (setq nErr    (nErr    + (nth 4 (car r)))))
+                            (progn
+                                (setq nErr (nErr + 1))
+                                (apt_log (sprintf nil "[FAIL] 处理异常: %s" f)))))
+                    (progn
+                        (setq nErr (nErr + 1))
+                        (apt_log (sprintf nil "[FAIL] 打不开: %s" full))))))
+
+        (apt_log "================================================================")
+        (apt_log (sprintf nil ".dra 总数 %d, 打开成功 %d" n nOpen))
+        (apt_log (sprintf nil "圆 %d, 有 keepout %d, 认定缺失定位孔 %d, 已生成 %d, 错误 %d"
+                            nCircle nKp nHole nMade nErr))
+        (apt_log "================================================================")
+        (apt_end)
+        (list n nOpen nHole nMade nErr)))
+
+
+;;; ---------------------------------------------------------------------------
+;;; 对外命令 (菜单项 / Allegro 命令行都用这些)
+;;; ---------------------------------------------------------------------------
+
+(defvar apt_libDir  nil)
+
+
+;;; 当前打开的那张图
+(procedure (apt_cmd_scan)
+    (apt_uiDefaults)
+    (apt_run "scan"))
+
+
+(procedure (apt_cmd_fix)
+    (apt_uiDefaults)
+    (apt_run "fix"))
+
+
+;;; 整个库(单会话内连跑) -- 先问目录
+(procedure (apt_libUI t_action)
+    (let (r res msg title)
+        (apt_uiDefaults)
+        (unless apt_libDir
+            (setq apt_libDir (errset (axlOSSlash (getWorkingDir)) t))
+            (if apt_libDir (setq apt_libDir (car apt_libDir)) (setq apt_libDir ".")))
+        (setq r (axlUIPrompt "库目录 (.dra 所在目录):" apt_libDir))
+        (when r
+            (setq apt_libDir r)
+            (setq res (apt_librun r t_action))
+            (setq title (if (equal (lowerCase t_action) "fix") "修复" "扫描"))
+            (setq msg (sprintf nil "APTools 定位孔%s完成\n\n.dra 总数 %d / 打开成功 %d\n认定缺失孔 %d / 已生成 CUTOUT %d\n错误 %d\n\n报告:\n%s"
+                               title
+                               (nth 0 res) (nth 1 res)
+                               (nth 2 res) (nth 3 res)
+                               (nth 4 res)
+                               (apt_cfg 'report)))
+            (axlUIConfirm msg))))
+
+
+(procedure (apt_cmd_scanlib)
+    (apt_libUI "scan"))
+
+
+(procedure (apt_cmd_fixlib)
+    (apt_libUI "fix"))
+
+
+;;; 换个库目录(不用开扫描也能改)
+(procedure (apt_cmd_setlib)
+    (let (r)
+        (unless apt_libDir (setq apt_libDir "."))
+        (setq r (axlUIPrompt "库目录 (.dra 所在目录):" apt_libDir))
+        (when r
+            (setq apt_libDir r)
+            (printf "[APTools] 库目录 = %s\n" r))))
+
+
+(axlCmdRegister "apt_scan"    'apt_cmd_scan    ?cmdType "general")
+
+(axlCmdRegister "apt_fix"     'apt_cmd_fix     ?cmdType "general")
+
+(axlCmdRegister "apt_scanlib" 'apt_cmd_scanlib ?cmdType "general")
+
+(axlCmdRegister "apt_fixlib"  'apt_cmd_fixlib  ?cmdType "general")
+
+(axlCmdRegister "apt_setlib"  'apt_cmd_setlib  ?cmdType "general")
+
+
+(printf "[APTools] APT_LocatorHole 已加载 (apt_scan / apt_fix / apt_scanlib / apt_fixlib)\n")
+
+(apt_cfgdef 'targets (list "DOCUMENT"))
+(apt_cfgdef 'keepoutPat "KEEPOUT")
+(apt_cfgdef 'outLayer "BOARD GEOMETRY/CUTOUT")
+(apt_cfgdef 'requireKeepout t)
+(apt_cfgdef 'circleTol 0.05)
+(apt_cfgdef 'minDiaMM 0.3)
+(apt_cfgdef 'maxDiaMM 8.0)
+(apt_cfgdef 'padTol 0.10)
+(apt_cfgdef 'deleteOriginal nil)
+(apt_cfgdef 'dryRun nil)
+(apt_cfgdef 'segments 72)
+(apt_cfgdef 'only nil)
+(apt_cfgdef 'report "")
+(apt_cfgdef 'csv "")
+(apt_cfgdef 'modified "")
+;;; ---------------------------------------------------------------------------
+;;; 本工具的配置默认值 (用 apt_cfgdef, 只在未设置过时生效)
+;;; ---------------------------------------------------------------------------
+
+(apt_cfgdef 'targets        (list "DOCUMENT"))
+(apt_cfgdef 'keepoutPat     "KEEPOUT")
+(apt_cfgdef 'outLayer       "BOARD GEOMETRY/CUTOUT")
+(apt_cfgdef 'requireKeepout t)
+(apt_cfgdef 'circleTol      0.05)
+(apt_cfgdef 'minDiaMM       0.3)
+(apt_cfgdef 'maxDiaMM       8.0)
+(apt_cfgdef 'padTol         0.10)
+(apt_cfgdef 'deleteOriginal nil)
+(apt_cfgdef 'dryRun         nil)
+(apt_cfgdef 'segments       72)
+(apt_cfgdef 'only           nil)
+(apt_cfgdef 'report         "")
+(apt_cfgdef 'csv            "")
+(apt_cfgdef 'modified       "")
+
+;;; ---------------------------------------------------------------------------
+;;; 菜单自声明 (阶段 = tools/10_library)
+;;; ---------------------------------------------------------------------------
+
+(apt_menuAdd "10_library" "定位孔: 扫描当前图"    "apt_scan")
+(apt_menuAdd "10_library" "定位孔: 修复当前图"    "apt_fix")
+(apt_menuSep "10_library")
+(apt_menuAdd "10_library" "定位孔: 扫描整个库..." "apt_scanlib")
+(apt_menuAdd "10_library" "定位孔: 修复整个库..." "apt_fixlib")
+(apt_menuSep "10_library")
+(apt_menuAdd "10_library" "设置库目录..."         "apt_setlib")
+
+(printf "[APTools] APT_LocatorHole 已加载 (apt_scan / apt_fix / apt_scanlib / apt_fixlib)\n")

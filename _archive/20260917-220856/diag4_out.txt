@@ -1,0 +1,53 @@
+Loading axlcore.cxt 
+function xFormBegin redefined
+function xFormEnd redefined
+function xCheckList redefined
+function xGroup redefined
+function xText redefined
+function xButton redefined
+function xEdit redefined
+function xInfoText redefined
+[APTools] APT_LocatorHole 已加载 (apt_scan / apt_fix / apt_scanlib / apt_fixlib)
+[APTools] APT_LocatorHole 已加载 (apt_scan / apt_fix / apt_scanlib / apt_fixlib)
+[APTools]   ok   D:/Aphranda/APTools/tools/10_library/locatorhole/APT_LocatorHole.il
+[APTools] APT_SymbolCheck 已加载 (占位, 待实现)
+[APTools]   ok   D:/Aphranda/APTools/tools/10_library/symcheck/APT_SymbolCheck.il
+[APTools] APT_ColorScheme 已加载 (3 套方案; 改数值见 apt_colorSchemes)
+[APTools]   ok   D:/Aphranda/APTools/tools/90_misc/color/APT_ColorScheme.il
+[APTools] APT_NetColor 已加载 (GND规则 7 / 电源规则 52 / 排除 52; 保留槽 32)
+[APTools]   ok   D:/Aphranda/APTools/tools/90_misc/netcolor/APT_NetColor.il
+[APTools] 工具加载完成: 成功 4, 失败 0
+[APTools] 菜单已注册 (menubar 右端 "APTools", 6 个阶段)
+[APTools] 工具集就绪 (root=D:/Aphranda/APTools)
+Starting new design...
+nil
+0
+S1 nil
+E- *Error* eval: not a function - (255 - a)
+t
+S2 ((67 0 255))
+t
+S3 ((255 0 80))
+t
+S4 nil
+E- *Error* eval: not a function - (255 - a)
+t
+S5 nil
+E- *Error* eval: not a function - (255 - a)
+t
+S6 ((0 255 85))
+t
+nil
+0
+G1 ((135 135 135))
+t
+G2 ((158 158 158))
+t
+G3 ((206 206 206))
+t
+V1 ((pwr "\265\347压 3300mV" 3300))
+t
+V2 ((pwr "\265\347压 12000mV" 12000))
+t
+V3 ((pwr "\265\347压 5000mV" 5000))
+t

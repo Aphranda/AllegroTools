@@ -1,0 +1,215 @@
+Loading axlcore.cxt 
+function xFormBegin redefined
+function xFormEnd redefined
+function xCheckList redefined
+function xGroup redefined
+function xText redefined
+function xButton redefined
+function xEdit redefined
+function xInfoText redefined
+[APTools] APT_LocatorHole ÒÑ¼ÓÔØ (apt_scan / apt_fix / apt_scanlib / apt_fixlib)
+[APTools] APT_LocatorHole ÒÑ¼ÓÔØ (apt_scan / apt_fix / apt_scanlib / apt_fixlib)
+[APTools]   ok   D:/Aphranda/APTools/tools/10_library/locatorhole/APT_LocatorHole.il
+[APTools] APT_SymbolCheck ÒÑ¼ÓÔØ (Õ¼Î», ´ýÊµÏÖ)
+[APTools]   ok   D:/Aphranda/APTools/tools/10_library/symcheck/APT_SymbolCheck.il
+[APTools] APT_ColorScheme ÒÑ¼ÓÔØ (3 Ì×·½°¸; ¸ÄÊýÖµ¼û apt_colorSchemes)
+[APTools]   ok   D:/Aphranda/APTools/tools/90_misc/color/APT_ColorScheme.il
+[APTools] APT_NetColor ÒÑ¼ÓÔØ (GND¹æÔò 7 / µçÔ´¹æÔò 52 / ÅÅ³ý 52; ±£Áô²Û 32)
+[APTools]   ok   D:/Aphranda/APTools/tools/90_misc/netcolor/APT_NetColor.il
+[APTools] ¹¤¾ß¼ÓÔØÍê³É: ³É¹¦ 4, Ê§°Ü 0
+[APTools] ²Ëµ¥ÒÑ×¢²á (menubar ÓÒ¶Ë "APTools", 6 ¸ö½×¶Î)
+[APTools] ¹¤¾ß¼¯¾ÍÐ÷ (root=D:/Aphranda/APTools)
+Starting new design...
+LOAD self=(t)
+t
+
+=== A. GND family (expect gnd) ===
+CLS  GND                gnd   ¹Ø¼ü´Ê GND
+CLS  AGND               gnd   ¹Ø¼ü´Ê GND
+CLS  DGND               gnd   ¹Ø¼ü´Ê GND
+CLS  PGND               gnd   ¹Ø¼ü´Ê GND
+CLS  FGND               gnd   ¹Ø¼ü´Ê GND
+CLS  SGND               gnd   ¹Ø¼ü´Ê GND
+CLS  CGND               gnd   ¹Ø¼ü´Ê GND
+CLS  MGND               gnd   ¹Ø¼ü´Ê GND
+CLS  GNDA               gnd   ¹Ø¼ü´Ê GND
+CLS  GND0               gnd   ¹Ø¼ü´Ê GND
+CLS  GND_1              gnd   ¹Ø¼ü´Ê GND
+CLS  GND12              gnd   ¹Ø¼ü´Ê GND
+CLS  VSS                gnd   ¹Ø¼ü´Ê VSS
+CLS  VSSA               gnd   ¹Ø¼ü´Ê VSS
+CLS  VSSD               gnd   ¹Ø¼ü´Ê VSS
+CLS  VSSIO              gnd   ¹Ø¼ü´Ê VSS
+CLS  AVSS               gnd   ¹Ø¼ü´Ê VSS
+CLS  EARTH              gnd   ¹Ø¼ü´Ê EARTH
+CLS  CHASSIS            gnd   ¹Ø¼ü´Ê CHASSIS
+CLS  GROUND             gnd   ¹Ø¼ü´Ê GROUND
+CLS  0V                 gnd   ¹Ø¼ü´Ê ^0V$
+
+=== B. Power rails (expect pwr) ===
+CLS  VCC                pwr   ¹Ø¼ü´Ê VCC
+CLS  VDD                pwr   ¹Ø¼ü´Ê VDD
+CLS  VEE                pwr   ¹Ø¼ü´Ê VEE
+CLS  VPP                pwr   ¹Ø¼ü´Ê VPP
+CLS  VTT                pwr   ¹Ø¼ü´Ê VTT
+CLS  VREF               pwr   ¹Ø¼ü´Ê VREF
+CLS  VBUS               pwr   ¹Ø¼ü´Ê VBUS
+CLS  VUSB               pwr   ¹Ø¼ü´Ê VUSB
+CLS  VBAT               pwr   ¹Ø¼ü´Ê VBAT
+CLS  VSYS               pwr   ¹Ø¼ü´Ê VSYS
+CLS  VMAIN              pwr   ¹Ø¼ü´Ê VMAIN
+CLS  VIN                pwr   ¹Ø¼ü´Ê ^VIN
+CLS  VOUT               pwr   ¹Ø¼ü´Ê ^VOUT
+CLS  VIO                pwr   ¹Ø¼ü´Ê ^VIO
+CLS  AVDD               pwr   ¹Ø¼ü´Ê VDD
+CLS  DVDD               pwr   ¹Ø¼ü´Ê VDD
+CLS  PVDD               pwr   ¹Ø¼ü´Ê VDD
+CLS  AVCC               pwr   ¹Ø¼ü´Ê VCC
+CLS  DVCC               pwr   ¹Ø¼ü´Ê VCC
+CLS  VCCIO              pwr   ¹Ø¼ü´Ê VCC
+CLS  VCCINT             pwr   ¹Ø¼ü´Ê VCC
+CLS  VCCAUX             pwr   ¹Ø¼ü´Ê VCC
+CLS  VDDCORE            pwr   ¹Ø¼ü´Ê VDD
+CLS  VDDA               pwr   ¹Ø¼ü´Ê VDD
+CLS  VDDO               pwr   ¹Ø¼ü´Ê VDD
+CLS  V33                pwr   ¹Ø¼ü´Ê V33
+CLS  V18                pwr   ¹Ø¼ü´Ê V18
+CLS  PWR                pwr   ¹Ø¼ü´Ê ^PWR
+CLS  POWER              pwr   ¹Ø¼ü´Ê ^POWER
+CLS  VBUCK              pwr   ¹Ø¼ü´Ê VBUCK
+CLS  VPHASE             pwr   ¹Ø¼ü´Ê VPHASE
+CLS  VPWR               pwr   ¹Ø¼ü´Ê VPWR
+CLS  3V3                <ERROR: è§ä¸Šé¢çš„ *Error* è¡Œ>
+CLS  3.3V               <ERROR: è§ä¸Šé¢çš„ *Error* è¡Œ>
+CLS  1V8                <ERROR: è§ä¸Šé¢çš„ *Error* è¡Œ>
+CLS  1.2V               <ERROR: è§ä¸Šé¢çš„ *Error* è¡Œ>
+CLS  5V                 <ERROR: è§ä¸Šé¢çš„ *Error* è¡Œ>
+CLS  12V                <ERROR: è§ä¸Šé¢çš„ *Error* è¡Œ>
+CLS  +5V                <ERROR: è§ä¸Šé¢çš„ *Error* è¡Œ>
+CLS  -12V               <ERROR: è§ä¸Šé¢çš„ *Error* è¡Œ>
+CLS  N12V               <ERROR: è§ä¸Šé¢çš„ *Error* è¡Œ>
+CLS  24V                <ERROR: è§ä¸Šé¢çš„ *Error* è¡Œ>
+CLS  48V                <ERROR: è§ä¸Šé¢çš„ *Error* è¡Œ>
+CLS  0V9                <ERROR: è§ä¸Šé¢çš„ *Error* è¡Œ>
+CLS  1V25               pwr   ¹Ø¼ü´Ê V25
+CLS  2V5                <ERROR: è§ä¸Šé¢çš„ *Error* è¡Œ>
+CLS  5V0                <ERROR: è§ä¸Šé¢çš„ *Error* è¡Œ>
+CLS  12V0               <ERROR: è§ä¸Šé¢çš„ *Error* è¡Œ>
+CLS  VCC3V3             pwr   ¹Ø¼ü´Ê VCC
+CLS  VDD_1V8            pwr   ¹Ø¼ü´Ê VDD
+CLS  VCC5V0             pwr   ¹Ø¼ü´Ê VCC
+CLS  P12V               <ERROR: è§ä¸Šé¢çš„ *Error* è¡Œ>
+CLS  1P8V               <ERROR: è§ä¸Šé¢çš„ *Error* è¡Œ>
+CLS  3P3V               <ERROR: è§ä¸Šé¢çš„ *Error* è¡Œ>
+CLS  3V3_A              <ERROR: è§ä¸Šé¢çš„ *Error* è¡Œ>
+CLS  5V_STBY            <ERROR: è§ä¸Šé¢çš„ *Error* è¡Œ>
+
+=== C. Excluded control/feedback (expect skip) ===
+CLS  PWR_EN             skip  ºó×º EN$ (±¾¿ÉËãµçÔ´)
+CLS  VCC_EN             skip  ºó×º EN$ (±¾¿ÉËãµçÔ´)
+CLS  3V3_EN             <ERROR: è§ä¸Šé¢çš„ *Error* è¡Œ>
+CLS  VBUS_PG            skip  ºó×º PG$ (±¾¿ÉËãµçÔ´)
+CLS  PWRGD              skip  ºó×º PWRGD$ (±¾¿ÉËãµçÔ´)
+CLS  PWROK              skip  ºó×º PWROK$ (±¾¿ÉËãµçÔ´)
+CLS  VCC_FB             skip  ºó×º FB$ (±¾¿ÉËãµçÔ´)
+CLS  VCC_SENSE          skip  ºó×º SENSE$ (±¾¿ÉËãµçÔ´)
+CLS  3V3_OV             <ERROR: è§ä¸Šé¢çš„ *Error* è¡Œ>
+CLS  VDD_DET            skip  ºó×º DET$ (±¾¿ÉËãµçÔ´)
+CLS  GND_PG             skip  ºó×º PG$ (±¾¿ÉËãµçÔ´)
+CLS  VCC_CLK            skip  ºó×º CLK$ (±¾¿ÉËãµçÔ´)
+CLS  VCC_MON            skip  ºó×º MON$ (±¾¿ÉËãµçÔ´)
+CLS  VDDO_TEMP          skip  ºó×º TEMP$ (±¾¿ÉËãµçÔ´)
+CLS  5V_SEL             <ERROR: è§ä¸Šé¢çš„ *Error* è¡Œ>
+
+=== D. Ordinary signals (expect -, must NOT be listed as excluded) ===
+CLS  TX_P               -
+CLS  RX_N               -
+CLS  SPI_CLK            -
+CLS  SPI_CS             -
+CLS  SDA                -
+CLS  SCL                -
+CLS  GPIO5              -
+CLS  ADC_IN0            -
+CLS  N00001             -
+CLS  RESET_N            -
+CLS  LED1               -
+CLS  USB_DM             -
+CLS  D0                 -
+CLS  DATA3              -
+CLS  TEMP               -
+CLS  SEL0               -
+CLS  MODE1              -
+CLS  NMI                -
+CLS  TDO                -
+CLS  CTRL1              -
+CLS  STAT               -
+CLS  MON1               -
+CLS  VCC_CURRENT        pwr   ¹Ø¼ü´Ê VCC
+
+=== E. Voltage token edge cases ===
+CLS  3V3                <ERROR: è§ä¸Šé¢çš„ *Error* è¡Œ>
+CLS  3.3V               <ERROR: è§ä¸Šé¢çš„ *Error* è¡Œ>
+CLS  12V                <ERROR: è§ä¸Šé¢çš„ *Error* è¡Œ>
+CLS  +5V                <ERROR: è§ä¸Šé¢çš„ *Error* è¡Œ>
+CLS  5V0                <ERROR: è§ä¸Šé¢çš„ *Error* è¡Œ>
+CLS  0V9                <ERROR: è§ä¸Šé¢çš„ *Error* è¡Œ>
+CLS  1V25               pwr   ¹Ø¼ü´Ê V25
+CLS  1P8V               <ERROR: è§ä¸Šé¢çš„ *Error* è¡Œ>
+CLS  3P3V               <ERROR: è§ä¸Šé¢çš„ *Error* è¡Œ>
+CLS  13V3               <ERROR: è§ä¸Šé¢çš„ *Error* è¡Œ>
+CLS  DDR13V3            <ERROR: è§ä¸Šé¢çš„ *Error* è¡Œ>
+CLS  100V               -
+CLS  0V                 gnd   ¹Ø¼ü´Ê ^0V$
+CLS  DATA0V             -
+CLS  TXD3               -
+CLS  VCC                pwr   ¹Ø¼ü´Ê VCC
+CLS  5                  -
+
+=== F. RNG / random color picks ===
+seed(timestamp string) : (62026)
+RND  (rnd 100) x16 : (81) (98) (84) (23) (50) (47) (67) (84) (25) (88) (71) (12) (94) (82) (14) (5) 
+GREY (6 nets)      : ((202 202 202)) ((102 102 102)) ((143 143 143)) ((163 163 163)) ((123 123 123)) ((178 178 178)) 
+PWR  (8 nets)      : ((87 0 255)) ((0 255 116)) nil ((255 0 119)) ((255 79 0)) nil nil nil 
+GREY cfg range     : min=(90) max=(210)
+
+=== G. dialect diagnostics ===
+(defvar X 32) readable at own load's top level : (t)
+rule tables bound (GndKw/RailKw/SkipSuf)       : (t) (t) (t)
+ReserveN / GreyIdx                             : nil (4)
+palette count                                  : (192)
+
+SELFTEST DONE
+E- *Error* eval: undefined function - itoa
+E- *Error* eval: undefined function - itoa
+E- *Error* eval: undefined function - itoa
+E- *Error* eval: undefined function - itoa
+E- *Error* eval: undefined function - itoa
+E- *Error* eval: undefined function - itoa
+E- *Error* eval: undefined function - itoa
+E- *Error* eval: undefined function - itoa
+E- *Error* eval: undefined function - itoa
+E- *Error* eval: undefined function - itoa
+E- *Error* eval: undefined function - itoa
+E- *Error* eval: undefined function - itoa
+E- *Error* eval: undefined function - itoa
+E- *Error* eval: undefined function - itoa
+E- *Error* eval: undefined function - itoa
+E- *Error* eval: undefined function - itoa
+E- *Error* eval: undefined function - itoa
+E- *Error* eval: undefined function - itoa
+E- *Error* eval: undefined function - itoa
+E- *Error* eval: undefined function - itoa
+E- *Error* eval: undefined function - itoa
+E- *Error* eval: undefined function - itoa
+E- *Error* eval: undefined function - itoa
+E- *Error* eval: undefined function - itoa
+E- *Error* eval: undefined function - itoa
+E- *Error* eval: undefined function - itoa
+E- *Error* eval: undefined function - itoa
+E- *Error* eval: undefined function - itoa
+E- *Error* eval: undefined function - itoa
+E- *Error* eval: undefined function - itoa
+E- *Error* eval: undefined function - itoa
+E- *Error* eval: undefined function - itoa
+E- *Error* eval: undefined function - itoa
+t

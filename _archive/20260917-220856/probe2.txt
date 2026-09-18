@@ -1,0 +1,4 @@
+apt_home=("D:/Aphranda/APTools")
+apt_menuList=(t)
+cmd_apt_scan=(0)
+loadAll=((1 0))

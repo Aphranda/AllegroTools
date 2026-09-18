@@ -1,0 +1,36 @@
+;;; ============================================================================
+;;; APTools_Menu.il  --  APTools 的 ilinit 唯一入口
+;;; ----------------------------------------------------------------------------
+;;; Allegro 的加载点是  %HOME%\pcbenv\allegro.ilinit  (本机 HOME=D:\Cadence\SPB_Data)
+;;; 里面写:
+;;;     ; ---- APTools 自建 SKILL 工具集 ----
+;;;     apt_home = "D:/Aphranda/APTools"
+;;;     loadi(strcat(apt_home "/core/APTools_Menu.il"))
+;;;
+;;; 用绝对路径而不是环境变量: 实测用户级环境变量对 Allegro 不可见
+;;; (注册表有值, 但已运行的父进程不会更新环境块, 新进程继承的是旧环境块),
+;;; getShellEnvVar 返回空 -> loadi 静默失败 -> 菜单完全不出现。
+;;;
+;;; 本文件本身也能独立工作(没在 ilinit 里设 apt_home 时走下面的兜底)。
+;;;
+;;; 编码: 必须 GBK(cp936)。
+;;; ============================================================================
+
+(defvar apt_home nil)
+
+(unless apt_home
+    (setq apt_home (getShellEnvVar "APTools")))
+(when (or (null apt_home) (equal apt_home ""))
+    (setq apt_home "D:/Aphranda/APTools"))
+(setq apt_home (axlOSSlash apt_home))
+
+;; 1) 加载框架
+(loadi (strcat apt_home "/core/APTools_Load.il"))
+
+;; 2) 加载 tools/ 下所有工具(工具会调用 apt_menuAdd 声明菜单)
+(apt_loadAll)
+
+;; 3) 汇总菜单并挂到 menubar 右端
+(apt_menuRegister)
+
+(printf "[APTools] 工具集就绪 (root=%s)\n" apt_home)

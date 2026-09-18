@@ -1,0 +1,3 @@
+skill (printf "LOAD self=%L\n" (errset (load "F:/1.Hardware/GTS_PPA1/08.CTL-SYNCTRIG4F4-HASL/AllegroTools/APTools/devkit/tests/selftest_netcolor.il") nil))
+skill (aptTestAll)
+exit

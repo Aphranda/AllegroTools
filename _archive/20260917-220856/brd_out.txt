@@ -1,0 +1,62 @@
+Loading axlcore.cxt 
+function xFormBegin redefined
+function xFormEnd redefined
+function xCheckList redefined
+function xGroup redefined
+function xText redefined
+function xButton redefined
+function xEdit redefined
+function xInfoText redefined
+[APTools] APT_LocatorHole ÒÑ¼ÓÔØ (apt_scan / apt_fix / apt_scanlib / apt_fixlib)
+[APTools] APT_LocatorHole ÒÑ¼ÓÔØ (apt_scan / apt_fix / apt_scanlib / apt_fixlib)
+[APTools]   ok   D:/Aphranda/APTools/tools/10_library/locatorhole/APT_LocatorHole.il
+[APTools] APT_SymbolCheck ÒÑ¼ÓÔØ (Õ¼Î», ´ýÊµÏÖ)
+[APTools]   ok   D:/Aphranda/APTools/tools/10_library/symcheck/APT_SymbolCheck.il
+[APTools] APT_ColorScheme ÒÑ¼ÓÔØ (3 Ì×·½°¸; ¸ÄÊýÖµ¼û apt_colorSchemes)
+[APTools]   ok   D:/Aphranda/APTools/tools/90_misc/color/APT_ColorScheme.il
+[APTools] APT_NetColor ÒÑ¼ÓÔØ (GND¹æÔò 7 / µçÔ´¹æÔò 52 / ÅÅ³ý 52; ±£Áô²Û 32)
+[APTools]   ok   D:/Aphranda/APTools/tools/90_misc/netcolor/APT_NetColor.il
+[APTools] ¹¤¾ß¼ÓÔØÍê³É: ³É¹¦ 4, Ê§°Ü 0
+[APTools] ²Ëµ¥ÒÑ×¢²á (menubar ÓÒ¶Ë "APTools", 6 ¸ö½×¶Î)
+[APTools] ¹¤¾ß¼¯¾ÍÐ÷ (root=D:/Aphranda/APTools)
+Starting new design...
+W- *WARNING* (axlOpenDesign): Illegal mode - "r"
+(nil)
+OPEN1=(nil)
+t
+Opening existing design...
+Loading signal.cxt 
+W- Dielectric layer thickness is 0 !
+> Sending response DoneOpenBoard
+Opened connection with Capture.
+OPEN2=("ctl-synctrig4f4-hasl-ascii")
+t
+DESIGN=("ctl-synctrig4f4-hasl-ascii")
+t
+NETS=(186)
+t
+MENUTREE=((("10_library/\266\250Î»\277\327\320Þ¸\264" ("É¨\303èµ±Ç°Í¼" "apt_scan") ("\320Þ¸\264\265\261Ç°Í¼" "apt_fix") (separator) ("É¨\303\350\325\373\270\366\277\342..." "apt_scanlib") ("\320Þ¸\264\325\373\270\366\277\342..." "apt_fixlib") (separator) ("\311\350\326Ã¿\342Ä¿Â¼..." "apt_setlib")) ("10_library/\267\373\272Å·\342×°Ò»\326\302\320\324" ("\274\354\262\351\267\373\272\305\323\353\267\342×°Ò»\326\302\320\324" "apt_symcheck")) ("90_misc/\321\325É«\267\275\260\270" ("\305\344É«\267\275\260\270 1" "apt_color1") ("\305\344É«\267\275\260\270 2" "apt_color2") ("\305\344É«\267\275\260\270 3" "apt_color3") (separator) ("\301Ð³\366È«\262\277\267\275\260\270" "apt_colorlist")) ("90_misc/\265\347Ô´\315\370\302\347Ë¢É«" ("Ê¶\261\360\265\347Ô´\315\370\302\347" "apt_netcolorscan") ("\313\346\273\372Ë¢É«" "apt_netcolor") ("\307\345\263\375Ë¢É«" "apt_netcolorclear") (separator) ("\262é¿´Ê¶\261\360\271\346\324\362" "apt_netcolorrule") ("\262é¿´\265\367É«\260\345" "apt_netcolorpal") ("\312Í·Å±\243\301\364\265\367É«
+t
+---- SCAN(???, ???) ----
+t
+
+[APTools] ===== µçÔ´ÍøÂçÊ¶±ð =====
+[APTools] ºÏ¼Æ: GND Ïµ 2 ¸ö / µçÔ´ 10 ¸ö / ÅÅ³ý 0 ¸ö / ÆäËü 174 ¸ö ; Î´Ë¢É«(½öÊ¶±ð)
+[APTools]   -- GND Ïµ (»ÒÉ«ÏµËæ»ú) 2 ¸ö --
+[APTools]     FGND   -> RGB (137 137 137)  ²Û    (¹Ø¼ü´Ê GND)
+[APTools]     GND   -> RGB (201 201 201)  ²Û    (¹Ø¼ü´Ê GND)
+[APTools]   -- µçÔ´ (Ëæ»ú²Ê) 10 ¸ö --
+[APTools]     VCC12V   -> RGB (0 255 52)  ²Û    (¹Ø¼ü´Ê VCC)
+[APTools]     VCCISO_5V   -> RGB (0 241 255)  ²Û    (¹Ø¼ü´Ê VCC)
+[APTools]     VCC5V_OUT   -> RGB (239 255 0)  ²Û    (¹Ø¼ü´Ê VCC)
+[APTools]     VCC5V   -> RGB (255 0 84)  ²Û    (¹Ø¼ü´Ê VCC)
+[APTools]     PWR_IN   -> RGB (26 0 255)  ²Û    (¹Ø¼ü´Ê ^PWR)
+[APTools]     1V1   -> RGB (255 53 0)  ²Û    (µçÑ¹ 1100mV)
+[APTools]     VDDISO_3V3   -> RGB (202 255 0)  ²Û    (¹Ø¼ü´Ê VDD)
+[APTools]     VBUS2   -> RGB (159 0 255)  ²Û    (¹Ø¼ü´Ê VBUS)
+[APTools]     PWR_OUT   -> RGB (170 255 0)  ²Û    (¹Ø¼ü´Ê ^PWR)
+[APTools]     VBUS1   -> RGB (0 104 255)  ²Û    (¹Ø¼ü´Ê VBUS)
+[APTools] Ê¶±ð±¨¸æÒÑÐ´³ö: D:/Aphranda/APTools/Temp/netcolor_report.csv
+SCANRESULT=((2 10 0 174 0))
+t
+Closed connection with Capture.

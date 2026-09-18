@@ -1,0 +1,9 @@
+skill (setq op (errset (axlOpenDesign ?design "F:/1.Hardware/GTS_PPA1/08.CTL-SYNCTRIG4F4-HASL/Allegro/ctl-synctrig4f4-hasl-ascii.brd" ?mode "r" ?noMru t) t))
+skill (printf "OPEN1=%L\n" op)
+skill (when (null (car op)) (setq op (errset (axlOpenDesign ?design "F:/1.Hardware/GTS_PPA1/08.CTL-SYNCTRIG4F4-HASL/Allegro/ctl-synctrig4f4-hasl-ascii.brd" ?noMru t) t)) (printf "OPEN2=%L\n" op))
+skill (printf "DESIGN=%L\n" (errset (axlCurrentDesign) nil))
+skill (printf "NETS=%L\n" (errset (length (axlDBGetDesign)->nets) nil))
+skill (printf "MENUTREE=%L\n" (errset apt_menuTree nil))
+skill (printf "---- SCAN(???, ???) ----\n")
+skill (printf "SCANRESULT=%L\n" (errset (apt_netPowRun nil) t))
+exit
