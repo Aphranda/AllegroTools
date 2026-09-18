@@ -25,7 +25,9 @@
 ;;;   保留槽会盖掉调色板原来那几格, 原 RGB 已记录, 菜单"释放保留调色板槽"可还原。
 ;;;
 ;;; 可调参数
-;;;   (apt_cfgset 'netColorReserveN 32)   保留槽个数(默认 32)
+;;;   (apt_cfgset 'netColorReserveN 64)   保留槽个数(默认 64; 调色板共 192 色)
+;;;     真板实测: 一块板 15 个地(各自一个灰阶) + 约 35 个电源族 = 50 色, 32 个不够。
+;;;     按族刷色能大幅减少需要的颜色数; 一网一色在 100+ 网络的大板上必然不够。
 ;;;   (apt_cfgset 'netColorGreyMin 90)    GND 灰色下限(默认 90,  太暗看不见)
 ;;;   (apt_cfgset 'netColorGreyMax 210)   GND 灰色上限(默认 210, 太亮看不见)
 ;;;
@@ -496,7 +498,7 @@
     (let (n k used hit reserveN)
         (setq n (axlColorGet 'count))
         (setq reserveN (apt_cfg 'netColorReserveN))
-        (unless reserveN (setq reserveN 32))
+        (unless reserveN (setq reserveN 64))
         (setq k (n - reserveN))
         (when (k < 1) (setq k 1))
         (while (and (null hit) (k <= n))
@@ -711,7 +713,7 @@
         (when t_doColor
             (setq nWant (nGnd + nPwr))
             (setq nSlot (apt_cfg 'netColorReserveN))
-            (unless nSlot (setq nSlot 32))
+            (unless nSlot (setq nSlot 64))
             (when (nNoSlot > 0)
                 (printf "[APTools] !! 有 %d 个网络没有可用调色板槽, 未上色\n" nNoSlot)
                 (printf "[APTools] !! 需要 %d 个颜色, 保留槽只有 %d 个(调色板共 %d 色)\n"
@@ -857,7 +859,7 @@
 (axlCmdRegister "apt_netcolorpal"   'apt_cmd_netcolorPal     ?cmdType "general")
 (axlCmdRegister "apt_netcolorrule"  'apt_cmd_netcolorRule    ?cmdType "general")
 
-(apt_cfgdef 'netColorReserveN 32)
+(apt_cfgdef 'netColorReserveN 64)
 (apt_cfgdef 'netColorGreyMin 90)
 (apt_cfgdef 'netColorGreyMax 210)
 
