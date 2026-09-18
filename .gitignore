@@ -17,3 +17,12 @@ capture_import_state.json
 *.pcbdoc
 *.PrjPcbStructure
 translator.run/
+
+# scratch / runtime output (Temp 里只保留真正的脚本)
+Temp/*
+!Temp/normalize_orcad_exp.ps1
+*.EXP
+*.jrl
+
+# Allegro 二进制与锁
+*.lck
