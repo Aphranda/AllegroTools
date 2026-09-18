@@ -170,8 +170,10 @@
 ;;; ---------------------------------------------------------------------------
 
 ;;; 目录里真的有 core/APTools_Load.il 才算可用
-;;;   (Menu.il 里也有一个同名同义的, 两边各自定义是为了都能被单独 load)
-(procedure (apt_homeOk t_dir)
+;;;   注意: Menu.il 里有个同义的 apt_homeOk, 这里刻意换个名字 apt_rootOk,
+;;;   两边都定义是为了各自能被单独 load, 但同名会让 Allegro 打
+;;;   "function X redefined" 警告, 所以错开命名。
+(procedure (apt_rootOk t_dir)
     (let (fs hit)
         (when t_dir
             (setq fs (car (errset (getDirFiles (strcat t_dir "/core")) nil)))
@@ -184,10 +186,10 @@
 (let (cur pick)
     (setq cur (car (errset apt_home nil)))          ; 未绑定时直接读会报错
     (setq pick nil)
-    (when (apt_homeOk cur) (setq pick cur))
+    (when (apt_rootOk cur) (setq pick cur))
     (unless pick
         (foreach cand (list (getShellEnvVar "APTools") "D:/Aphranda/APTools")
-            (when (and (null pick) (apt_homeOk cand))
+            (when (and (null pick) (apt_rootOk cand))
                 (setq pick cand))))
     (unless pick (setq pick "D:/Aphranda/APTools"))
     (setq apt_home (axlOSSlash pick)))

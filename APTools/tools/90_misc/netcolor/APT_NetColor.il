@@ -108,9 +108,11 @@
     ;; 前缀式
     "^VIN" "^VOUT" "^VIO" "^VPH" "^PWR" "^POWER"))
 
-;;; 排除: 后缀命中即"不是电源"(控制/反馈/状态类)
+;;; 排除(一): 后缀命中即"不是电源"(控制/反馈/状态类)
 ;;;   每条都必须带 $ 走后缀匹配。若写成包含匹配, "PG" 会误伤 PGND,
 ;;;   "EN" 会误伤 VCC_CURRENT(里面含 EN), 所以一律带 $。
+;;;   控制信号常带电平尾缀或序号(ULPI0_VBUS_SEL_L), 光靠后缀撞不到 ——
+;;;   apt_netPowClass 会把末尾那个单电平字母去掉再查一次这张表。
 (defvar apt_netPowSkipSuf nil)
 (setq apt_netPowSkipSuf (list
     "EN$" "ENB$" "ENABLE$" "PG$" "PGOOD$" "GOOD$" "PWRGD$" "PWROK$" "OK$"
@@ -118,7 +120,28 @@
     "OC$" "OV$" "UV$" "DRV$" "GATE$" "COMP$" "CLK$" "SYNC$" "DET$" "FB$"
     "SENSE$" "SNS$" "NMI$" "IRQ$" "CS$" "SCL$" "SDA$" "STAT$" "STATUS$"
     "MON$" "ADC$" "TEMP$" "WDI$" "WDO$" "PWM$" "CTRL$" "CTL$" "SEL$" "MODE$"
-    "TEST$" "TCK$" "TMS$" "TDI$" "TDO$" "TRST$"))
+    "TEST$" "TCK$" "TMS$" "TDI$" "TDO$" "TRST$"
+    "NC$"))
+
+;;; 排除(二): "包含"即排除(不分位置)
+;;;   2026-09-18 真板实测(1211 网络)发现 51 个采样对漏进了电源组, 例如:
+;;;     VCC1V2_ISEN_P/N       电流检测
+;;;     VCCINT_AMS_VIN_R_P/N  开尔文采样
+;;;     MGT1V8_SNS_P          远端采样
+;;;     VCCINT_SEN_CORE_N     sense
+;;;   它们的尾巴是 _P/_N 或 _SNS_P, **后缀表永远撞不到**, 所以改成按"含关键词"排除。
+;;;   还有 MIO_1V8_RESERVED_GPIO0 这种"信号名里恰好含 1V8"的, 也在这张表里挡掉。
+;;;   副作用: 名字里恰好含这些词的电源轨也会被排除, 核对时看报告"被排除"那一档即可。
+(defvar apt_netPowSkipAny nil)
+(setq apt_netPowSkipAny (list
+    ;; 采样/检测类 —— VCC/VDD 名字里带这些的都不是电源轨本身
+    "ISEN" "SNS" "SENSE" "VSNS" "CSEN" "VSEN" "IOUT" "VINR" "SEN"
+    ;; 控制类
+    "PWM"
+    ;; 信号名里恰好含电压记号或电源关键词的
+    ;;   MIO_1V8_RESERVED_GPIO0  (GPIO 信号名字里带 1V8)
+    ;;   FAN_TACH_12V            (风扇测速信号名字里带 12V)
+    "GPIO" "RESERVED" "SPARE" "TEST" "TACH"))
 
 ;;; ---------------------------------------------------------------------------
 ;;; 字符串小工具
@@ -296,14 +319,32 @@
 ;;; 分类: 返回 (组 原因 毫伏)  组 = gnd / pwr / skip; 不是电源网络返回 nil
 ;;;
 ;;;   先判"是不是电源"(GND 关键词 / 电源关键词 / 电压记号), 只有本来就是电源
-;;;   的名字才去看排除后缀。否则 SPI_CS、SDA、TEMP、SEL0 这类普通信号全都会
+;;;   的名字才去看排除规则。否则 SPI_CS、SDA、TEMP、SEL0 这类普通信号全都会
 ;;;   被当成"排除", 把报告淹掉。
+;;;
+;;;   排除走两张表:
+;;;     apt_netPowSkipAny  含关键词(采样对这类尾巴认不出来的, 见那张表的说明)
+;;;     apt_netPowSkipSuf  后缀(控制/状态类), 会先把末尾电平字母去掉再查一次
 ;;; ---------------------------------------------------------------------------
 (procedure (apt_netPowClass t_nm)
-    (let (up cp sk g r mv grp why)
+    (let (up cp cpTrim skAny skSuf lastc n g r mv grp why)
         (setq up (upperCase t_nm))
         (setq cp (apt_nosep up))
-        (setq sk (apt_patAny cp apt_netPowSkipSuf))
+        ;; 去掉末尾单个电平字母: ULPI0_VBUS_SEL_L -> ULPI0_VBUSSEL
+        (setq cpTrim cp)
+        (setq n (strlen cp))
+        (when (n > 1)
+            (setq lastc (apt_ch cp (n - 1)))
+            (when (or (equal lastc "L") (equal lastc "H")
+                      (equal lastc "N") (equal lastc "P"))
+                (setq cpTrim (apt_sub cp 0 (n - 1)))))
+        ;; 排除(二) 含关键词 -> 排除(一) 后缀
+        (setq skAny (apt_patAny cp apt_netPowSkipAny))
+        (setq skSuf nil)
+        (unless skAny
+            (setq skSuf (apt_patAny cp apt_netPowSkipSuf))
+            (unless skSuf
+                (setq skSuf (apt_patAny cpTrim apt_netPowSkipSuf))))
         ;; ① GND 系(用 GND/VSS 关键词匹配)
         (setq g (apt_patAny cp apt_netPowGndKw))
         ;; ② 电源关键词
@@ -321,9 +362,92 @@
                         (setq why (strcat "关键词 " r))
                         (setq why (strcat "电压 " (sprintf nil "%d" mv) "mV"))))))
         (when grp
-            (if sk
-                (list 'skip (strcat "后缀 " sk " (本可算电源)") mv)
+            (if (or skAny skSuf)
+                (list 'skip
+                      (if skAny
+                          (strcat "含 " skAny " (本可算电源)")
+                          (strcat "后缀 " skSuf " (本可算电源)"))
+                      mv)
                 (list grp why mv)))))
+
+;;; ---------------------------------------------------------------------------
+;;; 电源"族"归并 —— 给"按电源族刷色"用
+;;;
+;;;   为什么需要: 大板上电源网络常有 100+ 个(实测一块 1715 网络的板上有 187 个),
+;;;   一网一色既人眼分不出来, 调色板也不够(总共 192 色)。按族归并后只剩二三十族。
+;;;
+;;;   取自真板数据的例子:
+;;;     VCC5V_LMK_BUF1/2/3, VCC5V_TCXO, VCC5V_VCXO   -> 族 VCC5V
+;;;     VCC1V8, VCC1V8_BUS, VCC1V8_SWITCH            -> 族 VCC1V8
+;;;     UTIL_5V0, UTIL_5V0_A                         -> 族 UTIL_5V0
+;;;     UTIL_3V3, UTIL_3V3_SW                        -> 族 UTIL_3V3   (与 5V0 分开)
+;;;     ADC_AVCC, ADC_AVCC_BUS                       -> 族 ADC_AVCC
+;;;     DAC_AVTT, DAC_AVTT_BUS                       -> 族 DAC_AVTT
+;;;     8A34001_VDDO_Q0..Q11                         -> 族 8A34001_VDDO
+;;;     MGTAVCC, MGTAVCC_BUS                         -> 族 MGTAVCC
+;;;
+;;;   规则(两步, 刻意做得简单可预期):
+;;;     1) 取第一段。若第一段里已经有电压记号(如 VCC5V / VCC1V8 / VCC12),
+;;;        就到此为止 —— 这样 VCC5V_LMK_* 全部归成 VCC5V。
+;;;     2) 否则往后找第一个"既不是修饰词、也不是序号"的段并进来。
+;;;        所以 UTIL_5V0 会并上 5V0(与 UTIL_3V3 分开),
+;;;        而 MGTAVCC_BUS 只会停在 MGTAVCC(BUS 是修饰词)。
+;;;
+;;;   觉得归并得不合适就改 apt_netPowFamilyMod, 或直接用一网一色那个菜单项。
+;;; ---------------------------------------------------------------------------
+(defvar apt_netPowFamilyMod nil)
+(setq apt_netPowFamilyMod (list
+    "BUS" "SW" "SWITCH" "BUF" "VCO" "VCXO" "TCXO" "OSC" "PLL" "CP" "CLK"
+    "FOD" "Q" "IN" "OUT" "HS" "WAKE" "SNS" "SEN" "ISEN" "TACH"
+    "A" "B" "C" "D" "E" "F" "L" "H" "N" "P" "R"))
+
+;;; 这一段是不是"修饰词/序号"(是的话不参与族名)
+(procedure (apt_netFamSkip t_tok)
+    (let (hit)
+        (setq hit nil)
+        (foreach m apt_netPowFamilyMod
+            (when (equal t_tok m) (setq hit t)))
+        (when (null hit)
+            (when (or (rexMatchp "^[0-9]+$" t_tok)
+                      (rexMatchp "^[A-Z]+[0-9]+$" t_tok))
+                (setq hit t)))
+        hit))
+
+;;; 按 '_' 切成段(不用 split, 各版本 SKILL 的写法不一定一致)
+(procedure (apt_netSplit t_s)
+    (let (n i out cur ch)
+        (setq n (strlen t_s))
+        (setq i 0)
+        (setq cur "")
+        (setq out nil)
+        (while (i < n)
+            (setq ch (apt_ch t_s i))
+            (if (equal ch "_")
+                (progn
+                    (setq out (append out (list cur)))
+                    (setq cur ""))
+                (setq cur (strcat cur ch)))
+            (setq i (i + 1)))
+        (append out (list cur))))
+
+;;; 取族名(入参用原名即可, 内部转大写)
+;;;   注意: 变量名不能用 t —— t 是 SKILL 的保留字(let 会报 illegal variable name)
+(procedure (apt_netPowFamily t_nm)
+    (let (toks n i key done tok)
+        (setq toks (apt_netSplit (upperCase t_nm)))
+        (setq n (length toks))
+        (setq key (car toks))
+        ;; 第一段里已有电压记号 -> 到此为止
+        (unless (apt_voltFind (car toks))
+            (setq i 1)
+            (setq done nil)
+            (while (and (null done) (i < n))
+                (setq tok (nth i toks))
+                (unless (apt_netFamSkip tok)
+                    (setq key (strcat key "_" tok))
+                    (setq done t))
+                (setq i (i + 1))))
+        key))
 
 ;;; ---------------------------------------------------------------------------
 ;;; 调色板(带缓存)
@@ -504,17 +628,19 @@
 
 ;;; ---------------------------------------------------------------------------
 ;;; 主流程: 识别 + (可选)随机刷色
-;;;   返回 (GND数 电源数 排除数 其它数 上色数)
+;;;   返回 (GND数 电源数 排除数 其它数 上色数 无槽未上色数)
 ;;; ---------------------------------------------------------------------------
-(procedure (apt_netPowRun t_doColor)
-    (let (nets nm cls grp why nGnd nPwr nSkip nOther nSet rgb idx rows rep cnt tag)
+(procedure (apt_netPowRun t_doColor t_byFamily)
+    (let (nets nm cls grp why fam byFam famMap nGnd nPwr nSkip nOther nSet nNoSlot rgb idx rows rep cnt tag nWant nSlot)
         (setq nets (axlDBGetDesign)->nets)
         (setq nGnd 0)
         (setq nPwr 0)
         (setq nSkip 0)
         (setq nOther 0)
         (setq nSet 0)
+        (setq nNoSlot 0)
         (setq rows nil)
+        (setq famMap nil)
         (setq apt_netPowUsed nil)
         (setq apt_netPowGreyIdx 0)
         (apt_netSeed)
@@ -538,25 +664,59 @@
                                 (if (equal grp 'gnd)
                                     (setq nGnd (nGnd + 1))
                                     (setq nPwr (nPwr + 1)))
-                                (setq rgb (apt_netPowPick grp))
+                                ;; 族名: 只对电源算(GND 系仍按网络各自随机灰阶)
+                                (setq fam nil)
+                                (when (equal grp 'pwr)
+                                    (setq fam (apt_netPowFamily nm->name))
+                                    (when fam
+                                        (setq why (strcat why " ; 族 " fam))))
+                                (setq byFam (and t_doColor t_byFamily fam))
+                                (setq rgb nil)
                                 (setq idx nil)
-                                (when t_doColor
-                                    (setq idx (apt_netColorAlloc rgb))
-                                    (if idx
-                                        (progn
-                                            (axlCustomColorObject nm idx)
-                                            (setq nSet (nSet + 1)))
-                                        (printf "[APTools]   %s 没有可用调色板槽, 未上色\n" nm->name)))
+                                ;; ---- 按族: 先找这一族已经分配过的颜色 ----
+                                (when byFam
+                                    (foreach fe famMap
+                                        (when (and (null idx) (equal (car fe) fam))
+                                            (setq rgb (nth 1 fe))
+                                            (setq idx (nth 2 fe)))))
+                                ;; ---- 需要新颜色就随机一个 ----
+                                (when (null idx)
+                                    (setq rgb (apt_netPowPick grp))
+                                    (when t_doColor
+                                        (setq idx (apt_netColorAlloc rgb))
+                                        (when (and idx byFam)
+                                            (setq famMap (append famMap
+                                                                 (list (list fam rgb idx)))))))
+                                (when (and t_doColor idx)
+                                    (axlCustomColorObject nm idx)
+                                    (setq nSet (nSet + 1)))
+                                (when (and t_doColor (null idx))
+                                    (setq nNoSlot (nNoSlot + 1))
+                                    (when (equal nNoSlot 1)
+                                        (printf "[APTools]   ... 调色板保留槽已用尽, 之后的网络不再上色\n")))
                                 (setq rows (append rows (list
                                     (list (if (equal grp 'gnd) "GND系" "电源")
                                           nm->name why
                                           (sprintf nil "%L" rgb)
                                           (if idx (sprintf nil "%d" idx) "")))))))))))
 
-        (printf "\n[APTools] ===== 电源网络识别 =====\n")
+        (printf "\n[APTools] ===== 电源网络识别%s =====\n"
+                (if t_doColor
+                    (if t_byFamily " (按电源族刷色)" " (一网一色)")
+                    " (只识别)"))
         (printf "[APTools] 合计: GND 系 %d 个 / 电源 %d 个 / 排除 %d 个 / 其它 %d 个%s\n"
                 nGnd nPwr nSkip nOther
                 (if t_doColor (sprintf nil " ; 已上色 %d 个" nSet) " ; 未刷色(仅识别)"))
+        ;; 调色板容量提示 —— 网络数超过保留槽时会有一部分上不了色, 别让它静默发生
+        (when t_doColor
+            (setq nWant (nGnd + nPwr))
+            (setq nSlot (apt_cfg 'netColorReserveN))
+            (unless nSlot (setq nSlot 32))
+            (when (nNoSlot > 0)
+                (printf "[APTools] !! 有 %d 个网络没有可用调色板槽, 未上色\n" nNoSlot)
+                (printf "[APTools] !! 需要 %d 个颜色, 保留槽只有 %d 个(调色板共 %d 色)\n"
+                        nWant nSlot (axlColorGet 'count))
+                (printf "[APTools] !! 可加大保留槽: (apt_cfgset 'netColorReserveN 96), 代价是覆盖更多调色板原有颜色\n")))
         (foreach tag (list "GND系" "电源" "排除")
             (setq cnt 0)
             (foreach r rows (when (equal (nth 0 r) tag) (setq cnt (cnt + 1))))
@@ -581,7 +741,7 @@
         (when rep
             (errset (apt_netPowCsv rows rep) nil))
 
-        (list nGnd nPwr nSkip nOther nSet)))
+        (list nGnd nPwr nSkip nOther nSet nNoSlot)))
 
 ;;; ---------------------------------------------------------------------------
 ;;; 辅助打印
@@ -608,9 +768,14 @@
         (foreach p apt_netPowRailKw
             (setq i (i + 1))
             (printf "  %2d. %s\n" i p))
-        (printf "[APTools] 排除后缀 %d 条:\n" (length apt_netPowSkipSuf))
+        (printf "[APTools] 排除后缀 %d 条(会先去末尾电平字母再查):\n" (length apt_netPowSkipSuf))
         (setq i 0)
         (foreach p apt_netPowSkipSuf
+            (setq i (i + 1))
+            (printf "  %2d. %s\n" i p))
+        (printf "[APTools] 排除关键词 %d 条(名字里含即排除):\n" (length apt_netPowSkipAny))
+        (setq i 0)
+        (foreach p apt_netPowSkipAny
             (setq i (i + 1))
             (printf "  %2d. %s\n" i p))
         (printf "[APTools] 电压记号: 3V3 / 3.3V / 12V / +5V / 5V0 / 0V9 / 1V25 / 1P8V ... 取值 0.4V~60V\n")
@@ -640,17 +805,33 @@
 
 (procedure (apt_cmd_netPowScan)
     (let (r)
-        (setq r (apt_netPowRun nil))
+        (setq r (apt_netPowRun nil nil))
         (axlUIConfirm (sprintf nil
             "电源网络识别完成(未刷色)\n\nGND 系 : %d 个\n电源   : %d 个\n排除   : %d 个\n其它   : %d 个\n\n详细清单见命令窗口, 报告在 APTools/Temp/netcolor_report.csv"
             (nth 0 r) (nth 1 r) (nth 2 r) (nth 3 r)))))
 
 (procedure (apt_cmd_netcolor)
-    (let (r)
-        (setq r (apt_netPowRun t))
+    (let (r ns)
+        (setq r (apt_netPowRun t nil))
+        (setq ns (nth 5 r))
         (axlUIConfirm (sprintf nil
-            "电源网络随机刷色完成\n\nGND 系 : %d 个 (灰色系随机)\n电源   : %d 个 (随机彩)\n已上色 : %d 个\n排除   : %d 个\n\n想先看清单不刷色, 用菜单\"识别电源网络\"。"
-            (nth 0 r) (nth 1 r) (nth 4 r) (nth 2 r)))))
+            "电源网络随机刷色(一网一色)完成\n\nGND 系 : %d 个 (灰色系随机)\n电源   : %d 个 (每网一个随机色)\n已上色 : %d 个\n排除   : %d 个%s"
+            (nth 0 r) (nth 1 r) (nth 4 r) (nth 2 r)
+            (if (ns > 0)
+                (sprintf nil "\n\n注意: 还有 %d 个网络没有可用调色板槽, 未能上色。\n网络多时建议改用菜单的「按电源族刷色」。" ns)
+                "")))))
+
+;;; 按电源族刷色: 同一族共用一色, 网络多的大板用这个
+(procedure (apt_cmd_netcolorFam)
+    (let (r ns)
+        (setq r (apt_netPowRun t t))
+        (setq ns (nth 5 r))
+        (axlUIConfirm (sprintf nil
+            "电源网络按族刷色完成\n\n同一族的网络共用一色(如 VCC5V_LMK_BUF1/2/3 同色)\nGND 系 : %d 个 (各自随机灰阶)\n电源   : %d 个 (按族共用随机彩)\n已上色 : %d 个\n排除   : %d 个%s"
+            (nth 0 r) (nth 1 r) (nth 4 r) (nth 2 r)
+            (if (ns > 0)
+                (sprintf nil "\n\n注意: 还有 %d 个网络没有可用调色板槽。" ns)
+                "")))))
 
 (procedure (apt_cmd_netcolorClear)
     (axlUIConfirm (sprintf nil "已清除 %d 个网络的自定义配色。"
@@ -670,6 +851,7 @@
 
 (axlCmdRegister "apt_netcolorscan"  'apt_cmd_netPowScan      ?cmdType "general")
 (axlCmdRegister "apt_netcolor"      'apt_cmd_netcolor        ?cmdType "general")
+(axlCmdRegister "apt_netcolorfam"   'apt_cmd_netcolorFam     ?cmdType "general")
 (axlCmdRegister "apt_netcolorclear" 'apt_cmd_netcolorClear   ?cmdType "general")
 (axlCmdRegister "apt_netcolorfree"  'apt_cmd_netcolorFree    ?cmdType "general")
 (axlCmdRegister "apt_netcolorpal"   'apt_cmd_netcolorPal     ?cmdType "general")
@@ -680,13 +862,15 @@
 (apt_cfgdef 'netColorGreyMax 210)
 
 (apt_menuSub "90_misc" apt_netcolor_submenu "识别电源网络"        "apt_netcolorscan")
-(apt_menuSub "90_misc" apt_netcolor_submenu "随机刷色"            "apt_netcolor")
+(apt_menuSub "90_misc" apt_netcolor_submenu "按电源族刷色"        "apt_netcolorfam")
+(apt_menuSub "90_misc" apt_netcolor_submenu "随机刷色(每网一色)"  "apt_netcolor")
 (apt_menuSub "90_misc" apt_netcolor_submenu "清除刷色"            "apt_netcolorclear")
 (apt_menuSubSep "90_misc" apt_netcolor_submenu)
 (apt_menuSub "90_misc" apt_netcolor_submenu "查看识别规则"        "apt_netcolorrule")
 (apt_menuSub "90_misc" apt_netcolor_submenu "查看调色板"          "apt_netcolorpal")
 (apt_menuSub "90_misc" apt_netcolor_submenu "释放保留调色板槽"    "apt_netcolorfree")
 
-(printf "[APTools] APT_NetColor 已加载 (GND规则 %d / 电源规则 %d / 排除 %d; 保留槽 %d)\n"
+(printf "[APTools] APT_NetColor 已加载 (GND规则 %d / 电源规则 %d / 排除后缀 %d / 排除关键词 %d; 保留槽 %d)\n"
         (length apt_netPowGndKw) (length apt_netPowRailKw)
-        (length apt_netPowSkipSuf) (apt_cfg 'netColorReserveN))
+        (length apt_netPowSkipSuf) (length apt_netPowSkipAny)
+        (apt_cfg 'netColorReserveN))
