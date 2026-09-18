@@ -279,10 +279,15 @@
                                 (if (nth 0 c) (nth 0 c) "(空)")
                                 (if (nth 1 c) (nth 1 c) "(空)")
                                 (if (nth 2 c) (nth 2 c) "(空)"))))
-                (printf "[APTools] 结论: %s\n"
+                (printf "[APTools] 结论(PATTERN 这一项): %s\n"
                         (if (null empty)
-                            "PATTERN 无空缺, 可以导入 Allegro"
+                            "PATTERN 无空缺 —— 这一项通过"
                             "先把 PATTERN 为空的元件清掉再导入(菜单: 删除空封装元件)"))
+                (printf "[APTools] 注意: 本检查只覆盖 PATTERN 为空这一个根因。实测有一块板\n")
+                (printf "        PATTERN 全部合格, 转换仍在 text blocks 之后对 nil 调 upperCase\n")
+                (printf "        崩掉(PowerDetector 板)。那类问题看转换日志更直接, 典型两条:\n")
+                (printf "          Unable to find device file for ...  -> 缺 device 文件\n")
+                (printf "          axlDBCreateSymbol: Refdes not found -> 建符号时拿不到位号\n")
 
                 (when t_report
                     (setq p (car (errset (outfile t_report "w") nil)))
